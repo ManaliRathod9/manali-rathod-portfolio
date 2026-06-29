@@ -1,6 +1,6 @@
 const repoName = "manali-rathod-portfolio"
-const isProd = process.env.NODE_ENV === "production"
-export const basePath = isProd ? `/${repoName}` : ""
+const isGithubPages = process.env.GITHUB_ACTIONS === "true"
+export const basePath = isGithubPages ? `/${repoName}` : ""
 
 export function withBasePath(path: string) {
   if (/^(https?:|mailto:|tel:|#)/.test(path)) return path

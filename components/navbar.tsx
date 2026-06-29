@@ -111,6 +111,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon-sm"
+            nativeButton={false}
             className="size-9 cursor-pointer rounded-full border border-white/5 bg-white/[0.03] text-slate-200 transition-all duration-300 ease-out hover:scale-[1.08] hover:border-cyan-300/20 hover:bg-white/[0.1] hover:text-white hover:shadow-[0_0_24px_rgba(56,189,248,0.2),0_0_30px_rgba(168,85,247,0.16)]"
             render={
               <a href={siteConfig.social.github} target="_blank" rel="noreferrer" aria-label="GitHub">
@@ -121,6 +122,7 @@ export function Navbar() {
           <Button
             variant="ghost"
             size="icon-sm"
+            nativeButton={false}
             className="size-9 cursor-pointer rounded-full border border-white/5 bg-white/[0.03] text-slate-200 transition-all duration-300 ease-out hover:scale-[1.08] hover:border-cyan-300/20 hover:bg-white/[0.1] hover:text-white hover:shadow-[0_0_24px_rgba(56,189,248,0.2),0_0_30px_rgba(168,85,247,0.16)]"
             render={
               <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -131,6 +133,7 @@ export function Navbar() {
           <Button
             variant="secondary"
             size="sm"
+            nativeButton={false}
             className="h-9 cursor-pointer rounded-xl border border-white/10 bg-white/[0.06] px-4 text-[15px] font-medium text-slate-100 shadow-[0_8px_20px_rgba(15,23,42,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-cyan-300/20 hover:bg-white/[0.1] hover:shadow-[0_10px_28px_rgba(56,189,248,0.14),0_0_26px_rgba(168,85,247,0.12)]"
             render={
               <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
@@ -166,6 +169,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="sm"
+                nativeButton={false}
                 render={
                   <a href={siteConfig.social.github} target="_blank" rel="noreferrer">
                     <GithubIcon className="size-3.5" />
@@ -176,6 +180,7 @@ export function Navbar() {
               <Button
                 variant="outline"
                 size="sm"
+                nativeButton={false}
                 render={
                   <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer">
                     <LinkedinIcon className="size-3.5" />
@@ -186,6 +191,7 @@ export function Navbar() {
               <Button
                 variant="secondary"
                 size="sm"
+                nativeButton={false}
                 render={
                   <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
                     <FileDown className="size-3.5" />

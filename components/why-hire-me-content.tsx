@@ -132,7 +132,7 @@ export function WhyHireMeContent() {
           <p className="mt-3 text-lg font-semibold text-foreground">
             Let&apos;s build something useful together.
           </p>
-          <Button size="lg" className="mt-5" render={<Link href="/#contact">Contact Me</Link>} />
+          <Button size="lg" className="mt-5" nativeButton={false} render={<Link href="/#contact">Contact Me</Link>} />
         </motion.div>
       </div>
     </div>

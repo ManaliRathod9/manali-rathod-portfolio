@@ -64,6 +64,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
           <Button
             variant="outline"
             size="icon-sm"
+            nativeButton={false}
             render={
               <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label={`${project.title} on GitHub`}>
                 <GithubIcon className="size-4" />
@@ -74,6 +75,7 @@ export function ProjectCard({ project, index = 0 }: { project: Project; index?: 
             <Button
               variant="secondary"
               size="sm"
+              nativeButton={false}
               render={
                 <a href={project.demoUrl} target="_blank" rel="noreferrer">
                   Live Demo

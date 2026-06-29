@@ -72,6 +72,7 @@ export function GithubBanner() {
         >
           <Button
             size="lg"
+            nativeButton={false}
             className="btn-shine"
             render={
               <a href={siteConfig.social.github} target="_blank" rel="noreferrer" className="group/btn">

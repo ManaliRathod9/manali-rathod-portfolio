@@ -210,6 +210,7 @@ export function Hero() {
             <motion.div whileHover={{ y: -3 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
               <Button
                 size="lg"
+                nativeButton={false}
                 render={
                   <a href="#projects">
                     View Work
@@ -221,6 +222,7 @@ export function Hero() {
             <Button
               variant="outline"
               size="lg"
+              nativeButton={false}
               className="hover:border-cyan-400/50 hover:shadow-[0_0_18px_-4px_rgba(34,211,238,0.45)]"
               render={
                 <a href={siteConfig.social.github} target="_blank" rel="noreferrer">
@@ -232,6 +234,7 @@ export function Hero() {
             <Button
               variant="outline"
               size="lg"
+              nativeButton={false}
               className="hover:border-violet-400/50 hover:shadow-[0_0_18px_-4px_rgba(167,139,250,0.45)]"
               render={
                 <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer">
@@ -243,6 +246,7 @@ export function Hero() {
             <Button
               variant="secondary"
               size="lg"
+              nativeButton={false}
               render={
                 <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
                   <FileDown className="size-4" />
@@ -263,6 +267,7 @@ export function Hero() {
             <Button
               variant="outline"
               size="sm"
+              nativeButton={false}
               className="gradient-border border-white/15 hover:shadow-[0_0_20px_-4px_rgba(34,211,238,0.4)]"
               render={
                 <Link href="/why-hire-me" className="group">

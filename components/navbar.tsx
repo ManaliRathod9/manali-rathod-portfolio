@@ -13,7 +13,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { siteConfig } from "@/lib/site"
+import { siteConfig, withBasePath } from "@/lib/site"
 
 const sectionIds = ["about", "experience", "skills", "education", "projects", "contact"]
 
@@ -79,7 +79,7 @@ export function Navbar() {
   const isHome = pathname === "/"
   const activeId = useActiveSection(isHome)
 
-  const sectionHref = (id: string) => (isHome ? `#${id}` : `/#${id}`)
+  const sectionHref = (id: string) => (isHome ? `#${id}` : withBasePath(`/#${id}`))
 
   const orderedLinks = [
     { key: "about", href: sectionHref("about"), label: "About", isActive: isHome && activeId === "about" },
@@ -87,7 +87,7 @@ export function Navbar() {
     { key: "skills", href: sectionHref("skills"), label: "Skills", isActive: isHome && activeId === "skills" },
     { key: "education", href: sectionHref("education"), label: "Education", isActive: isHome && activeId === "education" },
     { key: "projects", href: sectionHref("projects"), label: "Projects", isActive: isHome && activeId === "projects" },
-    { key: "life", href: "/life", label: "Life", isActive: pathname === "/life" },
+    { key: "life", href: withBasePath("/life"), label: "Life", isActive: pathname === "/life" },
     { key: "contact", href: sectionHref("contact"), label: "Contact", isActive: isHome && activeId === "contact" },
   ]
 
@@ -97,7 +97,7 @@ export function Navbar() {
       className="sticky top-0 z-50 bg-background/70 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl"
     >
       <div className="mx-auto flex h-[4.35rem] max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href={isHome ? "#top" : "/"} className="text-lg font-extrabold tracking-tight text-slate-100 transition-colors duration-300 hover:text-white sm:text-[1.3rem]">
+        <a href={isHome ? "#top" : withBasePath("/")} className="text-lg font-extrabold tracking-tight text-slate-100 transition-colors duration-300 hover:text-white sm:text-[1.3rem]">
           Manali <span className="text-gradient">Rathod</span>
         </a>
 

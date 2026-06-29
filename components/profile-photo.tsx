@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
+import { withBasePath } from "@/lib/site"
 
 interface ProfilePhotoProps {
   /** Approximate max rendered size in px, used as an image-loading hint and to scale the fallback initials. */
@@ -47,7 +48,7 @@ export function ProfilePhoto({
           </div>
         ) : (
           <Image
-            src="/images/manali-profile.png"
+            src={withBasePath("/images/manali-profile.png")}
             alt={alt}
             fill
             sizes={`${size}px`}

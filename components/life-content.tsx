@@ -4,7 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { Camera, ChefHat, Dumbbell, Plane, Volleyball, type LucideIcon } from "lucide-react"
 import { InstagramIcon, XIcon } from "@/components/icons"
-import { siteConfig } from "@/lib/site"
+import { siteConfig, withBasePath } from "@/lib/site"
 import { lifeItems } from "@/lib/content"
 
 const tileStyles: Record<string, { icon: LucideIcon; ring: string; glow: string; gradient: string }> = {
@@ -78,7 +78,7 @@ export function LifeContent() {
             className="relative isolate aspect-16/10 overflow-hidden rounded-2xl border border-blue-400/25 shadow-lg shadow-black/30 transition-all duration-300 hover:border-blue-400/45 hover:shadow-[0_0_32px_-8px_rgba(96,165,250,0.45)] sm:aspect-video"
           >
             <Image
-              src="/images/manali-travel.jpg"
+              src={withBasePath("/images/manali-travel.jpg")}
               alt="Manali traveling"
               fill
               sizes="(min-width: 1024px) 60vw, 95vw"

@@ -1,3 +1,13 @@
+const repoName = "manali-rathod-portfolio"
+const isProd = process.env.NODE_ENV === "production"
+export const basePath = isProd ? `/${repoName}` : ""
+
+export function withBasePath(path: string) {
+  if (/^(https?:|mailto:|tel:|#)/.test(path)) return path
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`
+  return `${basePath}${normalizedPath}`
+}
+
 export const siteConfig = {
   name: "Manali Rathod",
   title: "Data Analyst • AI/ML Builder • Research Data Tool Developer",
@@ -6,7 +16,7 @@ export const siteConfig = {
   location: "Bloomington, IN",
   email: "manalidr93@gmail.com",
   phone: "+1 8126793058",
-  resumeHref: "/resume/manali-rathod-resume.pdf",
+  resumeHref: withBasePath("/resume/manali-rathod-resume.pdf"),
   social: {
     github: "https://github.com/ManaliRathod9",
     linkedin: "https://www.linkedin.com/in/manali-rathod-1128a5202",

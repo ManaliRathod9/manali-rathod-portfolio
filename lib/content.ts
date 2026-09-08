@@ -58,7 +58,7 @@ export const experiences: Experience[] = [
     id: "iu-psych-data-analyst",
     title: "Data Analyst",
     org: "Indiana University Department of Psychological and Brain Sciences",
-    period: "Sep 2025 — Present",
+    period: "Sep 2025 - Present",
     location: "Bloomington, IN, United States",
     bullets: [
       "Clean and organize research datasets so they are ready for analysis instead of needing manual fixing.",
@@ -69,7 +69,7 @@ export const experiences: Experience[] = [
     id: "kintsugi-ai-ml",
     title: "AI & ML Intern",
     org: "Kintsugi Global",
-    period: "Jul 2025 — Dec 2025",
+    period: "Jul 2025 - Dec 2025",
     location: "Remote",
     bullets: [
       "Worked on recommendation and user-data workflows where the goal was to make model output useful for real product behavior.",
@@ -80,7 +80,7 @@ export const experiences: Experience[] = [
     id: "project990-research",
     title: "Data Analyst",
     org: "Project 990 Inc.",
-    period: "Sep 2024 — Jul 2025",
+    period: "Sep 2024 - Jul 2025",
     location: "Bloomington, IN, United States",
     bullets: [
       "Built a unified data pipeline that combined multiple source files into one clean reporting structure, reducing preprocessing time by approximately 30%.",
@@ -92,7 +92,7 @@ export const experiences: Experience[] = [
     id: "hudl-data-analyst",
     title: "Data Analyst",
     org: "Hudl",
-    period: "Jan 2024 — Jul 2024",
+    period: "Jan 2024 - Jul 2024",
     location: "Mumbai, India",
     bullets: [
       "Reviewed performance datasets using Excel, SQL, and Python to find recurring patterns, missing information, and inconsistent metrics.",
@@ -103,7 +103,7 @@ export const experiences: Experience[] = [
     id: "verzeo-ai-engineer",
     title: "Artificial Intelligence Engineer",
     org: "Verzeo",
-    period: "Apr 2023 — Aug 2023",
+    period: "Apr 2023 - Aug 2023",
     location: "Bengaluru, India",
     bullets: [
       "Built and tested ML prototypes in Python using NumPy, pandas, and scikit-learn.",
@@ -114,7 +114,7 @@ export const experiences: Experience[] = [
     id: "tcr-android",
     title: "Android Developer Intern",
     org: "TCR Innovation",
-    period: "Aug 2022 — Nov 2022",
+    period: "Aug 2022 - Nov 2022",
     location: "India",
     bullets: [
       "Built and tested Android app features using Kotlin and native Android tools.",
@@ -129,7 +129,7 @@ export const teachingExperience: Experience[] = [
     label: "Instructor Support",
     title: "Graduate Associate Instructor - Data Science On Ramp",
     org: "Indiana University Luddy School",
-    period: "Aug 2025 — Jan 2026",
+    period: "Aug 2025 - Jan 2026",
     location: "United States",
     bullets: [
       "Supported students across Python, Spark, NLP, Tableau, and web scraping modules.",
@@ -141,7 +141,7 @@ export const teachingExperience: Experience[] = [
     label: "Teaching Assistant",
     title: "Environment and People",
     org: "O'Neill School of Public and Environmental Affairs",
-    period: "Aug 2025 — Dec 2025",
+    period: "Aug 2025 - Dec 2025",
     location: "United States",
     bullets: [
       "Helped students with assignments, course material, and technical questions related to data and public affairs.",
@@ -156,7 +156,7 @@ export const education: Education[] = [
     degree: "MS in Computer Science",
     school: "Indiana University Bloomington",
     gpa: "3.75/4",
-    period: "Aug 2024 — May 2026",
+    period: "Aug 2024 - May 2026",
     location: "Bloomington, IN, United States",
     coursework: [
       "Software Engineering",
@@ -173,7 +173,7 @@ export const education: Education[] = [
     degree: "Bachelor in Information Technology",
     school: "University of Mumbai",
     gpa: "3.81/4",
-    period: "Aug 2019 — Jun 2023",
+    period: "Aug 2019 - Jun 2023",
     location: "Mumbai, India",
   },
 ]

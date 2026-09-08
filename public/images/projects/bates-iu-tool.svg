@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" role="img" aria-label="Animated preview of the Bates IU Research Data Tool: a data table with variables being checked and a CSV export action">
+  <defs>
+    <linearGradient id="bt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAFBF5"/><stop offset="55%" stop-color="#EAF2FF"/><stop offset="100%" stop-color="#F1EEFF"/>
+    </linearGradient>
+    <linearGradient id="bt-btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#14B8A6"/><stop offset="100%" stop-color="#0EA5A0"/>
+    </linearGradient>
+    <filter id="bt-sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <style>
+    * { transform-box: fill-box; transform-origin: center; }
+    /* Rows tick on in sequence, then stay checked for most of the loop. */
+    .box { animation: bt-box 9s ease-out infinite }
+    .tick { animation: bt-tick 9s ease-out infinite }
+    .r1 { animation-delay: .2s } .r2 { animation-delay: .8s } .r3 { animation-delay: 1.4s }
+    @keyframes bt-box { 0%, 4% { fill: #FFFFFF; stroke: #CBD5E1 } 10%, 100% { fill: #14B8A6; stroke: #14B8A6 } }
+    @keyframes bt-tick { 0%, 4% { opacity: 0; transform: scale(.5) } 12%, 100% { opacity: 1; transform: scale(1) } }
+    .export { animation: bt-export 4.5s ease-in-out infinite }
+    @keyframes bt-export { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(3px) } }
+    @media (prefers-reduced-motion: reduce) {
+      .tick { animation: none; opacity: 1; transform: none }
+      .box { animation: none; fill: #14B8A6; stroke: #14B8A6 }
+      .export { animation: none; transform: none }
+    }
+  </style>
+
+  <rect width="400" height="250" fill="url(#bt-bg)"/>
+  <g filter="url(#bt-sh)"><rect x="22" y="20" width="356" height="210" rx="14" fill="#FFFFFF"/></g>
+  <rect x="22" y="20" width="356" height="30" rx="14" fill="#F6FDFB"/>
+  <rect x="22" y="38" width="356" height="12" fill="#F6FDFB"/>
+  <circle cx="40" cy="35" r="3.5" fill="#FF6B5E"/><circle cx="52" cy="35" r="3.5" fill="#FF9F43"/><circle cx="64" cy="35" r="3.5" fill="#14B8A6"/>
+  <line x1="22" y1="50" x2="378" y2="50" stroke="#E2E8F0"/>
+
+  <rect x="38" y="62" width="104" height="24" rx="12" fill="#EAFBF5" stroke="#99E6D8"/>
+  <rect x="52" y="71" width="66" height="7" rx="3.5" fill="#14B8A6"/>
+  <g class="export">
+    <rect x="272" y="62" width="90" height="24" rx="12" fill="url(#bt-btn)"/>
+    <path d="M292 70v8m0 0l-3.2-3.2M292 78l3.2-3.2" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <rect x="304" y="70" width="44" height="7" rx="3.5" fill="#FFFFFF" opacity=".9"/>
+  </g>
+
+  <rect x="38" y="96" width="324" height="126" rx="12" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <path d="M38 108a12 12 0 0 1 12-12h300a12 12 0 0 1 12 12v12H38z" fill="#EAF2FF"/>
+  <rect x="84" y="104" width="46" height="8" rx="4" fill="#6366F1"/>
+  <rect x="158" y="104" width="46" height="8" rx="4" fill="#6366F1"/>
+  <rect x="232" y="104" width="46" height="8" rx="4" fill="#6366F1"/>
+  <rect x="300" y="104" width="46" height="8" rx="4" fill="#6366F1"/>
+  <line x1="38" y1="120" x2="362" y2="120" stroke="#DCE6FF"/>
+
+  <g transform="translate(0 120)">
+    <rect class="box r1" x="54" y="10" width="14" height="14" rx="4" fill="#14B8A6" stroke="#14B8A6" stroke-width="1.6"/>
+    <path class="tick r1" d="M57.6 17.2l2.8 2.8 4.6-5.4" stroke="#FFFFFF" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="84" y="13" width="52" height="8" rx="4" fill="#BFD3FD"/><rect x="158" y="13" width="38" height="8" rx="4" fill="#C7D2FE"/>
+    <rect x="232" y="13" width="46" height="8" rx="4" fill="#A7E8DC"/><rect x="300" y="13" width="30" height="8" rx="4" fill="#FFD8B0"/>
+    <line x1="38" y1="31" x2="362" y2="31" stroke="#EEF2F7"/>
+  </g>
+  <g transform="translate(0 151)">
+    <rect class="box r2" x="54" y="10" width="14" height="14" rx="4" fill="#14B8A6" stroke="#14B8A6" stroke-width="1.6"/>
+    <path class="tick r2" d="M57.6 17.2l2.8 2.8 4.6-5.4" stroke="#FFFFFF" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="84" y="13" width="40" height="8" rx="4" fill="#C7D2FE"/><rect x="158" y="13" width="48" height="8" rx="4" fill="#BFD3FD"/>
+    <rect x="232" y="13" width="32" height="8" rx="4" fill="#FFD8B0"/><rect x="300" y="13" width="42" height="8" rx="4" fill="#A7E8DC"/>
+    <line x1="38" y1="31" x2="362" y2="31" stroke="#EEF2F7"/>
+  </g>
+  <g transform="translate(0 182)">
+    <rect class="box r3" x="54" y="10" width="14" height="14" rx="4" fill="#14B8A6" stroke="#14B8A6" stroke-width="1.6"/>
+    <path class="tick r3" d="M57.6 17.2l2.8 2.8 4.6-5.4" stroke="#FFFFFF" stroke-width="2.1" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="84" y="13" width="54" height="8" rx="4" fill="#A7E8DC"/><rect x="158" y="13" width="32" height="8" rx="4" fill="#FFD8B0"/>
+    <rect x="232" y="13" width="48" height="8" rx="4" fill="#C7D2FE"/><rect x="300" y="13" width="36" height="8" rx="4" fill="#BFD3FD"/>
+  </g>
+</svg>

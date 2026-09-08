@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" role="img" aria-label="Animated preview of the PaperTrail study tool: a search field, research paper results, and a notes and comparison panel">
+  <defs>
+    <linearGradient id="pt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAF2FF"/><stop offset="55%" stop-color="#F1EEFF"/><stop offset="100%" stop-color="#EAFBF5"/>
+    </linearGradient>
+    <linearGradient id="pt-btn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3157F6"/><stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <filter id="pt-sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <style>
+    * { transform-box: fill-box; transform-origin: center; }
+    /* Results settle in once per loop, then stay fully visible. */
+    .card { animation: pt-in 9s ease-out infinite; }
+    .c1 { animation-delay: 0s } .c2 { animation-delay: .35s } .c3 { animation-delay: .7s }
+    @keyframes pt-in {
+      0%  { opacity: 0; transform: translateX(-12px) }
+      11% { opacity: 1; transform: translateX(0) }
+      100% { opacity: 1; transform: translateX(0) }
+    }
+    .caret { animation: pt-blink 1.1s step-end infinite }
+    @keyframes pt-blink { 0%, 55% { opacity: 1 } 56%, 100% { opacity: 0 } }
+    .query { animation: pt-type 9s ease-out infinite }
+    @keyframes pt-type { 0% { width: 6px } 14%, 100% { width: 104px } }
+    .note { animation: pt-note 4.5s ease-in-out infinite }
+    @keyframes pt-note { 0%, 100% { opacity: .65 } 50% { opacity: 1 } }
+    .cta { animation: pt-cta 4.5s ease-in-out infinite }
+    @keyframes pt-cta { 0%, 100% { opacity: .85 } 50% { opacity: 1 } }
+    @media (prefers-reduced-motion: reduce) {
+      .card, .caret, .query, .note, .cta { animation: none; opacity: 1; transform: none }
+      .query { width: 104px }
+    }
+  </style>
+
+  <rect width="400" height="250" fill="url(#pt-bg)"/>
+  <g filter="url(#pt-sh)"><rect x="22" y="20" width="356" height="210" rx="14" fill="#FFFFFF"/></g>
+  <rect x="22" y="20" width="356" height="30" rx="14" fill="#F8FAFF"/>
+  <rect x="22" y="38" width="356" height="12" fill="#F8FAFF"/>
+  <circle cx="40" cy="35" r="3.5" fill="#FF6B5E"/><circle cx="52" cy="35" r="3.5" fill="#FF9F43"/><circle cx="64" cy="35" r="3.5" fill="#14B8A6"/>
+  <line x1="22" y1="50" x2="378" y2="50" stroke="#E2E8F0"/>
+
+  <rect x="38" y="64" width="230" height="26" rx="13" fill="#F1EEFF" stroke="#C7D2FE"/>
+  <circle cx="56" cy="77" r="6" fill="none" stroke="#3157F6" stroke-width="2.4"/>
+  <line x1="60.5" y1="81.5" x2="65" y2="86" stroke="#3157F6" stroke-width="2.4" stroke-linecap="round"/>
+  <rect class="query" x="72" y="73" width="104" height="8" rx="4" fill="#6366F1" opacity=".6"/>
+  <rect class="caret" x="180" y="70" width="2" height="14" fill="#3157F6"/>
+
+  <g class="card c1"><rect x="38" y="104" width="184" height="40" rx="10" fill="#FFFFFF" stroke="#DCE6FF"/>
+    <rect x="52" y="116" width="12" height="16" rx="2" fill="#3157F6"/>
+    <rect x="74" y="117" width="128" height="7" rx="3.5" fill="#93A9F5"/>
+    <rect x="74" y="129" width="80" height="6" rx="3" fill="#C7D2FE"/></g>
+  <g class="card c2"><rect x="38" y="150" width="184" height="40" rx="10" fill="#FFFFFF" stroke="#DCE6FF"/>
+    <rect x="52" y="162" width="12" height="16" rx="2" fill="#6366F1"/>
+    <rect x="74" y="163" width="104" height="7" rx="3.5" fill="#A5B4FC"/>
+    <rect x="74" y="175" width="64" height="6" rx="3" fill="#DDD6FE"/></g>
+  <g class="card c3"><rect x="38" y="196" width="184" height="26" rx="9" fill="#FFFFFF" stroke="#DCE6FF"/>
+    <rect x="52" y="203" width="12" height="12" rx="2" fill="#14B8A6"/>
+    <rect x="74" y="206" width="112" height="7" rx="3.5" fill="#5EEAD4"/></g>
+
+  <rect x="238" y="104" width="126" height="118" rx="12" fill="#FBFCFF" stroke="#E2E8F0"/>
+  <rect x="252" y="116" width="60" height="8" rx="4" fill="#A5B4FC"/>
+  <g class="note"><rect x="252" y="132" width="98" height="36" rx="8" fill="#FFF1E8" stroke="#FFC188"/>
+    <rect x="262" y="143" width="62" height="7" rx="3.5" fill="#FF9F43"/>
+    <rect x="262" y="155" width="44" height="6" rx="3" fill="#FFCFA6"/></g>
+  <rect x="252" y="178" width="98" height="7" rx="3.5" fill="#E4E9F2"/>
+  <rect x="252" y="190" width="72" height="7" rx="3.5" fill="#E4E9F2"/>
+  <rect class="cta" x="252" y="204" width="98" height="16" rx="8" fill="url(#pt-btn)"/>
+</svg>

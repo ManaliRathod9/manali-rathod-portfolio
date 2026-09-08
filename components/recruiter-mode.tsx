@@ -1,50 +1,86 @@
 "use client"
 
 import { useState } from "react"
-import { AnimatePresence, motion } from "framer-motion"
-import { BriefcaseBusiness, FolderKanban, Sparkles } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { Briefcase, FolderKanban, Sparkles } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
+import { cn } from "@/lib/utils"
 import { recruiterRoleProfiles } from "@/lib/content"
 
 export function RecruiterMode() {
   const [activeRole, setActiveRole] = useState(recruiterRoleProfiles[0]?.id ?? "")
-  const activeProfile = recruiterRoleProfiles.find((profile) => profile.id === activeRole) ?? recruiterRoleProfiles[0]
+  const activeProfile =
+    recruiterRoleProfiles.find((profile) => profile.id === activeRole) ?? recruiterRoleProfiles[0]
+
+  const panels = [
+    {
+      icon: Briefcase,
+      tint: "bg-brand/10 text-brand",
+      title: "Best matching experience",
+      body: <p className="mt-3 text-[0.9375rem] leading-relaxed text-muted">{activeProfile.matchingExperience}</p>,
+    },
+    {
+      icon: FolderKanban,
+      tint: "bg-coral/12 text-coral",
+      title: "Best matching projects",
+      body: (
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {activeProfile.matchingProjects.map((project) => (
+            <li
+              key={project}
+              className="rounded-lg border border-hairline bg-sky px-2.5 py-1 text-sm font-medium text-subtle"
+            >
+              {project}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+    {
+      icon: Sparkles,
+      tint: "bg-teal/12 text-teal-ink",
+      title: "Top skills",
+      body: (
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {activeProfile.topSkills.map((skill) => (
+            <li
+              key={skill}
+              className="rounded-lg border border-hairline bg-sky px-2.5 py-1 text-sm font-medium text-subtle"
+            >
+              {skill}
+            </li>
+          ))}
+        </ul>
+      ),
+    },
+  ]
 
   return (
-    <section className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(45rem_24rem_at_15%_20%,oklch(0.34_0.12_225/14%),transparent_65%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(40rem_22rem_at_85%_65%,oklch(0.34_0.12_300/13%),transparent_62%)]"
-      />
-
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-14">
+    <section className="border-b border-hairline bg-white">
+      <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
         <SectionHeading
           eyebrow="Recruiter Mode"
           title="Choose what you are hiring for"
           description="A quick role-based view of the experience, projects, and skills that match best."
         />
 
-        <div className="mt-8 flex flex-wrap gap-2.5">
+        <div role="tablist" aria-label="Role profiles" className="mt-8 flex flex-wrap gap-2.5">
           {recruiterRoleProfiles.map((profile) => {
             const isActive = profile.id === activeProfile.id
             return (
               <button
                 key={profile.id}
                 type="button"
+                role="tab"
+                id={`role-tab-${profile.id}`}
+                aria-selected={isActive}
+                aria-controls="role-panel"
                 onClick={() => setActiveRole(profile.id)}
-                data-cursor="button"
-                className={[
-                  "cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-all duration-300",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/50",
+                className={cn(
+                  "cursor-pointer rounded-xl border px-4 py-2.5 text-[0.9375rem] font-semibold transition-colors duration-200",
                   isActive
-                    ? "border-cyan-300/30 bg-linear-to-r from-cyan-500/18 via-blue-500/14 to-violet-500/18 text-white shadow-[0_0_24px_-8px_rgba(34,211,238,0.45)]"
-                    : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-cyan-300/20 hover:bg-white/[0.06] hover:text-cyan-100",
-                ].join(" ")}
+                    ? "border-brand bg-brand text-white"
+                    : "border-hairline bg-sky text-subtle hover:border-brand/40 hover:text-brand"
+                )}
               >
                 {profile.label}
               </button>
@@ -52,65 +88,32 @@ export function RecruiterMode() {
           })}
         </div>
 
-        <div className="mt-6">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeProfile.id}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -18 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="glass-card gradient-border-flow rounded-3xl p-5 sm:p-6"
-            >
-              <div className="grid gap-4 lg:grid-cols-[1.25fr_0.95fr_0.95fr]">
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-                    <BriefcaseBusiness className="size-4 text-cyan-300" />
-                    Best matching experience
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
-                    {activeProfile.matchingExperience}
-                  </p>
+        <div
+          id="role-panel"
+          role="tabpanel"
+          aria-labelledby={`role-tab-${activeProfile.id}`}
+          className="mt-6 grid gap-5 lg:grid-cols-3"
+        >
+          {panels.map((panel) => {
+            const Icon = panel.icon
+            return (
+              <div
+                key={panel.title}
+                className="rounded-2xl border border-hairline bg-white p-6 card-shadow"
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    aria-hidden
+                    className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${panel.tint}`}
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                  <h3 className="text-base font-extrabold text-ink">{panel.title}</h3>
                 </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-                    <FolderKanban className="size-4 text-blue-300" />
-                    Best matching projects
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProfile.matchingProjects.map((project) => (
-                      <Badge
-                        key={project}
-                        variant="secondary"
-                        className="border border-blue-300/10 bg-blue-400/10 text-slate-100"
-                      >
-                        {project}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-100">
-                    <Sparkles className="size-4 text-violet-300" />
-                    Top skills
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {activeProfile.topSkills.map((skill) => (
-                      <Badge
-                        key={skill}
-                        variant="secondary"
-                        className="border border-violet-300/10 bg-violet-400/10 text-slate-100"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
+                {panel.body}
               </div>
-            </motion.div>
-          </AnimatePresence>
+            )
+          })}
         </div>
       </div>
     </section>

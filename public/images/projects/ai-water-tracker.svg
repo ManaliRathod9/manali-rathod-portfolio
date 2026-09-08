@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" role="img" aria-label="Animated preview of the AI Water Tracker: a water drop with a moving level, a hydration ring, and daily progress bars">
+  <defs>
+    <linearGradient id="wt-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EAF2FF"/><stop offset="60%" stop-color="#F1EEFF"/><stop offset="100%" stop-color="#EAFBF5"/>
+    </linearGradient>
+    <linearGradient id="wt-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="#3157F6"/>
+    </linearGradient>
+    <clipPath id="wt-clip"><path d="M112 62c25 29 41 49 41 68a41 41 0 1 1-82 0c0-19 16-39 41-68z"/></clipPath>
+    <filter id="wt-sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <style>
+    * { transform-box: fill-box; transform-origin: center; }
+    .wave { animation: wt-rise 8s ease-in-out infinite }
+    @keyframes wt-rise { 0%, 100% { transform: translateY(6px) } 50% { transform: translateY(-34px) } }
+    .ring { stroke-dasharray: 176; stroke-dashoffset: 176; animation: wt-ring 8s ease-in-out infinite }
+    @keyframes wt-ring { 0% { stroke-dashoffset: 150 } 45%, 85% { stroke-dashoffset: 44 } 100% { stroke-dashoffset: 150 } }
+    .bar { transform-origin: left center; animation: wt-bar 8s ease-in-out infinite }
+    .b1 { animation-delay: 0s } .b2 { animation-delay: .5s } .b3 { animation-delay: 1s }
+    @keyframes wt-bar { 0% { transform: scaleX(.18) } 30%, 88% { transform: scaleX(1) } 100% { transform: scaleX(.18) } }
+    .dropper { animation: wt-float 6s ease-in-out infinite }
+    @keyframes wt-float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+    @media (prefers-reduced-motion: reduce) {
+      .wave, .bar, .dropper { animation: none; transform: none }
+      .ring { animation: none; stroke-dashoffset: 60 }
+    }
+  </style>
+
+  <rect width="400" height="250" fill="url(#wt-bg)"/>
+  <g filter="url(#wt-sh)"><rect x="22" y="20" width="356" height="210" rx="14" fill="#FFFFFF"/></g>
+  <rect x="22" y="20" width="356" height="30" rx="14" fill="#F8FAFF"/>
+  <rect x="22" y="38" width="356" height="12" fill="#F8FAFF"/>
+  <circle cx="40" cy="35" r="3.5" fill="#FF6B5E"/><circle cx="52" cy="35" r="3.5" fill="#FF9F43"/><circle cx="64" cy="35" r="3.5" fill="#14B8A6"/>
+  <line x1="22" y1="50" x2="378" y2="50" stroke="#E2E8F0"/>
+
+  <g class="dropper">
+    <path d="M112 62c25 29 41 49 41 68a41 41 0 1 1-82 0c0-19 16-39 41-68z" fill="#F3F8FF" stroke="#3157F6" stroke-width="2.6"/>
+    <g clip-path="url(#wt-clip)">
+      <g class="wave">
+        <path d="M62 148q12-9 25 0t25 0t25 0t25 0v80H62z" fill="url(#wt-fill)"/>
+        <path d="M62 157q12-9 25 0t25 0t25 0t25 0v72H62z" fill="#3157F6" opacity=".5"/>
+      </g>
+    </g>
+    <circle cx="99" cy="110" r="5" fill="#FFFFFF" opacity=".55"/>
+  </g>
+
+  <circle cx="252" cy="104" r="28" fill="none" stroke="#E7EDF7" stroke-width="8"/>
+  <circle class="ring" cx="252" cy="104" r="28" fill="none" stroke="#14B8A6" stroke-width="8" stroke-linecap="round" transform="rotate(-90 252 104)"/>
+  <path d="M252 96c5 6 8 10 8 14a8 8 0 1 1-16 0c0-4 3-8 8-14z" fill="#14B8A6"/>
+
+  <rect x="298" y="80" width="66" height="14" rx="7" fill="#EDE9FE"/>
+  <rect x="298" y="102" width="52" height="11" rx="5.5" fill="#DDD6FE"/>
+  <rect x="298" y="121" width="40" height="9" rx="4.5" fill="#E7EDF7"/>
+
+  <g>
+    <rect x="196" y="162" width="168" height="11" rx="5.5" fill="#EEF2FF"/>
+    <rect class="bar b1" x="196" y="162" width="168" height="11" rx="5.5" fill="#3157F6"/>
+    <rect x="196" y="184" width="168" height="11" rx="5.5" fill="#EEF2FF"/>
+    <rect class="bar b2" x="196" y="184" width="132" height="11" rx="5.5" fill="#14B8A6"/>
+    <rect x="196" y="206" width="168" height="11" rx="5.5" fill="#EEF2FF"/>
+    <rect class="bar b3" x="196" y="206" width="150" height="11" rx="5.5" fill="#6366F1"/>
+  </g>
+</svg>

@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { motion } from "framer-motion"
-import { Mail, Phone, Send } from "lucide-react"
+import { FileDown, Mail, Phone, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -17,11 +16,7 @@ const contactCards = [
     href: `tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`,
     icon: Phone,
     external: false,
-    border: "hover:border-cyan-400/45",
-    glow: "hover:shadow-[0_0_24px_-6px_rgba(34,211,238,0.45)]",
-    iconBorder: "border-cyan-400/30",
-    iconBg: "bg-cyan-500/10",
-    iconText: "text-cyan-300",
+    tint: "bg-white/20 text-white",
   },
   {
     label: "Email",
@@ -29,11 +24,7 @@ const contactCards = [
     href: `mailto:${siteConfig.email}`,
     icon: Mail,
     external: false,
-    border: "hover:border-blue-400/45",
-    glow: "hover:shadow-[0_0_24px_-6px_rgba(96,165,250,0.45)]",
-    iconBorder: "border-blue-400/30",
-    iconBg: "bg-blue-500/10",
-    iconText: "text-blue-300",
+    tint: "bg-coral/25 text-[#ffb3ab]",
   },
   {
     label: "GitHub",
@@ -41,11 +32,7 @@ const contactCards = [
     href: siteConfig.social.github,
     icon: GithubIcon,
     external: true,
-    border: "hover:border-violet-400/45",
-    glow: "hover:shadow-[0_0_24px_-6px_rgba(167,139,250,0.45)]",
-    iconBorder: "border-violet-400/30",
-    iconBg: "bg-violet-500/10",
-    iconText: "text-violet-300",
+    tint: "bg-white/12 text-white",
   },
   {
     label: "LinkedIn",
@@ -53,11 +40,7 @@ const contactCards = [
     href: siteConfig.social.linkedin,
     icon: LinkedinIcon,
     external: true,
-    border: "hover:border-blue-400/45",
-    glow: "hover:shadow-[0_0_24px_-6px_rgba(96,165,250,0.45)]",
-    iconBorder: "border-blue-400/30",
-    iconBg: "bg-blue-500/10",
-    iconText: "text-blue-300",
+    tint: "bg-teal/25 text-[#7fe8d8]",
   },
 ]
 
@@ -71,143 +54,129 @@ export function Contact() {
     event.preventDefault()
 
     const subject = `Portfolio message from ${name || "a visitor"}`
-    const body = `${message}\n\n— ${name}${email ? ` (${email})` : ""}`
+    const body = `${message}\n\n- ${name}${email ? ` (${email})` : ""}`
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
 
     setSent(true)
   }
 
   return (
-    <section id="contact" className="relative overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-cyan-400/40 to-transparent"
-      />
-      <div aria-hidden className="bg-grid absolute inset-0 opacity-30" />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(46rem_30rem_at_8%_25%,oklch(0.32_0.1_215/16%),transparent_62%)]"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(50rem_30rem_at_90%_10%,oklch(0.32_0.11_300/18%),transparent_65%)]"
-      />
+    <section id="contact" className="bg-contact on-dark relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <span className="blob -left-24 top-0 size-96 bg-indigo/45" />
+        <span className="blob blob-2 -right-20 bottom-0 size-96 bg-teal/25" />
+        <span className="blob blob-3 left-1/3 top-1/2 size-80 bg-pink/20" />
+      </div>
 
-      <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <p className="section-eyebrow text-[13px] font-bold uppercase tracking-[0.16em] sm:text-sm">Contact</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-[2.6rem]">
-              Contact Me
+      <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] lg:gap-14">
+          <div>
+            <p className="label-mono inline-flex rounded-lg bg-white/10 px-2.5 py-1 text-white/80">
+              Contact
+            </p>
+            <h2 className="mt-4 text-[1.75rem] font-extrabold text-white sm:text-[2.125rem]">
+              Let&apos;s build something{" "}
+              <span className="accent-serif text-orange">useful</span> together.
             </h2>
-            <p className="mt-3 max-w-md text-base leading-7 text-slate-300">
+            <p className="mt-3 max-w-md text-lg leading-relaxed text-white/70">
               Have a question, opportunity, or project idea? Send me a message or connect with me
               online.
             </p>
 
-            <div className="mt-7 grid grid-cols-2 gap-3">
-              {contactCards.map((card, index) => {
+            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
+              {contactCards.map((card) => {
                 const Icon = card.icon
                 return (
-                  <motion.a
-                    key={card.label}
-                    href={card.href}
-                    target={card.external ? "_blank" : undefined}
-                    rel={card.external ? "noreferrer" : undefined}
-                    data-cursor="card"
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-40px" }}
-                    whileHover={{ y: -4 }}
-                    transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
-                    className={`glass-card group flex items-center gap-3 rounded-xl p-3.5 transition-all duration-250 ${card.border} ${card.glow}`}
-                  >
-                    <span
-                      className={`flex size-9 shrink-0 items-center justify-center rounded-full border transition-transform duration-250 group-hover:scale-110 ${card.iconBorder} ${card.iconBg} ${card.iconText}`}
+                  <li key={card.label}>
+                    <a
+                      href={card.href}
+                      target={card.external ? "_blank" : undefined}
+                      rel={card.external ? "noreferrer" : undefined}
+                      className="flex items-center gap-3.5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.1]"
                     >
-                      <Icon className="size-4" />
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-xs font-medium text-slate-400">{card.label}</span>
-                      <span className="block truncate text-[15px] font-medium text-foreground">{card.value}</span>
-                    </span>
-                  </motion.a>
+                      <span
+                        aria-hidden
+                        className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${card.tint}`}
+                      >
+                        <Icon className="size-4.5" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="label-mono block text-white/50">{card.label}</span>
+                        <span className="mt-0.5 block truncate text-[0.9375rem] font-semibold text-white">
+                          {card.value}
+                        </span>
+                      </span>
+                    </a>
+                  </li>
                 )
               })}
-            </div>
-          </motion.div>
+            </ul>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
-            className="gradient-border glass-card rounded-2xl p-6 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)] sm:p-7"
-          >
-            <h3 className="text-xl font-semibold text-foreground">Send Me a Message</h3>
+            <div className="mt-8 flex flex-wrap items-center gap-4 border-t border-white/15 pt-8">
+              <Button
+                variant="contrast"
+                nativeButton={false}
+                render={
+                  <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
+                    <FileDown className="transition-transform duration-200 group-hover/button:translate-y-0.5" />
+                    Download Resume
+                  </a>
+                }
+              />
+            </div>
+          </div>
+
+          <div className="on-light rounded-2xl border border-hairline bg-white p-6 text-ink sm:p-7">
+            <h3 className="text-xl font-extrabold text-ink">Send me a message</h3>
             <form onSubmit={handleSubmit} className="mt-5 space-y-4">
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <Label htmlFor="contact-name">Name</Label>
                 <Input
                   id="contact-name"
+                  name="name"
+                  autoComplete="name"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   placeholder="Your name"
                   required
                 />
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <Label htmlFor="contact-email">Email</Label>
                 <Input
                   id="contact-email"
+                  name="email"
                   type="email"
+                  autoComplete="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder="you@email.com"
                   required
                 />
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <Label htmlFor="contact-message">Message</Label>
                 <Textarea
                   id="contact-message"
+                  name="message"
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                   placeholder="What's the role or project?"
-                  rows={5}
+                  rows={4}
                   required
                 />
               </div>
 
-              <motion.div whileHover={{ y: -2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
-                <Button
-                  type="submit"
-                  size="lg"
-                  data-cursor="glow"
-                  className="group/send w-full bg-linear-to-r from-cyan-500 via-blue-500 to-violet-500 text-white hover:from-cyan-400 hover:via-blue-400 hover:to-violet-400"
-                >
-                  <Send className="size-4 transition-transform duration-300 group-hover/send:-translate-y-0.5 group-hover/send:translate-x-0.5" />
-                  Send Message
-                </Button>
-              </motion.div>
+              <Button type="submit" size="lg" className="w-full">
+                <Send />
+                Send Message
+              </Button>
 
-              {sent && (
-                <motion.p
-                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  className="text-center text-sm text-cyan-300"
-                >
-                  Thanks, your message is ready to send.
-                </motion.p>
-              )}
+              <p aria-live="polite" className="min-h-5 text-center text-sm font-semibold text-teal-ink">
+                {sent ? "Thanks, your message is ready to send." : ""}
+              </p>
             </form>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

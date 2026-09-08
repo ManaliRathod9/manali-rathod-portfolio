@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250" role="img" aria-label="Animated preview of the Car Sales Dashboard: KPI cards, a car silhouette, growing revenue bars and a trend line">
+  <defs>
+    <linearGradient id="cs-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF1E8"/><stop offset="55%" stop-color="#F1EEFF"/><stop offset="100%" stop-color="#EAF2FF"/>
+    </linearGradient>
+    <linearGradient id="cs-bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#3157F6"/><stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <filter id="cs-sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+  </defs>
+  <style>
+    * { transform-box: fill-box; transform-origin: center; }
+    .gbar { transform-origin: center bottom; animation: cs-grow 8s ease-out infinite }
+    .g1 { animation-delay: 0s } .g2 { animation-delay: .1s } .g3 { animation-delay: .2s }
+    .g4 { animation-delay: .3s } .g5 { animation-delay: .4s } .g6 { animation-delay: .5s }
+    @keyframes cs-grow { 0% { transform: scaleY(.12) } 26%, 100% { transform: scaleY(1) } }
+    .trend { stroke-dasharray: 210; animation: cs-draw 8s ease-out infinite }
+    @keyframes cs-draw { 0% { stroke-dashoffset: 210 } 34%, 100% { stroke-dashoffset: 0 } }
+    .dot { animation: cs-dot 8s ease-out infinite }
+    @keyframes cs-dot { 0%, 30% { opacity: 0 } 42%, 100% { opacity: 1 } }
+    .car { animation: cs-car 6s ease-in-out infinite }
+    @keyframes cs-car { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(6px) } }
+    @media (prefers-reduced-motion: reduce) {
+      .gbar, .car, .dot { animation: none; transform: none; opacity: 1 }
+      .trend { animation: none; stroke-dashoffset: 0 }
+    }
+  </style>
+
+  <rect width="400" height="250" fill="url(#cs-bg)"/>
+  <g filter="url(#cs-sh)"><rect x="22" y="20" width="356" height="210" rx="14" fill="#FFFFFF"/></g>
+  <rect x="22" y="20" width="356" height="30" rx="14" fill="#FFF8F2"/>
+  <rect x="22" y="38" width="356" height="12" fill="#FFF8F2"/>
+  <circle cx="40" cy="35" r="3.5" fill="#FF6B5E"/><circle cx="52" cy="35" r="3.5" fill="#FF9F43"/><circle cx="64" cy="35" r="3.5" fill="#14B8A6"/>
+  <line x1="22" y1="50" x2="378" y2="50" stroke="#E2E8F0"/>
+
+  <g><rect x="38" y="60" width="100" height="42" rx="10" fill="#EAF2FF"/><rect x="50" y="70" width="34" height="7" rx="3.5" fill="#93A9F5"/><rect x="50" y="83" width="58" height="10" rx="5" fill="#3157F6"/></g>
+  <g><rect x="150" y="60" width="100" height="42" rx="10" fill="#EAFBF5"/><rect x="162" y="70" width="34" height="7" rx="3.5" fill="#7FD8C9"/><rect x="162" y="83" width="48" height="10" rx="5" fill="#14B8A6"/></g>
+  <g><rect x="262" y="60" width="100" height="42" rx="10" fill="#FFF1E8"/><rect x="274" y="70" width="34" height="7" rx="3.5" fill="#FFC188"/><rect x="274" y="83" width="54" height="10" rx="5" fill="#FF9F43"/></g>
+
+  <rect x="38" y="114" width="196" height="108" rx="12" fill="#FBFCFF" stroke="#E2E8F0"/>
+  <g>
+    <rect class="gbar g1" x="56" y="162" width="18" height="42" rx="5" fill="#C7D2FE"/>
+    <rect class="gbar g2" x="82" y="148" width="18" height="56" rx="5" fill="#C7D2FE"/>
+    <rect class="gbar g3" x="108" y="170" width="18" height="34" rx="5" fill="#C7D2FE"/>
+    <rect class="gbar g4" x="134" y="138" width="18" height="66" rx="5" fill="#A5B4FC"/>
+    <rect class="gbar g5" x="160" y="156" width="18" height="48" rx="5" fill="#A5B4FC"/>
+    <rect class="gbar g6" x="186" y="128" width="18" height="76" rx="5" fill="url(#cs-bar)"/>
+  </g>
+  <line x1="50" y1="205" x2="222" y2="205" stroke="#E2E8F0" stroke-width="1.5"/>
+
+  <rect x="246" y="114" width="116" height="108" rx="12" fill="#FBFCFF" stroke="#E2E8F0"/>
+  <g transform="translate(262 128)">
+    <g class="car">
+      <path d="M4 18h6l4-8h30l6 8h6a4 4 0 0 1 4 4v6H0v-6a4 4 0 0 1 4-4z" fill="#FF6B5E"/>
+      <circle cx="14" cy="30" r="4.5" fill="#0F172A"/><circle cx="46" cy="30" r="4.5" fill="#0F172A"/>
+      <path d="M16 18l3-6h10v6z" fill="#FFE1DC"/><path d="M33 12h7l4 6H33z" fill="#FFE1DC"/>
+    </g>
+  </g>
+  <polyline class="trend" points="258,206 278,190 296,196 316,170 334,180 352,152" fill="none" stroke="#EC4899" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle class="dot" cx="352" cy="152" r="4.5" fill="#EC4899"/>
+</svg>

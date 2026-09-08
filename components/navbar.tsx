@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -15,7 +16,7 @@ import {
 import { cn } from "@/lib/utils"
 import { siteConfig, withBasePath } from "@/lib/site"
 
-const sectionIds = ["about", "experience", "skills", "education", "projects", "contact"]
+const sectionIds = ["experience", "projects", "skills", "education", "about", "contact"]
 
 function useActiveSection(isHome: boolean) {
   const [activeId, setActiveId] = useState("")
@@ -43,37 +44,6 @@ function useActiveSection(isHome: boolean) {
   return activeId
 }
 
-function NavLink({
-  href,
-  label,
-  isActive,
-  onClick,
-}: {
-  href: string
-  label: string
-  isActive: boolean
-  onClick?: () => void
-}) {
-  return (
-    <a
-      href={href}
-      onClick={onClick}
-      className={cn(
-        "group relative pb-1 text-[15px] font-semibold transition-all duration-300 ease-out lg:text-base",
-        isActive ? "text-white" : "text-slate-200 hover:text-cyan-100"
-      )}
-    >
-      {label}
-      <span
-        className={cn(
-          "absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-linear-to-r from-cyan-300 via-blue-400 to-violet-400 shadow-[0_0_10px_rgba(56,189,248,0.35)] transition-all duration-300 ease-out",
-          isActive ? "scale-x-100" : "group-hover:scale-x-100"
-        )}
-      />
-    </a>
-  )
-}
-
 export function Navbar() {
   const pathname = usePathname()
   const isHome = pathname === "/"
@@ -81,40 +51,63 @@ export function Navbar() {
 
   const sectionHref = (id: string) => (isHome ? `#${id}` : withBasePath(`/#${id}`))
 
-  const orderedLinks = [
-    { key: "about", href: sectionHref("about"), label: "About", isActive: isHome && activeId === "about" },
+  const links = [
     { key: "experience", href: sectionHref("experience"), label: "Experience", isActive: isHome && activeId === "experience" },
-    { key: "skills", href: sectionHref("skills"), label: "Skills", isActive: isHome && activeId === "skills" },
-    { key: "education", href: sectionHref("education"), label: "Education", isActive: isHome && activeId === "education" },
     { key: "projects", href: sectionHref("projects"), label: "Projects", isActive: isHome && activeId === "projects" },
+    { key: "skills", href: sectionHref("skills"), label: "Skills", isActive: isHome && activeId === "skills" },
+    { key: "about", href: sectionHref("about"), label: "About", isActive: isHome && activeId === "about" },
     { key: "life", href: withBasePath("/life"), label: "Life", isActive: pathname === "/life" },
     { key: "contact", href: sectionHref("contact"), label: "Contact", isActive: isHome && activeId === "contact" },
   ]
 
   return (
-    <header
-      data-cursor="nav"
-      className="sticky top-0 z-50 bg-background/70 shadow-[0_1px_0_0_rgba(255,255,255,0.06)] backdrop-blur-xl"
-    >
-      <div className="mx-auto flex h-[4.35rem] max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href={isHome ? "#top" : withBasePath("/")} className="text-lg font-extrabold tracking-tight text-slate-100 transition-colors duration-300 hover:text-white sm:text-[1.3rem]">
-          Manali <span className="text-gradient">Rathod</span>
+    <header className="sticky top-0 z-50 border-b border-hairline bg-white/85 backdrop-blur-md">
+      <div className="mx-auto flex h-18 max-w-[1200px] items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
+        <a
+          href={isHome ? "#top" : withBasePath("/")}
+          aria-label={`${siteConfig.name} - Home`}
+          className="logo-link flex items-center gap-2 rounded-lg py-1"
+        >
+          {/* Decorative: the link's aria-label already carries the name. */}
+          <span aria-hidden className="logo-mark">
+            <span className="logo-m">M</span>
+            <span className="logo-r">R</span>
+            <svg className="logo-underline" viewBox="0 0 48 10" fill="none">
+              <path d="M2 3 Q23 12 44 3" pathLength="100" />
+              <circle className="logo-data-point" r="2" />
+            </svg>
+          </span>
+          <span className="font-heading text-lg font-bold tracking-tight text-ink">
+            {siteConfig.name}
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {orderedLinks.map((link) => (
-            <NavLink key={link.key} href={link.href} label={link.label} isActive={link.isActive} />
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+          {links.map((link) => (
+            <a
+              key={link.key}
+              href={link.href}
+              aria-current={link.isActive ? "page" : undefined}
+              className={cn(
+                "rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold transition-colors duration-200",
+                link.isActive
+                  ? "bg-brand/10 text-brand"
+                  : "text-subtle hover:bg-ink/[0.05] hover:text-ink"
+              )}
+            >
+              {link.label}
+            </a>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <Button
             variant="ghost"
             size="icon-sm"
             nativeButton={false}
-            className="size-9 cursor-pointer rounded-full border border-white/5 bg-white/[0.03] text-slate-200 transition-all duration-300 ease-out hover:scale-[1.08] hover:border-cyan-300/20 hover:bg-white/[0.1] hover:text-white hover:shadow-[0_0_24px_rgba(56,189,248,0.2),0_0_30px_rgba(168,85,247,0.16)]"
+            className="text-subtle hover:text-ink"
             render={
-              <a href={siteConfig.social.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+              <a href={siteConfig.social.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
                 <GithubIcon className="size-5" />
               </a>
             }
@@ -123,22 +116,20 @@ export function Navbar() {
             variant="ghost"
             size="icon-sm"
             nativeButton={false}
-            className="size-9 cursor-pointer rounded-full border border-white/5 bg-white/[0.03] text-slate-200 transition-all duration-300 ease-out hover:scale-[1.08] hover:border-cyan-300/20 hover:bg-white/[0.1] hover:text-white hover:shadow-[0_0_24px_rgba(56,189,248,0.2),0_0_30px_rgba(168,85,247,0.16)]"
+            className="text-subtle hover:text-ink"
             render={
-              <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
                 <LinkedinIcon className="size-5" />
               </a>
             }
           />
           <Button
-            variant="secondary"
             size="sm"
             nativeButton={false}
-            className="h-9 cursor-pointer rounded-xl border border-white/10 bg-white/[0.06] px-4 text-[15px] font-medium text-slate-100 shadow-[0_8px_20px_rgba(15,23,42,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-cyan-300/20 hover:bg-white/[0.1] hover:shadow-[0_10px_28px_rgba(56,189,248,0.14),0_0_26px_rgba(168,85,247,0.12)]"
             render={
               <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
-                <FileDown className="size-4" />
-                Download Resume
+                <FileDown />
+                Resume
               </a>
             }
           />
@@ -146,55 +137,67 @@ export function Navbar() {
 
         <Sheet>
           <SheetTrigger
-            render={<Button variant="ghost" size="icon-sm" aria-label="Open menu" />}
+            render={
+              <Button
+                variant="secondary"
+                size="icon-sm"
+                aria-label="Open navigation menu"
+                className="lg:hidden"
+              />
+            }
           >
-            <Menu className="size-4" />
+            <Menu className="size-5" />
           </SheetTrigger>
-          <SheetContent side="right" className="w-3/4 p-0">
-            <SheetHeader className="border-b border-white/10">
+          <SheetContent side="right" className="w-[min(20rem,86vw)] p-0">
+            <SheetHeader className="border-b border-hairline px-5 py-4">
               <SheetTitle>{siteConfig.name}</SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-1 p-4 text-sm">
-              {orderedLinks.map((link) => (
-                <a
+            <nav aria-label="Mobile" className="flex flex-col gap-0.5 p-3">
+              {links.map((link) => (
+                <SheetClose
                   key={link.key}
-                  href={link.href}
-                  className="rounded-md px-2 py-2 text-base font-medium text-slate-200 transition-colors hover:bg-white/5 hover:text-white"
-                >
-                  {link.label}
-                </a>
+                  render={
+                    <a
+                      href={link.href}
+                      className={cn(
+                        "rounded-lg px-3 py-3 font-sans text-base font-semibold transition-colors",
+                        link.isActive
+                          ? "bg-brand/10 text-brand"
+                          : "text-ink hover:bg-ink/[0.05]"
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  }
+                />
               ))}
             </nav>
-            <div className="mt-auto flex flex-col gap-2 border-t border-white/10 p-4">
+            <div className="mt-auto flex flex-col gap-2 border-t border-hairline p-4">
               <Button
-                variant="outline"
-                size="sm"
+                variant="secondary"
                 nativeButton={false}
                 render={
                   <a href={siteConfig.social.github} target="_blank" rel="noreferrer">
-                    <GithubIcon className="size-3.5" />
+                    <GithubIcon />
                     GitHub
                   </a>
                 }
               />
               <Button
-                variant="outline"
-                size="sm"
+                variant="secondary"
                 nativeButton={false}
                 render={
                   <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer">
-                    <LinkedinIcon className="size-3.5" />
+                    <LinkedinIcon />
                     LinkedIn
                   </a>
                 }
               />
               <Button
-                variant="secondary"
-                size="sm"
                 nativeButton={false}
                 render={
                   <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
-                    <FileDown className="size-3.5" />
+                    <FileDown />
                     Download Resume
                   </a>
                 }

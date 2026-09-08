@@ -2,7 +2,6 @@
 
 import { useEffect, useSyncExternalStore } from "react"
 import { createPortal } from "react-dom"
-import { AnimatePresence, motion } from "framer-motion"
 import { X } from "lucide-react"
 import { ProfilePhoto } from "@/components/profile-photo"
 
@@ -36,46 +35,34 @@ export function ImageLightbox({ open, onClose }: ImageLightboxProps) {
     }
   }, [open, onClose])
 
-  if (!isClient) return null
+  if (!isClient || !open) return null
 
   return createPortal(
-    <AnimatePresence>
-      {open && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Profile photo"
+      onClick={onClose}
+      className="on-dark fixed inset-0 z-100 flex items-center justify-center bg-navy/88 p-6"
+    >
+      <div onClick={(event) => event.stopPropagation()} className="relative">
+        <button
+          type="button"
           onClick={onClose}
-          className="fixed inset-0 z-100 flex items-center justify-center bg-black/75 p-6 backdrop-blur-md"
+          aria-label="Close image preview"
+          autoFocus
+          className="absolute -top-4 -right-4 z-10 flex size-11 cursor-pointer items-center justify-center rounded-full border border-white/25 bg-navy text-white transition-colors hover:bg-white hover:text-ink"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            onClick={(event) => event.stopPropagation()}
-            className="relative"
-          >
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Close image preview"
-              data-cursor="button"
-              className="absolute -top-3 -right-3 z-10 flex size-9 items-center justify-center rounded-full border border-white/20 bg-black/70 text-white backdrop-blur-sm transition-colors hover:border-cyan-400/50 hover:text-cyan-300"
-            >
-              <X className="size-4" />
-            </button>
-            <ProfilePhoto
-              size={320}
-              priority
-              alt="Manali Rathod profile photo"
-              className="size-56 sm:size-72 lg:size-80"
-            />
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>,
+          <X className="size-4.5" />
+        </button>
+        <ProfilePhoto
+          size={460}
+          priority
+          alt="Manali Rathod profile photo"
+          className="h-80 w-64 rounded-2xl border-2 border-white/20 sm:h-[26rem] sm:w-[21rem]"
+        />
+      </div>
+    </div>,
     document.body
   )
 }

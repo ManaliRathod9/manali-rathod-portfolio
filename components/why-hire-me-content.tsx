@@ -1,139 +1,112 @@
-"use client"
-
 import Link from "next/link"
-import { motion } from "framer-motion"
 import {
-  ArrowDown,
+  ArrowLeft,
+  ArrowRight,
   BrainCircuit,
   Filter,
   Hammer,
   LayoutDashboard,
   Lightbulb,
-  Rocket,
   type LucideIcon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { valueProps } from "@/lib/content"
 
-const nodeStyles: { icon: LucideIcon; border: string; iconBg: string; iconText: string; glow: string }[] = [
-  {
-    icon: Filter,
-    border: "border-cyan-400/30",
-    iconBg: "bg-cyan-500/10",
-    iconText: "text-cyan-300",
-    glow: "hover:shadow-[0_0_30px_-8px_rgba(34,211,238,0.4)]",
-  },
-  {
-    icon: LayoutDashboard,
-    border: "border-blue-400/30",
-    iconBg: "bg-blue-500/10",
-    iconText: "text-blue-300",
-    glow: "hover:shadow-[0_0_30px_-8px_rgba(96,165,250,0.4)]",
-  },
-  {
-    icon: BrainCircuit,
-    border: "border-violet-400/30",
-    iconBg: "bg-violet-500/10",
-    iconText: "text-violet-300",
-    glow: "hover:shadow-[0_0_30px_-8px_rgba(167,139,250,0.4)]",
-  },
-  {
-    icon: Hammer,
-    border: "border-fuchsia-400/30",
-    iconBg: "bg-fuchsia-500/10",
-    iconText: "text-fuchsia-300",
-    glow: "hover:shadow-[0_0_30px_-8px_rgba(232,121,249,0.4)]",
-  },
-  {
-    icon: Lightbulb,
-    border: "border-pink-400/30",
-    iconBg: "bg-pink-500/10",
-    iconText: "text-pink-300",
-    glow: "hover:shadow-[0_0_30px_-8px_rgba(244,114,182,0.4)]",
-  },
+const cardStyles: { icon: LucideIcon; tint: string; ring: string }[] = [
+  { icon: Filter, tint: "bg-brand/10 text-brand", ring: "hover:border-brand/40" },
+  { icon: LayoutDashboard, tint: "bg-coral/12 text-coral", ring: "hover:border-coral/45" },
+  { icon: BrainCircuit, tint: "bg-teal/12 text-teal-ink", ring: "hover:border-teal/45" },
+  { icon: Hammer, tint: "bg-orange/15 text-orange", ring: "hover:border-orange/50" },
+  { icon: Lightbulb, tint: "bg-brand/10 text-brand", ring: "hover:border-brand/40" },
 ]
 
 export function WhyHireMeContent() {
   return (
-    <div className="relative overflow-hidden">
-      <div aria-hidden className="bg-grid absolute inset-0 opacity-40" />
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-transparent to-violet-600/10"
-      />
-
-      <div className="relative mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-center"
+    <div className="bg-life relative overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <span className="blob -left-24 top-0 size-96 bg-brand/22" />
+        <span className="blob blob-2 -right-20 bottom-10 size-96 bg-pink/22" />
+      </div>
+      <div className="relative mx-auto max-w-[1200px] px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <Link
+          href="/"
+          className="group inline-flex items-center gap-2 rounded-lg py-1 text-[0.9375rem] font-semibold text-subtle transition-colors hover:text-brand"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-cyan-300">
+          <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+          Back to portfolio
+        </Link>
+
+        <header className="mt-6 max-w-2xl">
+          <p className="label-mono inline-flex rounded-lg bg-white/70 px-2.5 py-1 text-brand backdrop-blur-sm">
             A quick look
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Why You Should{" "}
-            <span className="bg-linear-to-r from-cyan-400 via-blue-500 to-violet-500 bg-clip-text text-transparent">
-              Hire Me
+          <h1 className="anim-enter mt-4 text-[2rem] font-extrabold text-ink sm:text-[2.5rem]">
+            Why you should hire{" "}
+            <span className="accent-serif bg-gradient-to-r from-brand via-indigo to-pink bg-clip-text text-transparent">
+              me
             </span>
           </h1>
-          <p className="mx-auto mt-3 max-w-md text-muted-foreground">
+          <p className="anim-enter anim-delay-1 mt-3 text-lg leading-relaxed text-subtle">
             A simple view of how I work and what I can bring to a team.
           </p>
-        </motion.div>
+        </header>
 
-        <div className="mt-14 flex flex-col items-center">
+        <ol className="mt-10 grid gap-5 md:grid-cols-2">
           {valueProps.map((prop, index) => {
-            const style = nodeStyles[index]
+            const style = cardStyles[index % cardStyles.length]
             const Icon = style.icon
+            const isLast = index === valueProps.length - 1
+
             return (
-              <div key={prop.id} className="flex w-full flex-col items-center">
-                <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  whileHover={{ y: -3 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.08 }}
-                  className={`glass-card flex w-full items-start gap-4 rounded-2xl border p-5 transition-all duration-300 sm:p-6 ${style.border} ${style.glow}`}
-                >
+              <li
+                key={prop.id}
+                data-reveal={index % 2 === 0 ? "left" : "right"}
+                className={`rounded-2xl border border-white bg-white/85 p-6 backdrop-blur-sm card-shadow transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-2 hover:card-shadow-hover ${style.ring} ${
+                  isLast ? "md:col-span-2" : ""
+                }`}
+              >
+                <div className="flex items-start gap-4">
                   <span
-                    className={`flex size-11 shrink-0 items-center justify-center rounded-full border ${style.border} ${style.iconBg} ${style.iconText}`}
+                    aria-hidden
+                    className={`flex size-12 shrink-0 items-center justify-center rounded-xl ${style.tint}`}
                   >
                     <Icon className="size-5" />
                   </span>
                   <div>
-                    <p className="text-base font-semibold text-foreground sm:text-lg">{prop.title}</p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    <p className="label-mono text-muted">
+                      {String(index + 1).padStart(2, "0")}
+                    </p>
+                    <h2 className="mt-1.5 text-lg font-extrabold text-ink sm:text-xl">
+                      {prop.title}
+                    </h2>
+                    <p className="mt-2 text-base leading-relaxed text-subtle">
                       {prop.description}
                     </p>
                   </div>
-                </motion.div>
-
-                {index < valueProps.length - 1 && (
-                  <div className="flex h-10 items-center text-muted-foreground/50">
-                    <ArrowDown className="size-5" />
-                  </div>
-                )}
-              </div>
+                </div>
+              </li>
             )
           })}
-        </div>
+        </ol>
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="glass-card mx-auto mt-10 max-w-lg rounded-2xl border border-cyan-400/30 p-8 text-center"
-        >
-          <Rocket className="mx-auto size-7 text-cyan-300" />
-          <p className="mt-3 text-lg font-semibold text-foreground">
-            Let&apos;s build something useful together.
+        <div data-reveal className="bg-contact on-dark mt-10 flex flex-col items-start gap-5 rounded-2xl p-7 sm:flex-row sm:items-center sm:justify-between sm:p-9">
+          <p className="text-xl font-extrabold text-white sm:text-2xl">
+            Let&apos;s build something{" "}
+            <span className="accent-serif text-orange">useful</span> together.
           </p>
-          <Button size="lg" className="mt-5" nativeButton={false} render={<Link href="/#contact">Contact Me</Link>} />
-        </motion.div>
+          <Button
+            variant="contrast"
+            size="lg"
+            nativeButton={false}
+            className="shrink-0"
+            render={
+              <Link href="/#contact">
+                Contact Me
+                <ArrowRight className="transition-transform duration-200 group-hover/button:translate-x-0.5" />
+              </Link>
+            }
+          />
+        </div>
       </div>
     </div>
   )

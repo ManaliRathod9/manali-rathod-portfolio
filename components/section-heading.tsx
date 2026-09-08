@@ -1,44 +1,76 @@
-"use client"
-
-import { motion } from "framer-motion"
+import { cn } from "@/lib/utils"
 
 interface SectionHeadingProps {
+  /** Small monospace label above the title. */
   eyebrow: string
   title: string
   description?: string
+  className?: string
+  /** Set on dark sections so the text inverts. */
+  tone?: "light" | "dark"
+  /** Left-aligned by default; "center" centers the whole block. */
   align?: "left" | "center"
+  /** A word inside `title` to render with the signature blue-to-teal gradient. */
+  gradientWord?: string
 }
 
 export function SectionHeading({
   eyebrow,
   title,
   description,
+  className,
+  tone = "light",
   align = "left",
+  gradientWord,
 }: SectionHeadingProps) {
+  const isDark = tone === "dark"
+  const isCenter = align === "center"
+
+  const titleNode = gradientWord ? (
+    title.split(gradientWord).reduce<React.ReactNode[]>((acc, part, index, arr) => {
+      acc.push(part)
+      if (index < arr.length - 1) {
+        acc.push(
+          <span key={index} className="text-gradient-signature">
+            {gradientWord}
+          </span>
+        )
+      }
+      return acc
+    }, [])
+  ) : (
+    title
+  )
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className={align === "center" ? "text-center" : "text-left"}
-    >
-      <p className="section-eyebrow text-[13px] font-bold tracking-[0.16em] uppercase sm:text-sm">
+    <div className={cn("max-w-2xl", isCenter && "mx-auto max-w-2xl text-center", className)}>
+      <p
+        className={cn(
+          "label-mono inline-flex items-center gap-2 rounded-lg px-2.5 py-1",
+          isDark ? "bg-white/10 text-white/80" : "bg-brand/8 text-brand"
+        )}
+      >
         {eyebrow}
       </p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-[2.6rem]">
-        {title}
+      <h2
+        className={cn(
+          "mt-4 text-[1.75rem] font-extrabold sm:text-[2.125rem]",
+          isDark ? "text-white" : "text-ink"
+        )}
+      >
+        {titleNode}
       </h2>
       {description && (
         <p
-          className={
-            "mt-3 max-w-2xl text-base leading-7 text-slate-300 " +
-            (align === "center" ? "mx-auto" : "")
-          }
+          className={cn(
+            "mt-3 text-lg leading-relaxed",
+            isDark ? "text-white/70" : "text-muted",
+            isCenter && "mx-auto"
+          )}
         >
           {description}
         </p>
       )}
-    </motion.div>
+    </div>
   )
 }

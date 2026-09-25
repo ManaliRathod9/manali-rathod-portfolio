@@ -1,14 +1,14 @@
-import { ArrowRight, Binary, Bot, ChartColumnBig, DatabaseZap, ScanSearch, type LucideIcon } from "lucide-react"
+import { ArrowRight, MessagesSquare, Plug, Rocket, Route, ShieldCheck, type LucideIcon } from "lucide-react"
 import { DataJourney } from "@/components/data-journey"
 import { SectionHeading } from "@/components/section-heading"
 import { workflowSteps } from "@/lib/content"
 
 const stepStyles: Record<string, { icon: LucideIcon; tint: string; bar: string }> = {
-  "messy-data": { icon: Binary, tint: "bg-coral/15 text-coral", bar: "from-coral to-orange" },
-  "clean-structure": { icon: DatabaseZap, tint: "bg-orange/18 text-orange", bar: "from-orange to-pink" },
-  analysis: { icon: ScanSearch, tint: "bg-brand/12 text-brand", bar: "from-brand to-indigo" },
-  "dashboard-or-ai-tool": { icon: Bot, tint: "bg-teal/15 text-teal-ink", bar: "from-teal to-brand" },
-  "useful-decision": { icon: ChartColumnBig, tint: "bg-pink/12 text-pink", bar: "from-pink to-indigo" },
+  "find-use-case": { icon: MessagesSquare, tint: "bg-coral/15 text-coral", bar: "from-coral to-orange" },
+  "choose-approach": { icon: Route, tint: "bg-orange/18 text-orange", bar: "from-orange to-pink" },
+  "build-into-workflow": { icon: Plug, tint: "bg-brand/12 text-brand", bar: "from-brand to-indigo" },
+  "push-past-demo": { icon: ShieldCheck, tint: "bg-teal/15 text-teal-ink", bar: "from-teal to-brand" },
+  "ship-learn-improve": { icon: Rocket, tint: "bg-pink/12 text-pink", bar: "from-pink to-indigo" },
 }
 
 export function Workflow() {
@@ -22,11 +22,11 @@ export function Workflow() {
       <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
         <SectionHeading
           eyebrow="Workflow"
-          title="How I turn messy data into something useful"
-          description="The part I enjoy most is moving from unclear inputs to something a person can actually act on."
+          title="What happens between an AI idea and a product people use"
+          description="The five steps I work through to get an AI feature from a promising idea to something people rely on."
         />
 
-        {/* The literal picture of this section's premise: scattered points settling into a chart. */}
+        {/* Scattered points settling into shape: an idea becoming something that holds up. */}
         <DataJourney
           uid="workflow"
           variant="divider"

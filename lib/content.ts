@@ -3,7 +3,7 @@ export interface Experience {
   title: string
   org: string
   period: string
-  location: string
+  location?: string
   bullets: string[]
   label?: string
 }
@@ -55,85 +55,63 @@ export interface WorkflowStep {
 
 export const experiences: Experience[] = [
   {
-    id: "iu-psych-data-analyst",
-    title: "Data Analyst",
-    org: "Indiana University Department of Psychological and Brain Sciences",
-    period: "Sep 2025 - Present",
-    location: "Bloomington, IN, United States",
+    id: "databricks-ai-pm",
+    title: "AI Product Manager",
+    org: "Databricks",
+    period: "Jan 2026 - Present",
     bullets: [
-      "Clean and organize research datasets so they are ready for analysis instead of needing manual fixing.",
-      "Build dashboards and web-based tools that help researchers select variables, export clean CSVs, and understand their data faster.",
+      "Increased Agent Bricks adoption by 18% across 20+ enterprise engagements by owning product strategy, PRDs, customer discovery, and roadmap prioritization for RAG, agent orchestration, evals, and governance.",
+      "Expanded governed AI into 8+ production workflows by defining user journeys, requirements, and acceptance criteria for Knowledge Assistant, Supervisor Agent, MCP integrations, and Unity Catalog controls.",
+      "Improved GenAI release quality by 15% by establishing MLflow evals and KPIs for groundedness, relevance, hallucination, and human feedback, then turning failures into prioritized model and retrieval improvements.",
+      "Drive latency and cost trade-offs across model selection, context size, token usage, and retrieval quality toward sub-3-second response targets.",
     ],
   },
   {
-    id: "kintsugi-ai-ml",
-    title: "AI & ML Intern",
-    org: "Kintsugi Global",
-    period: "Jul 2025 - Dec 2025",
-    location: "Remote",
+    id: "informative-web-pm",
+    title: "Product Manager",
+    org: "Informative Web Solutions",
+    period: "Oct 2022 - Jul 2024",
     bullets: [
-      "Worked on recommendation and user-data workflows where the goal was to make model output useful for real product behavior.",
-      "Cleaned user data, explored patterns, and supported ML workflows used for generating and evaluating recommendations.",
+      "Delivered features 22% faster by owning the roadmap, backlog prioritization, user stories, and sprint planning in Jira across engineering, design, and QA.",
+      "Improved checkout and onboarding completion by 18% through customer discovery, product analytics, A/B testing, journey mapping, and Figma prototypes.",
+      "Directed 10+ client initiatives across web, mobile, CRM, and e-commerce, from discovery and requirements through launch and post-release optimization.",
     ],
   },
   {
-    id: "project990-research",
-    title: "Data Analyst",
-    org: "Project 990 Inc.",
-    period: "Sep 2024 - Jul 2025",
-    location: "Bloomington, IN, United States",
+    id: "infinite-infolab-mle",
+    title: "Machine Learning Engineer",
+    org: "Infinite Infolab",
+    period: "Feb 2021 - Sep 2022",
     bullets: [
-      "Built a unified data pipeline that combined multiple source files into one clean reporting structure, reducing preprocessing time by approximately 30%.",
-      "Cleaned and transformed inconsistent datasets so the data could be used reliably for analysis, reporting, and dashboard development.",
-      "Created Power BI-style dashboards to help stakeholders understand patterns, compare results, and make faster decisions.",
-    ],
-  },
-  {
-    id: "hudl-data-analyst",
-    title: "Data Analyst",
-    org: "Hudl",
-    period: "Jan 2024 - Jul 2024",
-    location: "Mumbai, India",
-    bullets: [
-      "Reviewed performance datasets using Excel, SQL, and Python to find recurring patterns, missing information, and inconsistent metrics.",
-      "Automated recurring analysis reports and helped reduce repeated manual reporting work.",
-    ],
-  },
-  {
-    id: "verzeo-ai-engineer",
-    title: "Artificial Intelligence Engineer",
-    org: "Verzeo",
-    period: "Apr 2023 - Aug 2023",
-    location: "Bengaluru, India",
-    bullets: [
-      "Built and tested ML prototypes in Python using NumPy, pandas, and scikit-learn.",
-      "Cleaned datasets, improved data quality, tuned model inputs, and tested model outputs before deployment.",
-    ],
-  },
-  {
-    id: "tcr-android",
-    title: "Android Developer Intern",
-    org: "TCR Innovation",
-    period: "Aug 2022 - Nov 2022",
-    location: "India",
-    bullets: [
-      "Built and tested Android app features using Kotlin and native Android tools.",
-      "Fixed bugs and supported documentation for mobile application development.",
+      "Improved prediction accuracy by 14% with classification and regression models built in Python, scikit-learn, XGBoost, and pandas on structured client datasets.",
+      "Cut model training time by 25% through feature selection, hyperparameter tuning, cross-validation, and MLflow experiment tracking.",
+      "Deployed models as Flask REST APIs in Docker, integrating inference into client applications and serving 10K+ monthly prediction requests.",
+      "Automated data preparation and retraining workflows with Python, SQL, Airflow, and AWS, processing 500K+ records per cycle.",
     ],
   },
 ]
 
 export const teachingExperience: Experience[] = [
   {
+    id: "iu-research-data",
+    label: "Research Data",
+    title: "Data Analyst",
+    org: "Indiana University Bloomington",
+    period: "Oct 2025 - Present",
+    bullets: [
+      "Build Python ETL workflows and quality checks that turn messy experiment files into analysis-ready datasets.",
+      "Built a variable-selection workflow with researchers for clean CSV exports used in SPSS and Excel.",
+    ],
+  },
+  {
     id: "iu-instructor",
     label: "Instructor Support",
     title: "Graduate Associate Instructor - Data Science On Ramp",
     org: "Indiana University Luddy School",
     period: "Aug 2025 - Jan 2026",
-    location: "United States",
     bullets: [
       "Supported students across Python, Spark, NLP, Tableau, and web scraping modules.",
-      "Helped students debug assignments and understand how each tool fits into a real data workflow.",
+      "Helped students debug assignments and see how each tool fits into a real data workflow.",
     ],
   },
   {
@@ -142,10 +120,8 @@ export const teachingExperience: Experience[] = [
     title: "Environment and People",
     org: "O'Neill School of Public and Environmental Affairs",
     period: "Aug 2025 - Dec 2025",
-    location: "United States",
     bullets: [
-      "Helped students with assignments, course material, and technical questions related to data and public affairs.",
-      "Explained technical ideas in a clear way for students from non-technical backgrounds.",
+      "Explained technical ideas clearly for students from non-technical backgrounds.",
     ],
   },
 ]
@@ -305,80 +281,149 @@ export const recruiterRoleProfiles: RecruiterRoleProfile[] = [
 
 export const workflowSteps: WorkflowStep[] = [
   {
-    id: "messy-data",
-    title: "Messy Data",
-    description: "Start with scattered files, inconsistent labels, or unclear inputs.",
+    id: "find-use-case",
+    title: "Find the real use case",
+    description: "Talk to users and define the job the AI needs to do.",
   },
   {
-    id: "clean-structure",
-    title: "Clean Structure",
-    description: "Validate, transform, and shape the data into something reliable.",
+    id: "choose-approach",
+    title: "Choose the approach",
+    description:
+      "Decide whether a model, RAG system, agent, or simpler solution fits, and what success means.",
   },
   {
-    id: "analysis",
-    title: "Analysis",
-    description: "Look for patterns, edge cases, and what actually matters.",
+    id: "build-into-workflow",
+    title: "Build it into the workflow",
+    description: "Connect the AI to the product, APIs, and people who will actually use it.",
   },
   {
-    id: "dashboard-or-ai-tool",
-    title: "Dashboard or AI Tool",
-    description: "Turn the output into a dashboard, export tool, or AI workflow.",
+    id: "push-past-demo",
+    title: "Push past the demo",
+    description: "Test answer quality, failure cases, speed, safeguards, and cost.",
   },
   {
-    id: "useful-decision",
-    title: "Useful Decision",
-    description: "End with something a person can trust and act on quickly.",
+    id: "ship-learn-improve",
+    title: "Ship, learn, improve",
+    description: "Watch how it performs in use, listen to feedback, and decide what to improve next.",
   },
 ]
 
 export const skillGroups: SkillGroup[] = [
   {
-    id: "ai-ml-agentic",
-    title: "AI, ML and Agentic AI",
-    caption:
-      "I use these to build models and agents, evaluate them honestly, and turn outputs into something a workflow can actually use.",
+    id: "ai-product-delivery",
+    title: "AI Product, Discovery and Delivery",
+    caption: "Working out which customer problem is worth solving, then getting it shipped.",
     skills: [
-      "Python",
-      "Machine Learning",
-      "NLP",
-      "LLMs",
-      "RAG",
-      "Agentic AI",
-      "AI Agents",
-      "MLOps",
-      "Prompt Engineering",
-      "Model Evaluation",
-      "Recommendation Systems",
-      "LangChain",
-      "OpenAI API",
-      "Llama3",
-      "scikit-learn",
-      "PyTorch",
-      "TensorFlow",
-      "spaCy",
-      "NLTK",
+      "Product Strategy",
+      "Customer Discovery",
+      "PRDs",
+      "Roadmap Prioritization",
+      "Product Analytics",
+      "A/B Testing",
+      "User Stories",
+      "Go-to-Market",
+      "Launch Management",
+      "Stakeholder Management",
+      "Agile",
+      "Jira",
+      "Figma",
     ],
   },
   {
-    id: "data-analytics-bi",
-    title: "Data, Analytics and BI",
-    caption:
-      "I use these to turn messy spreadsheets and datasets into dashboards and answers people can act on.",
+    id: "genai-agents-eval",
+    title: "GenAI, RAG, Agents and Evaluation",
+    caption: "Building LLM systems and checking that they are grounded, governed, and worth the cost.",
+    skills: [
+      "RAG",
+      "Agent Orchestration",
+      "AI Evaluation",
+      "MCP",
+      "AI Governance",
+      "Groundedness and Hallucination Evals",
+      "Human-in-the-Loop",
+      "Retrieval Optimization",
+      "Model Selection",
+      "Token and Inference Cost",
+      "Unity Catalog",
+      "LangChain",
+      "OpenAI API",
+    ],
+  },
+  {
+    id: "ml-mlops",
+    title: "Machine Learning, Deployment and MLOps",
+    caption: "Training models, measuring them properly, and serving them behind real APIs.",
+    skills: [
+      "Python",
+      "scikit-learn",
+      "XGBoost",
+      "MLflow",
+      "Feature Engineering",
+      "Classification and Regression",
+      "Hyperparameter Tuning",
+      "Cross-Validation",
+      "Model Deployment",
+      "Model Retraining",
+      "Real-Time Inference",
+      "Flask",
+      "Docker",
+      "PyTorch",
+    ],
+  },
+  {
+    id: "data-eng-cloud",
+    title: "Data Engineering, Pipelines and Cloud",
+    caption: "Moving and cleaning the data that models and products depend on.",
     skills: [
       "SQL",
-      "Python",
-      "SAS",
-      "R",
-      "MATLAB",
-      "Oracle",
+      "Apache Airflow",
+      "AWS",
+      "ETL Pipelines",
+      "REST APIs",
       "pandas",
-      "NumPy",
-      "Excel",
+      "Data Validation",
+      "Snowflake",
+      "PostgreSQL",
+      "MongoDB",
+      "Kubernetes",
+      "Git",
+    ],
+  },
+]
+
+/** Smaller cards shown after the four core groups. Each skill appears only once across both lists. */
+export const supportingSkillGroups: SkillGroup[] = [
+  {
+    id: "databases-dev-tools",
+    title: "Databases, Cloud and Dev Tools",
+    caption: "Storing, testing, and shipping the data and apps behind the work.",
+    skills: [
+      "MySQL",
+      "SQLite",
+      "Oracle",
+      "Firebase",
+      "AWS EC2",
+      "AWS S3",
+      "GitHub",
+      "Postman",
+      "Linux Command Line",
+      "Vercel",
+      "Streamlit",
+    ],
+  },
+  {
+    id: "analytics-bi",
+    title: "Data, Analytics and BI",
+    caption: "Turning cleaned data into dashboards and answers people can act on.",
+    skills: [
       "Power BI",
       "Tableau",
-      "SPSS",
+      "Excel",
+      "NumPy",
+      "R",
+      "SAS",
+      "MATLAB",
       "Data Cleaning",
-      "Data Validation",
       "Data Visualization",
       "Dashboards",
       "Reporting",
@@ -386,70 +431,42 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    id: "research-data-tools",
-    title: "Research Data Tools",
-    caption: "I use these to take fragmented research data and make it analysis-ready.",
-    skills: [
-      "SPSS",
-      "CSV Processing",
-      "Data Quality Checks",
-      "Variable Selection",
-      "Research Data Cleaning",
-      "Dataset Preparation",
-      "Data Export Tools",
-      "Research Dashboards",
-    ],
-  },
-  {
     id: "web-product",
     title: "Web and Product Development",
-    caption: "I use these to turn a working idea into an app someone can actually open and use.",
+    caption: "Turning a working idea into an app someone can open and use.",
     skills: [
       "React",
       "Next.js",
       "TypeScript",
       "JavaScript",
+      "Node.js",
+      "FastAPI",
+      "Spring Boot",
       "HTML",
       "CSS",
       "Responsive UI",
-      "FastAPI",
-      "Flask",
-      "Spring Boot",
-      "Node.js",
-      "REST APIs",
       "SaaS",
     ],
   },
   {
-    id: "databases-cloud-devtools",
-    title: "Databases, Cloud and Dev Tools",
-    caption: "I use these to store, ship, and keep track of the data and apps behind everything above.",
+    id: "research-data-tools",
+    title: "Research Data Tools",
+    caption: "Taking fragmented research data and making it analysis-ready.",
     skills: [
-      "PostgreSQL",
-      "MySQL",
-      "MongoDB",
-      "Firebase",
-      "SQLite",
-      "Snowflake",
-      "Oracle",
-      "Docker",
-      "Kubernetes",
-      "AWS",
-      "AWS EC2",
-      "AWS S3",
-      "Git",
-      "GitHub",
-      "Postman",
-      "Jira",
-      "Linux Command Line",
-      "Vercel",
-      "Streamlit",
+      "SPSS",
+      "Research Data Cleaning",
+      "Data Quality Checks",
+      "Variable Selection",
+      "Dataset Preparation",
+      "CSV Processing",
+      "Data Export Tools",
+      "Research Dashboards",
     ],
   },
   {
     id: "ai-assisted-dev",
     title: "AI-Assisted Development",
-    caption: "I use these day to day to move faster without losing track of what the code is doing.",
+    caption: "Tools I use day to day to move faster without losing track of the code.",
     skills: ["Claude Code", "Cursor", "ChatGPT", "GitHub Copilot"],
   },
 ]
@@ -465,12 +482,12 @@ export const lifeItems: LifeItem[] = [
     id: "badminton",
     title: "Badminton",
     description:
-      "I like playing badminton because it keeps me active and helps me reset after long work or study days.",
+      "Badminton keeps me active and helps me reset after a long day of work or study.",
   },
   {
     id: "cooking",
     title: "Cooking",
-    description: "I like trying different cuisines and cooking new dishes whenever I get time.",
+    description: "I like trying different cuisines and cooking something new when I have the time.",
   },
   {
     id: "travel",
@@ -487,45 +504,6 @@ export const lifeItems: LifeItem[] = [
     id: "social-media",
     title: "Social Media",
     description:
-      "I like sharing parts of my interests and day-to-day life in a simple and creative way.",
-  },
-]
-
-export interface ValueProp {
-  id: string
-  title: string
-  description: string
-}
-
-export const valueProps: ValueProp[] = [
-  {
-    id: "messy-data",
-    title: "I work well with messy data",
-    description:
-      "I enjoy cleaning, organizing, and understanding messy datasets so they become easier to use and easier to trust.",
-  },
-  {
-    id: "useful-output",
-    title: "I turn analysis into something useful",
-    description:
-      "I like taking insights beyond analysis and turning them into dashboards, tools, and outputs that people can actually use.",
-  },
-  {
-    id: "ai-and-analytics",
-    title: "I can work across data and AI",
-    description:
-      "My work sits across analytics, dashboards, research tools, machine learning, and Agentic AI projects.",
-  },
-  {
-    id: "learn-by-building",
-    title: "I learn by building",
-    description:
-      "The best way I learn is by building real things, testing them, fixing what breaks, and improving them step by step.",
-  },
-  {
-    id: "practical-thinking",
-    title: "I care about practical outcomes",
-    description:
-      "I do not just focus on whether something works technically. I also care whether it is useful, clear, and easy for others to use.",
+      "I share bits of my interests and everyday life, keeping it simple and creative.",
   },
 ]

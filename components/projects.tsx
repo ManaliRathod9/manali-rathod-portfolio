@@ -20,8 +20,8 @@ export function Projects() {
       <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
         <SectionHeading
           eyebrow="Projects"
-          title="Things I've actually built and shipped"
-          description="Each project started from a real, specific problem - not a tutorial."
+          title="Things I've built"
+          description="Each one started from a specific problem I wanted to solve, not a tutorial."
         />
 
         <div className="mt-10 space-y-6">

@@ -1,11 +1,11 @@
-/** Existing role labels, shown as a slow horizontal strip under the hero. */
+/** Roles I'm targeting (not job titles held), shown as a slow horizontal strip under the hero. */
 const roles = [
-  "Data Analyst",
-  "AI/ML Builder",
-  "Agentic AI Builder",
-  "Dashboard Builder",
-  "Power BI Developer",
-  "Research Data Tool Developer",
+  "AI Product Manager",
+  "AI Engineer",
+  "Machine Learning Engineer",
+  "Forward Deployed Engineer",
+  "AI Research",
+  "AI Data Engineer",
 ]
 
 const dotTones = ["bg-brand", "bg-coral", "bg-teal", "bg-orange", "bg-pink", "bg-indigo"]
@@ -29,7 +29,7 @@ function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
 export function RoleStrip() {
   return (
     <section
-      aria-label="What I work as"
+      aria-label="Roles I'm targeting"
       className="marquee relative border-y border-hairline bg-white py-4"
     >
       <div className="marquee-track">

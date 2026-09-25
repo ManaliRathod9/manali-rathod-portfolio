@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ScrollReveal } from "@/components/scroll-reveal"
+import { OffscreenMotion } from "@/components/offscreen-motion"
 import { siteConfig } from "@/lib/site"
 
 const jakarta = Plus_Jakarta_Sans({
@@ -36,7 +37,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: `${siteConfig.name} - ${siteConfig.title}`,
-  description: siteConfig.intro,
+  description: siteConfig.description,
 }
 
 /**
@@ -68,12 +69,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      // Keeps smooth scrolling for in-page anchors, but lets Next jump straight to
+      // the target on route changes instead of animating down the new page.
+      data-scroll-behavior="smooth"
       className={`${jakarta.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col bg-surface text-ink">
         <script dangerouslySetInnerHTML={{ __html: revealScript }} />
         <ScrollReveal />
+        <OffscreenMotion />
         <TooltipProvider>
           <a
             href="#main"

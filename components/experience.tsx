@@ -26,7 +26,7 @@ export function Experience() {
           eyebrow="Career"
           title="My Experience"
           gradientWord="Experience"
-          description="Work I've done across data, AI, and research tools."
+          description="Product management and machine learning engineering, from customer problem to deployed system."
         />
 
         <ol className="relative mt-10 space-y-4">

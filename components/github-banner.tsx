@@ -20,7 +20,7 @@ export function GithubBanner() {
                 More of my work on GitHub
               </h2>
               <p className="mt-2 max-w-lg text-[0.9375rem] leading-relaxed text-subtle">
-                You can find more projects, experiments, and practice builds on my GitHub.
+                Experiments and practice builds that didn&apos;t make it onto this page.
               </p>
             </div>
           </div>

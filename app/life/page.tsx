@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site"
 
 export const metadata: Metadata = {
   title: `Life Outside Work - ${siteConfig.name}`,
-  description: "A little more about Manali beyond data, AI, and dashboards.",
+  description: "What Manali enjoys outside work: travel, badminton, cooking, the gym, and sharing everyday life online.",
 }
 
 export default function LifePage() {

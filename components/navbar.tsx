@@ -1,20 +1,20 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, FileDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
-import { siteConfig, withBasePath } from "@/lib/site"
+import { siteConfig } from "@/lib/site"
 
 const sectionIds = ["experience", "projects", "skills", "education", "about", "contact"]
 
@@ -47,24 +47,36 @@ function useActiveSection(isHome: boolean) {
 export function Navbar() {
   const pathname = usePathname()
   const isHome = pathname === "/"
+  // Controlled so menu items can stay plain links (not button-role close controls) and still close it.
+  const [menuOpen, setMenuOpen] = useState(false)
   const activeId = useActiveSection(isHome)
 
-  const sectionHref = (id: string) => (isHome ? `#${id}` : withBasePath(`/#${id}`))
+  // Off the homepage, section links are cross-page, so they use <Link> (client-side,
+  // prefetched) instead of reloading the whole site; on it they stay in-page anchors.
+  const section = (key: string, label: string) => ({
+    key,
+    label,
+    href: isHome ? `#${key}` : `/#${key}`,
+    route: !isHome,
+    isActive: isHome && activeId === key,
+  })
 
   const links = [
-    { key: "experience", href: sectionHref("experience"), label: "Experience", isActive: isHome && activeId === "experience" },
-    { key: "projects", href: sectionHref("projects"), label: "Projects", isActive: isHome && activeId === "projects" },
-    { key: "skills", href: sectionHref("skills"), label: "Skills", isActive: isHome && activeId === "skills" },
-    { key: "about", href: sectionHref("about"), label: "About", isActive: isHome && activeId === "about" },
-    { key: "life", href: withBasePath("/life"), label: "Life", isActive: pathname === "/life" },
-    { key: "contact", href: sectionHref("contact"), label: "Contact", isActive: isHome && activeId === "contact" },
+    section("experience", "Experience"),
+    section("projects", "Projects"),
+    section("skills", "Skills"),
+    section("about", "About"),
+    { key: "life", label: "Life", href: "/life", route: true, isActive: pathname === "/life" },
+    section("contact", "Contact"),
   ]
+
+  const LogoTag = isHome ? "a" : Link
 
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-white/85 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-[1200px] items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
-        <a
-          href={isHome ? "#top" : withBasePath("/")}
+        <LogoTag
+          href={isHome ? "#top" : "/"}
           aria-label={`${siteConfig.name} - Home`}
           className="logo-link flex items-center gap-2 rounded-lg py-1"
         >
@@ -80,24 +92,27 @@ export function Navbar() {
           <span className="font-heading text-lg font-bold tracking-tight text-ink">
             {siteConfig.name}
           </span>
-        </a>
+        </LogoTag>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
-          {links.map((link) => (
-            <a
-              key={link.key}
-              href={link.href}
-              aria-current={link.isActive ? "page" : undefined}
-              className={cn(
-                "rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold transition-colors duration-200",
-                link.isActive
-                  ? "bg-brand/10 text-brand"
-                  : "text-subtle hover:bg-ink/[0.05] hover:text-ink"
-              )}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => {
+            const LinkTag = link.route ? Link : "a"
+            return (
+              <LinkTag
+                key={link.key}
+                href={link.href}
+                aria-current={link.isActive ? "page" : undefined}
+                className={cn(
+                  "rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold transition-colors duration-200",
+                  link.isActive
+                    ? "bg-brand/10 text-brand"
+                    : "text-subtle hover:bg-ink/[0.05] hover:text-ink"
+                )}
+              >
+                {link.label}
+              </LinkTag>
+            )
+          })}
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
@@ -135,7 +150,7 @@ export function Navbar() {
           />
         </div>
 
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger
             render={
               <Button
@@ -153,24 +168,24 @@ export function Navbar() {
               <SheetTitle>{siteConfig.name}</SheetTitle>
             </SheetHeader>
             <nav aria-label="Mobile" className="flex flex-col gap-0.5 p-3">
-              {links.map((link) => (
-                <SheetClose
-                  key={link.key}
-                  render={
-                    <a
-                      href={link.href}
-                      className={cn(
-                        "rounded-lg px-3 py-3 font-sans text-base font-semibold transition-colors",
-                        link.isActive
-                          ? "bg-brand/10 text-brand"
-                          : "text-ink hover:bg-ink/[0.05]"
-                      )}
-                    >
-                      {link.label}
-                    </a>
-                  }
-                />
-              ))}
+              {links.map((link) => {
+                const LinkTag = link.route ? Link : "a"
+                return (
+                  <LinkTag
+                    key={link.key}
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "rounded-lg px-3 py-3 font-sans text-base font-semibold transition-colors",
+                      link.isActive
+                        ? "bg-brand/10 text-brand"
+                        : "text-ink hover:bg-ink/[0.05]"
+                    )}
+                  >
+                    {link.label}
+                  </LinkTag>
+                )
+              })}
             </nav>
             <div className="mt-auto flex flex-col gap-2 border-t border-hairline p-4">
               <Button

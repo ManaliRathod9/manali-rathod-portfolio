@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 interface RevealWindow extends Window {
   __revealWatchdog?: ReturnType<typeof setTimeout>
@@ -19,8 +20,13 @@ interface RevealWindow extends Window {
  * Every failure path ends with the content visible: no JS means the class is
  * never added, and if this never mounts the inline script's watchdog removes
  * the class on its own.
+ *
+ * The layout (and so this component) persists across client-side navigations,
+ * so the effect re-runs per pathname to pick up the new page's elements.
  */
 export function ScrollReveal() {
+  const pathname = usePathname()
+
   useEffect(() => {
     const root = document.documentElement
     if (!root.classList.contains("js-reveal")) return
@@ -31,7 +37,7 @@ export function ScrollReveal() {
       w.__revealWatchdog = undefined
     }
 
-    let items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"))
+    let items = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]:not([data-revealed])"))
     if (!items.length) {
       root.classList.remove("js-reveal")
       return
@@ -80,7 +86,7 @@ export function ScrollReveal() {
     update()
 
     return stop
-  }, [])
+  }, [pathname])
 
   return null
 }

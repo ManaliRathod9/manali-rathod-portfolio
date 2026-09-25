@@ -79,8 +79,8 @@ export function Contact() {
               <span className="accent-serif text-orange">useful</span> together.
             </h2>
             <p className="mt-3 max-w-md text-lg leading-relaxed text-white/70">
-              Have a question, opportunity, or project idea? Send me a message or connect with me
-              online.
+              Hiring for AI product, engineering, or research work? Or working on something
+              that&apos;s almost there? I&apos;d like to hear about it.
             </p>
 
             <ul className="mt-8 grid gap-3 sm:grid-cols-2">
@@ -127,8 +127,11 @@ export function Contact() {
           </div>
 
           <div className="on-light rounded-2xl border border-hairline bg-white p-6 text-ink sm:p-7">
-            <h3 className="text-xl font-extrabold text-ink">Send me a message</h3>
-            <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+            <h3 className="text-xl font-extrabold text-ink">Write me a message</h3>
+            <p id="contact-form-note" className="mt-1.5 text-sm leading-relaxed text-subtle">
+              This opens a pre-filled email in your mail app, so you can review it before sending.
+            </p>
+            <form aria-describedby="contact-form-note" onSubmit={handleSubmit} className="mt-5 space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="contact-name">Name</Label>
                 <Input
@@ -169,11 +172,13 @@ export function Contact() {
 
               <Button type="submit" size="lg" className="w-full">
                 <Send />
-                Send Message
+                Open Email Draft
               </Button>
 
               <p aria-live="polite" className="min-h-5 text-center text-sm font-semibold text-teal-ink">
-                {sent ? "Thanks, your message is ready to send." : ""}
+                {sent
+                  ? `Your email app should now be open with this message. If it didn't open, email me at ${siteConfig.email}.`
+                  : ""}
               </p>
             </form>
           </div>

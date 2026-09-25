@@ -192,6 +192,18 @@
   }
   .bg-navy { background: #0f172a; }
 
+  /* Ruled notebook page for the working notes on /why-hire-me. */
+  .notes-paper {
+    background-color: rgb(255 255 255 / 0.92);
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      rgb(49 87 246 / 0.07) 31px,
+      rgb(49 87 246 / 0.07) 32px
+    );
+  }
+
   /* Soft, slow-moving colour shapes. Blurred washes, never neon rings. */
   .blob {
     position: absolute;
@@ -419,8 +431,17 @@
   mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
   animation: role-enter 450ms ease 240ms both;
 }
-.hero-role-track { display: flex; width: max-content; animation: marquee-slide 20s linear infinite; }
-.hero-role-group { display: flex; gap: 10px; padding-right: 10px; flex-shrink: 0; }
+/*
+ * On phones the ribbon runs to the screen edges (cancelling the hero's 1.25rem side
+ * padding), so even the longest badge passes fully clear of the edge fades. The padding
+ * keeps the first badge lined up with the text above.
+ */
+@media (width < 40rem) {
+  .hero-role-ribbon { max-width: none; margin-inline: -1.25rem; padding-inline: 1.25rem; }
+}
+/* Duration sized to the six badges' width so they keep the same ~24px/s pace as before. */
+.hero-role-track { display: flex; flex-wrap: nowrap; width: max-content; animation: marquee-slide 44s linear infinite; }
+.hero-role-group { display: flex; flex-wrap: nowrap; gap: 10px; padding-right: 10px; flex-shrink: 0; }
 .hero-role-ribbon:is(:hover, :focus-within) .hero-role-track { animation-play-state: paused; }
 .data-travel-start { animation: data-start 100ms linear 1.05s both; }
 .data-traveler { animation: data-travel 12s linear infinite; }
@@ -481,6 +502,17 @@
 .js-reveal [data-reveal-delay="3"][data-revealed] { transition-delay: 270ms; }
 
 /*
+ * Off-screen page blocks (marked by <OffscreenMotion />) stop their looping
+ * decorative animations; they resume from the same point when scrolled back.
+ */
+[data-offscreen],
+[data-offscreen] *,
+[data-offscreen] *::before,
+[data-offscreen] *::after {
+  animation-play-state: paused !important;
+}
+
+/*
  * Unlayered so it beats Tailwind utilities such as `outline-none`.
  */
 a:focus-visible,
@@ -511,8 +543,18 @@ select:focus-visible,
     transform: none !important;
   }
   .tilt, .portrait-frame-outline { transform: none !important; }
-  .hero-role-ribbon { mask-image: none; }
-  .hero-role-track { width: auto; }
-  .hero-role-group { flex-wrap: wrap; padding-right: 0; }
+  /*
+   * The badges stop moving but stay in their single row. The ribbon scrolls sideways
+   * instead (swipe or trackpad), so every badge stays reachable without wrapping.
+   */
+  .hero-role-ribbon { mask-image: none; overflow-x: auto; scrollbar-width: none; }
+  .hero-role-ribbon::-webkit-scrollbar { display: none; }
+  .hero-role-group { padding-right: 0; }
   .hero-role-group[aria-hidden="true"] { display: none; }
+
+  /* The role strip stops sliding, so list every role once, wrapped to fit. */
+  .marquee-track { display: block; width: auto; }
+  .marquee-track > ul { flex-wrap: wrap; justify-content: center; row-gap: 0.75rem; padding-inline: 1.25rem; }
+  .marquee-track > ul[aria-hidden="true"],
+  .marquee > span[aria-hidden="true"] { display: none; }
 }

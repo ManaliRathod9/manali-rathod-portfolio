@@ -1,14 +1,15 @@
 import Link from "next/link"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
-import { siteConfig, withBasePath } from "@/lib/site"
+import { siteConfig } from "@/lib/site"
 
+// <Link> so that, from other pages, these navigate client-side instead of reloading the site.
 const footerLinks = [
-  { href: withBasePath("/#experience"), label: "Experience" },
-  { href: withBasePath("/#projects"), label: "Projects" },
-  { href: withBasePath("/#skills"), label: "Skills" },
-  { href: withBasePath("/#education"), label: "Education" },
-  { href: withBasePath("/#about"), label: "About" },
-  { href: withBasePath("/#contact"), label: "Contact" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#education", label: "Education" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ]
 
 export function Footer() {
@@ -36,13 +37,13 @@ export function Footer() {
 
           <nav aria-label="Footer" className="flex flex-wrap gap-x-5 gap-y-2">
             {footerLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="rounded-lg py-1 text-sm font-semibold text-white/70 transition-colors hover:text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <Link
               href="/life"
@@ -54,7 +55,7 @@ export function Footer() {
               href="/why-hire-me"
               className="rounded-lg py-1 text-sm font-semibold text-white/70 transition-colors hover:text-white"
             >
-              Why Hire Me
+              Why Work With Me
             </Link>
           </nav>
 

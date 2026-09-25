@@ -4,12 +4,8 @@ import { SectionHeading } from "@/components/section-heading"
 import { ProfilePhoto } from "@/components/profile-photo"
 
 const paragraphs = [
-  "Most of what I know, I learned by building things, breaking them, and then figuring out what went wrong. That is usually where I learn the most.",
-  "I recently completed my MS in Computer Science at Indiana University Bloomington, after my bachelor's in Information Technology from the University of Mumbai. My work has moved across data analytics, machine learning, dashboards, Agentic AI, and full-stack tools.",
-  "Right now, my focus is on building practical data and AI systems. I enjoy working with messy datasets, cleaning and organizing them, finding patterns, building dashboards, and creating tools that make the output easier to use.",
-  "I have worked on recommendation systems, user-data workflows, research data tools, business dashboards, and AI-based applications. Across these projects, I like seeing how everything connects: the data, the model, the dashboard, the backend, and the interface people actually use.",
-  "Some of my recent projects include PaperTrail, AI Water Tracker, BalanceBite, MeetMinder, and the Bates IU Research Data Tool. They are different, but they all show the kind of work I enjoy: taking something unclear or messy and turning it into a useful product.",
-  "Right now, I am looking for roles in Data Analytics, Business Intelligence, Machine Learning, Agentic AI, or Data-focused Full-Stack Development.",
+  "Teaching has made me less attached to my first explanation. If a student doesn't follow it, I need to find the missing step and try again. I think about building tools the same way. The person using one doesn't see the model training or the planning meetings; they see whether it helps them get on with their day.",
+  "I've worked in machine learning engineering, product, and research tools. I like moving between a conversation about what someone needs and the details of how to make it work. I want to keep doing AI work with room for both.",
 ]
 
 export function About() {

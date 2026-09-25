@@ -59,6 +59,10 @@ const smallItems = lifeItems.filter((item) => item.id !== "travel")
 const cardBase =
   "group flex flex-col overflow-hidden rounded-2xl border border-white bg-white/85 backdrop-blur-sm card-shadow transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-2 hover:card-shadow-hover"
 
+/** Profiles still set to "#" in lib/site.ts are placeholders, so their buttons stay hidden. */
+const hasLink = (href: string) => href !== "#"
+const hasSocialLinks = hasLink(siteConfig.social.instagram) || hasLink(siteConfig.social.x)
+
 export function LifeContent() {
   return (
     <div className="bg-life relative overflow-hidden">
@@ -86,16 +90,15 @@ export function LifeContent() {
             <span className="accent-serif text-gradient-signature">work</span>
           </h1>
           <p className="anim-enter anim-delay-1 mt-3 text-lg leading-relaxed text-subtle">
-            A little more about me outside work, data, and dashboards.
+            Some of what I enjoy when I&apos;m not working.
           </p>
         </header>
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {/* Travel - the one tile with a real photograph. */}
-          <article
-            data-reveal="scale"
-            className={`${cardBase} sm:col-span-2 lg:row-span-2`}
-          >
+          {/* Life cards render visible from the first paint (no scroll reveal):
+              the page is short and its content should never wait on JavaScript. */}
+          <article className={`${cardBase} sm:col-span-2 lg:row-span-2`}>
             <div className="relative aspect-4/3 w-full overflow-hidden lg:aspect-auto lg:min-h-80 lg:flex-1">
               <Image
                 src={withBasePath("/images/manali-travel.jpg")}
@@ -120,15 +123,10 @@ export function LifeContent() {
             </div>
           </article>
 
-          {smallItems.map((item, index) => {
+          {smallItems.map((item) => {
             const tile = tiles[item.id]
             return (
-              <article
-                key={item.id}
-                data-reveal
-                data-reveal-delay={String(Math.min(index, 3))}
-                className={`${cardBase} ${tile.ring} ${tile.area}`}
-              >
+              <article key={item.id} className={`${cardBase} ${tile.ring} ${tile.area}`}>
                 <div className={`relative flex items-center justify-center py-9 ${tile.panel}`}>
                   {tile.extra === "steam" && (
                     <span aria-hidden className="absolute inset-x-0 top-3 flex justify-center gap-2">
@@ -159,26 +157,30 @@ export function LifeContent() {
                     {item.description}
                   </p>
 
-                  {item.id === "social-media" && (
+                  {item.id === "social-media" && hasSocialLinks && (
                     <div className="mt-4 flex gap-2.5">
-                      <a
-                        href={siteConfig.social.instagram}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="Instagram"
-                        className="flex size-11 items-center justify-center rounded-xl border border-hairline bg-white text-subtle transition-[colors,transform] duration-200 hover:-translate-y-1 hover:border-transparent hover:bg-gradient-to-br hover:from-orange hover:via-pink hover:to-indigo hover:text-white"
-                      >
-                        <InstagramIcon className="size-4.5" />
-                      </a>
-                      <a
-                        href={siteConfig.social.x}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label="X"
-                        className="flex size-11 items-center justify-center rounded-xl border border-hairline bg-white text-subtle transition-[colors,transform] duration-200 hover:-translate-y-1 hover:border-ink hover:bg-ink hover:text-white"
-                      >
-                        <XIcon className="size-4.5" />
-                      </a>
+                      {hasLink(siteConfig.social.instagram) && (
+                        <a
+                          href={siteConfig.social.instagram}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="Instagram"
+                          className="flex size-11 items-center justify-center rounded-xl border border-hairline bg-white text-subtle transition-[colors,transform] duration-200 hover:-translate-y-1 hover:border-transparent hover:bg-gradient-to-br hover:from-orange hover:via-pink hover:to-indigo hover:text-white"
+                        >
+                          <InstagramIcon className="size-4.5" />
+                        </a>
+                      )}
+                      {hasLink(siteConfig.social.x) && (
+                        <a
+                          href={siteConfig.social.x}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label="X"
+                          className="flex size-11 items-center justify-center rounded-xl border border-hairline bg-white text-subtle transition-[colors,transform] duration-200 hover:-translate-y-1 hover:border-ink hover:bg-ink hover:text-white"
+                        >
+                          <XIcon className="size-4.5" />
+                        </a>
+                      )}
                     </div>
                   )}
                 </div>

@@ -2,7 +2,7 @@
 
 import { useState, type PointerEvent } from "react"
 import Link from "next/link"
-import { ArrowRight, ArrowUpRight, BarChart3, ChevronDown, Database, FileDown, Rocket, Sparkles } from "lucide-react"
+import { ArrowRight, ArrowUpRight, BrainCircuit, ChevronDown, Database, FileDown, FlaskConical, Handshake, Rocket, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
 import { PortraitDataFlow } from "@/components/portrait-data-flow"
@@ -10,12 +10,17 @@ import { ProfilePhoto } from "@/components/profile-photo"
 import { ImageLightbox } from "@/components/image-lightbox"
 import { siteConfig } from "@/lib/site"
 
-/** Category labels, kept together in one row under the description. */
+/**
+ * Focus areas, kept together in one moving row under the description. Six badges share
+ * the four existing tones, ordered so no two neighbours match (including across the loop).
+ */
 const focusAreas = [
-  { label: "Data", icon: Database, tone: "text-brand bg-brand/8 border-brand/20" },
-  { label: "AI / ML", icon: Sparkles, tone: "text-coral bg-coral/10 border-coral/25" },
-  { label: "Analytics", icon: BarChart3, tone: "text-teal-ink bg-teal/10 border-teal/25" },
-  { label: "Product Building", icon: Rocket, tone: "text-indigo bg-indigo/8 border-indigo/20" },
+  { label: "AI Product", icon: Rocket, tone: "text-indigo bg-indigo/8 border-indigo/20" },
+  { label: "AI Engineering", icon: Sparkles, tone: "text-coral bg-coral/10 border-coral/25" },
+  { label: "Machine Learning", icon: BrainCircuit, tone: "text-teal-ink bg-teal/10 border-teal/25" },
+  { label: "Forward Deployed Engineering", icon: Handshake, tone: "text-brand bg-brand/8 border-brand/20" },
+  { label: "AI Research", icon: FlaskConical, tone: "text-coral bg-coral/10 border-coral/25" },
+  { label: "Data Engineering", icon: Database, tone: "text-teal-ink bg-teal/10 border-teal/25" },
 ]
 
 export function Hero() {
@@ -51,7 +56,9 @@ export function Hero() {
             </h1>
 
             <p className="anim-enter anim-delay-2 mt-5 max-w-xl text-lg leading-relaxed text-subtle">
-              {siteConfig.intro}
+              I&apos;ve worked on AI from the model side and the product side. I enjoy figuring out
+              what&apos;s worth building, getting into the data and engineering, and asking the
+              question that matters once it&apos;s in use: does this make someone&apos;s work easier?
             </p>
 
             <div className="hero-role-ribbon mt-6" aria-label="Focus areas">
@@ -124,11 +131,6 @@ export function Hero() {
                 <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
-
-            <p className="anim-enter anim-delay-5 mt-6 text-[0.9375rem] leading-relaxed text-muted">
-              New Grad with hands-on experience in data, AI/ML, dashboards, and research data
-              tools.
-            </p>
           </div>
 
           <div

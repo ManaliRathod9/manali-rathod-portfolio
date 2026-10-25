@@ -75,7 +75,7 @@ export default function RootLayout({
       className={`${jakarta.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col bg-surface text-ink">
+      <body className="flex min-h-full flex-col bg-espresso text-ink">
         <script dangerouslySetInnerHTML={{ __html: revealScript }} />
         <ScrollReveal />
         <OffscreenMotion />

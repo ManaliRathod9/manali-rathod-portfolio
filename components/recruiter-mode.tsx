@@ -55,7 +55,7 @@ export function RecruiterMode() {
   ]
 
   return (
-    <section className="border-b border-hairline bg-white">
+    <section className="border-b border-hairline bg-lavender">
       <div className="mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
         <SectionHeading
           eyebrow="Recruiter Mode"
@@ -99,7 +99,7 @@ export function RecruiterMode() {
             return (
               <div
                 key={panel.title}
-                className="rounded-2xl border border-hairline bg-white p-6 card-shadow"
+                className="rounded-2xl border border-hairline bg-platinum p-6 card-shadow"
               >
                 <div className="flex items-center gap-3">
                   <span

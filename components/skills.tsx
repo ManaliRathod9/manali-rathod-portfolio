@@ -11,49 +11,77 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
+import { cn } from "@/lib/utils"
 import { skillGroups, supportingSkillGroups } from "@/lib/content"
 
-const groupStyles: Record<string, { icon: LucideIcon; tint: string; bar: string }> = {
-  "ai-product-delivery": { icon: Compass, tint: "bg-coral/25 text-[#ffa79d]", bar: "from-coral to-orange" },
-  "genai-agents-eval": { icon: Bot, tint: "bg-pink/25 text-[#f9a8d4]", bar: "from-pink to-brand" },
-  "ml-mlops": { icon: BrainCircuit, tint: "bg-brand/25 text-[#a9beff]", bar: "from-brand to-indigo" },
-  "data-eng-cloud": { icon: Database, tint: "bg-teal/25 text-[#6ee7d5]", bar: "from-teal to-brand" },
-  "databases-dev-tools": { icon: Server, tint: "bg-indigo/25 text-[#b3b6ff]", bar: "from-indigo to-teal" },
-  "analytics-bi": { icon: BarChart3, tint: "bg-teal/25 text-[#6ee7d5]", bar: "from-teal to-brand" },
-  "web-product": { icon: Code2, tint: "bg-orange/25 text-[#ffc98c]", bar: "from-orange to-pink" },
-  "research-data-tools": { icon: Microscope, tint: "bg-coral/25 text-[#ffa79d]", bar: "from-coral to-orange" },
-  "ai-assisted-dev": { icon: Sparkles, tint: "bg-pink/25 text-[#f9a8d4]", bar: "from-pink to-brand" },
+const groupIcons: Record<string, LucideIcon> = {
+  "ai-product-delivery": Compass,
+  "genai-agents-eval": Bot,
+  "ml-mlops": BrainCircuit,
+  "data-eng-cloud": Database,
+  "databases-dev-tools": Server,
+  "analytics-bi": BarChart3,
+  "web-product": Code2,
+  "research-data-tools": Microscope,
+  "ai-assisted-dev": Sparkles,
 }
 
 /** The first few entries of each group are the ones I lead with. */
 const coreCount = 5
 const supportingCoreCount = 2
 
-const highlightedChip =
-  "cursor-default rounded-xl bg-gradient-to-r from-brand to-indigo font-semibold text-white transition-transform duration-200 hover:-translate-y-0.5"
-const plainChip =
-  "cursor-default rounded-xl border border-white/15 bg-white/[0.06] font-medium text-white/80 transition-colors duration-200 hover:border-teal/50 hover:bg-teal/15 hover:text-white"
+/** Supporting groups cycle three category colours: mocha, deep lavender, chrome. */
+const supportingTiles = ["bg-mocha text-ivory", "bg-lavender-deep text-ivory", "bg-platinum bg-metal-soft text-espresso"]
+
+/**
+ * Skills as a typographic list: the lead skills set strong, the rest lighter,
+ * divided by hairlines instead of a wall of identical pills.
+ */
+function SkillList({ skills, lead, dark = false, small = false }: { skills: string[]; lead: number; dark?: boolean; small?: boolean }) {
+  return (
+    <div className="skill-list-clip">
+      <ul className={cn("skill-list flex flex-wrap items-baseline gap-y-1.5", small ? "text-sm" : "text-[0.9375rem] sm:text-base")}>
+        {skills.map((skill, i) => (
+          <li
+            key={skill}
+            className={cn(
+              i < lead
+                ? cn("font-semibold", dark ? "text-ivory" : "text-espresso")
+                : dark
+                  ? "text-platinum/80"
+                  : "text-subtle"
+            )}
+          >
+            {skill}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
 
 export function Skills() {
   return (
-    <section id="skills" className="bg-skills on-dark relative overflow-hidden">
+    <section id="skills" className="bg-skills grain grain-faint relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="blob -left-24 top-0 size-96 bg-brand/30" />
-        <span className="blob blob-2 -right-20 bottom-0 size-96 bg-teal/25" />
+        <span className="blob -left-24 top-1/4 size-96 bg-white/50" />
+        <span className="blob blob-2 -right-20 bottom-0 size-96 bg-lavender-deep/10" />
       </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
         <SectionHeading
-          tone="dark"
+          index="03"
+          layout="split"
           eyebrow="Skills"
           title="What I work with"
           description="From customer discovery to deployed models: the product, AI, ML, and data skills I use."
         />
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
+        {/* The four main groups, alternating mocha and platinum like a checkerboard. */}
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:mt-16">
           {skillGroups.map((group, index) => {
-            const style = groupStyles[group.id]
-            const Icon = style.icon
+            const Icon = groupIcons[group.id]
+            const dark = index === 0 || index === 3
 
             return (
               <section
@@ -61,92 +89,86 @@ export function Skills() {
                 aria-labelledby={`skill-${group.id}`}
                 data-reveal
                 data-reveal-delay={String(index % 2)}
-                className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.04] transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
+                className={cn(
+                  "metal-border flex flex-col overflow-hidden rounded-[1.75rem] p-7 sm:p-8",
+                  dark ? "surface-mocha card-shadow-hover" : "surface-platinum card-shadow"
+                )}
               >
-                <span aria-hidden className={`block h-1 w-full bg-gradient-to-r ${style.bar}`} />
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "flex size-12 shrink-0 items-center justify-center rounded-2xl",
+                      dark ? "bg-lavender/15 text-lavender" : "bg-mocha/10 text-mocha"
+                    )}
+                  >
+                    <Icon className="size-5" />
+                  </span>
+                  <span aria-hidden className={cn("section-index [--index-size:2.6rem] sm:[--index-size:3rem]", dark ? "text-metal" : "text-mocha-gradient")}>
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                </div>
 
-                <div className="p-6">
-                  <div className="flex items-center gap-3">
-                    <span
-                      aria-hidden
-                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${style.tint}`}
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                    <h3
-                      id={`skill-${group.id}`}
-                      className="text-lg font-extrabold text-white sm:text-xl"
-                    >
-                      {group.title}
-                    </h3>
-                  </div>
+                <h3
+                  id={`skill-${group.id}`}
+                  className={cn("mt-6 text-[1.3rem] leading-snug font-extrabold tracking-[-0.015em] sm:text-[1.45rem]", dark ? "text-ivory" : "text-espresso")}
+                >
+                  {group.title}
+                </h3>
+                <p className={cn("mt-2 text-[0.9375rem] leading-relaxed", dark ? "text-platinum/80" : "text-subtle")}>
+                  {group.caption}
+                </p>
 
-                  <p className="mt-3 text-[0.9375rem] leading-relaxed text-white/65">
-                    {group.caption}
-                  </p>
-
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {group.skills.map((skill, skillIndex) => (
-                      <li
-                        key={skill}
-                        className={`${skillIndex < coreCount ? highlightedChip : plainChip} px-3 py-1.5 text-[0.9375rem]`}
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
+                <span aria-hidden className={cn("mt-6 block", dark ? "metal-rule opacity-50" : "metal-rule-steel opacity-70")} />
+                <div className="mt-5">
+                  <SkillList skills={group.skills} lead={coreCount} dark={dark} />
                 </div>
               </section>
             )
           })}
         </div>
 
-        <h3 className="label-mono mt-12 text-white/60">Also in my toolkit</h3>
+        {/* Supporting groups: an open index, columns divided by steel rules. */}
+        <div className="mt-16 lg:mt-20">
+          <div className="flex items-center gap-3">
+            <h3 className="label-mono shrink-0 text-mocha">Also in my toolkit</h3>
+            <span aria-hidden className="metal-rule-steel flex-1 opacity-80" />
+          </div>
 
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {supportingSkillGroups.map((group, index) => {
-            const style = groupStyles[group.id]
-            const Icon = style.icon
-
-            return (
-              <section
-                key={group.id}
-                aria-labelledby={`skill-${group.id}`}
-                data-reveal
-                data-reveal-delay={String(index % 3)}
-                className="overflow-hidden rounded-2xl border border-white/12 bg-white/[0.04] transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
-              >
-                <span aria-hidden className={`block h-1 w-full bg-gradient-to-r ${style.bar}`} />
-
-                <div className="p-5">
+          <div className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {supportingSkillGroups.map((group, index) => {
+              const Icon = groupIcons[group.id]
+              return (
+                <section
+                  key={group.id}
+                  aria-labelledby={`skill-${group.id}`}
+                  data-reveal
+                  data-reveal-delay={String(index % 3)}
+                  className="relative lg:pl-10 lg:[&:nth-child(3n+1)]:pl-0"
+                >
+                  <span
+                    aria-hidden
+                    className={cn("metal-rule-v-steel absolute top-1 bottom-1 left-0 hidden opacity-70", index % 3 !== 0 && "lg:block")}
+                  />
                   <div className="flex items-center gap-3">
                     <span
                       aria-hidden
-                      className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${style.tint}`}
+                      className={cn("flex size-9 shrink-0 items-center justify-center rounded-xl", supportingTiles[index % supportingTiles.length])}
                     >
                       <Icon className="size-4" />
                     </span>
-                    <h4 id={`skill-${group.id}`} className="text-base font-extrabold text-white">
+                    <h4 id={`skill-${group.id}`} className="text-base font-extrabold text-espresso">
                       {group.title}
                     </h4>
                   </div>
-
-                  <p className="mt-2.5 text-sm leading-relaxed text-white/60">{group.caption}</p>
-
-                  <ul className="mt-4 flex flex-wrap gap-1.5">
-                    {group.skills.map((skill, skillIndex) => (
-                      <li
-                        key={skill}
-                        className={`${skillIndex < supportingCoreCount ? highlightedChip : plainChip} px-2.5 py-1 text-sm`}
-                      >
-                        {skill}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </section>
-            )
-          })}
+                  <p className="mt-3 text-sm leading-relaxed text-subtle">{group.caption}</p>
+                  <div className="mt-4">
+                    <SkillList skills={group.skills} lead={supportingCoreCount} small />
+                  </div>
+                </section>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

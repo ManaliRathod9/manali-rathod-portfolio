@@ -59,7 +59,7 @@ const thumbnails: Record<string, ThumbnailConfig> = {
     alt: "Animated preview of the Brain Tumor Analytics Dashboard showing a scan illustration, analytics tiles and a pulsing signal chart",
     kind: "art",
     emoji: "🧠",
-    backdrop: "bg-gradient-to-br from-pink/15 via-lavender to-sky",
+    backdrop: "bg-gradient-to-br from-peach via-lavender to-sky",
   },
 }
 
@@ -87,7 +87,7 @@ export function ProjectThumbnail({
   const showcase = variant === "showcase"
   const zoom = "transition-transform duration-500 ease-out group-hover:scale-[1.03]"
   const frame =
-    "overflow-hidden rounded-xl border border-white shadow-[0_14px_36px_-14px_rgb(15_23_42/0.3)]"
+    "overflow-hidden rounded-xl border border-white shadow-[0_14px_36px_-14px_rgb(47_36_31/0.3)]"
 
   return (
     <div

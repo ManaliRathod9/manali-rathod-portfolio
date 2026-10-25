@@ -8,7 +8,7 @@ const roles = [
   "AI Data Engineer",
 ]
 
-const dotTones = ["bg-brand", "bg-coral", "bg-teal", "bg-orange", "bg-pink", "bg-indigo"]
+const dotTones = ["bg-metal", "bg-lavender", "bg-orange", "bg-metal", "bg-lavender", "bg-platinum"]
 
 function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
   return (
@@ -19,7 +19,7 @@ function Row({ ariaHidden = false }: { ariaHidden?: boolean }) {
       {roles.map((role, index) => (
         <li key={role} className="flex items-center gap-3 whitespace-nowrap sm:gap-4">
           <span aria-hidden className={`size-2 rounded-full ${dotTones[index % dotTones.length]}`} />
-          <span className="label-mono text-subtle">{role}</span>
+          <span className="label-mono text-platinum/80">{role}</span>
         </li>
       ))}
     </ul>
@@ -30,7 +30,7 @@ export function RoleStrip() {
   return (
     <section
       aria-label="Roles I'm targeting"
-      className="marquee relative border-y border-hairline bg-white py-4"
+      className="marquee metal-border-y relative bg-espresso py-4"
     >
       <div className="marquee-track">
         <Row />
@@ -38,11 +38,11 @@ export function RoleStrip() {
       </div>
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent sm:w-24"
+        className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-espresso to-transparent sm:w-24"
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent sm:w-24"
+        className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-espresso to-transparent sm:w-24"
       />
     </section>
   )

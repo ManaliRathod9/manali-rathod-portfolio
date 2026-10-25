@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, type FormEvent } from "react"
-import { FileDown, Mail, Phone, Send } from "lucide-react"
+import { ArrowUpRight, FileDown, Mail, Phone, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,7 +16,7 @@ const contactCards = [
     href: `tel:${siteConfig.phone.replace(/[^\d+]/g, "")}`,
     icon: Phone,
     external: false,
-    tint: "bg-white/20 text-white",
+    tint: "bg-metal text-espresso",
   },
   {
     label: "Email",
@@ -24,7 +24,7 @@ const contactCards = [
     href: `mailto:${siteConfig.email}`,
     icon: Mail,
     external: false,
-    tint: "bg-coral/25 text-[#ffb3ab]",
+    tint: "bg-lavender/20 text-lavender",
   },
   {
     label: "GitHub",
@@ -32,7 +32,7 @@ const contactCards = [
     href: siteConfig.social.github,
     icon: GithubIcon,
     external: true,
-    tint: "bg-white/12 text-white",
+    tint: "bg-lavender/20 text-lavender",
   },
   {
     label: "LinkedIn",
@@ -40,7 +40,7 @@ const contactCards = [
     href: siteConfig.social.linkedin,
     icon: LinkedinIcon,
     external: true,
-    tint: "bg-teal/25 text-[#7fe8d8]",
+    tint: "bg-metal text-espresso",
   },
 ]
 
@@ -61,58 +61,68 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-contact on-dark relative overflow-hidden">
+    <section id="contact" className="bg-contact grain on-dark relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="blob -left-24 top-0 size-96 bg-indigo/45" />
-        <span className="blob blob-2 -right-20 bottom-0 size-96 bg-teal/25" />
-        <span className="blob blob-3 left-1/3 top-1/2 size-80 bg-pink/20" />
+        <span className="blob -left-24 top-0 size-96 bg-lavender/12" />
+        <span className="blob blob-2 -right-20 bottom-0 size-96 bg-platinum/8" />
+        <span className="blob blob-3 left-1/3 top-1/2 size-80 bg-orange/10" />
       </div>
+      <span aria-hidden className="spotlight spotlight-soft absolute -left-[8%] top-[4%] h-[70%] w-[60%]" />
 
-      <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,25rem)] lg:gap-14">
-          <div>
-            <p className="label-mono inline-flex rounded-lg bg-white/10 px-2.5 py-1 text-white/80">
-              Contact
-            </p>
-            <h2 className="mt-4 text-[1.75rem] font-extrabold text-white sm:text-[2.125rem]">
+      <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-7">
+            <div className="flex items-end gap-4 sm:gap-5">
+              <span aria-hidden className="section-index text-metal shrink-0 select-none">07</span>
+              <div className="flex min-w-0 flex-1 items-center gap-3 pb-1.5">
+                <p className="label-mono shrink-0 text-lavender">Contact</p>
+                <span aria-hidden className="metal-rule flex-1 opacity-70" />
+              </div>
+            </div>
+            <h2 className="mt-7 text-[2.2rem] leading-[1.05] font-extrabold tracking-[-0.035em] text-ivory sm:text-[3rem] lg:text-[3.5rem]">
               Let&apos;s build something{" "}
-              <span className="accent-serif text-orange">useful</span> together.
+              <span className="accent-serif text-lavender-glow inline-block text-[1.18em] leading-[0.9]">useful</span> together.
             </h2>
-            <p className="mt-3 max-w-md text-lg leading-relaxed text-white/70">
+            <p className="mt-5 max-w-md text-lg leading-relaxed text-platinum/80">
               Hiring for AI product, engineering, or research work? Or working on something
               that&apos;s almost there? I&apos;d like to hear about it.
             </p>
 
-            <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-              {contactCards.map((card) => {
+            {/* Contact details as open, hairline-ruled rows. */}
+            <ul className="mt-10 grid border-t border-platinum/15 sm:grid-cols-2">
+              {contactCards.map((card, index) => {
                 const Icon = card.icon
                 return (
-                  <li key={card.label}>
+                  <li
+                    key={card.label}
+                    className={`border-b border-platinum/15 ${index % 2 === 1 ? "sm:border-l sm:pl-6" : "sm:pr-6"}`}
+                  >
                     <a
                       href={card.href}
                       target={card.external ? "_blank" : undefined}
                       rel={card.external ? "noreferrer" : undefined}
-                      className="flex items-center gap-3.5 rounded-2xl border border-white/12 bg-white/[0.05] p-4 transition-[transform,background-color,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.1]"
+                      className="group flex items-center gap-4 rounded-lg py-5 transition-colors duration-300"
                     >
                       <span
                         aria-hidden
-                        className={`flex size-10 shrink-0 items-center justify-center rounded-xl ${card.tint}`}
+                        className={`flex size-11 shrink-0 items-center justify-center rounded-xl transition-shadow duration-300 group-hover:glow-lavender ${card.tint}`}
                       >
                         <Icon className="size-4.5" />
                       </span>
-                      <span className="min-w-0">
-                        <span className="label-mono block text-white/50">{card.label}</span>
-                        <span className="mt-0.5 block truncate text-[0.9375rem] font-semibold text-white">
+                      <span className="min-w-0 flex-1">
+                        <span className="label-mono block text-platinum/65">{card.label}</span>
+                        <span className="mt-0.5 block truncate text-[0.9375rem] font-semibold text-ivory transition-colors duration-300 group-hover:text-lavender">
                           {card.value}
                         </span>
                       </span>
+                      <ArrowUpRight aria-hidden className="size-4 shrink-0 text-platinum/40 transition-[color,translate] duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-lavender" />
                     </a>
                   </li>
                 )
               })}
             </ul>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4 border-t border-white/15 pt-8">
+            <div className="mt-9 flex flex-wrap items-center gap-4">
               <Button
                 variant="contrast"
                 nativeButton={false}
@@ -126,7 +136,8 @@ export function Contact() {
             </div>
           </div>
 
-          <div className="on-light rounded-2xl border border-hairline bg-white p-6 text-ink sm:p-7">
+          <div className="on-light surface-platinum metal-border self-start rounded-[1.75rem] p-6 text-ink glow-lavender sm:p-8 lg:col-span-5 lg:mt-24">
+            <span aria-hidden className="absolute inset-x-10 top-0 h-px bg-metal" />
             <h3 className="text-xl font-extrabold text-ink">Write me a message</h3>
             <p id="contact-form-note" className="mt-1.5 text-sm leading-relaxed text-subtle">
               This opens a pre-filled email in your mail app, so you can review it before sending.
@@ -175,7 +186,7 @@ export function Contact() {
                 Open Email Draft
               </Button>
 
-              <p aria-live="polite" className="min-h-5 text-center text-sm font-semibold text-teal-ink">
+              <p aria-live="polite" className="min-h-5 text-center text-sm font-semibold text-mocha">
                 {sent
                   ? `Your email app should now be open with this message. If it didn't open, email me at ${siteConfig.email}.`
                   : ""}

@@ -1,73 +1,66 @@
-import { CalendarDays, GraduationCap } from "lucide-react"
+import { GraduationCap } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
+import { cn } from "@/lib/utils"
 import { education } from "@/lib/content"
 
-const styles = [
-  { tint: "bg-brand/10 text-brand", bar: "from-brand to-indigo", ring: "hover:border-brand/45" },
-  { tint: "bg-coral/12 text-coral", bar: "from-coral to-orange", ring: "hover:border-coral/45" },
-]
-
+/** Two degrees set as open editorial columns on mocha, divided by a chrome rule. */
 export function Education() {
   return (
-    <section id="education" className="bg-education relative overflow-hidden">
+    <section id="education" className="bg-education grain on-dark relative overflow-hidden">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="blob -right-24 top-0 size-80 bg-teal/20" />
-        <span className="blob blob-2 -left-20 bottom-0 size-80 bg-brand/15" />
+        <span className="blob -right-24 top-0 size-96 bg-lavender/10" />
+        <span className="blob blob-2 -left-20 bottom-0 size-80 bg-platinum/8" />
       </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <SectionHeading eyebrow="Education" title="Education" />
+      <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <SectionHeading index="04" tone="dark" eyebrow="Education" title="Education" />
+          </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {education.map((entry, index) => {
-            const style = styles[index % styles.length]
-            return (
+          <div className="grid gap-12 sm:grid-cols-2 sm:gap-0 lg:col-span-8">
+            {education.map((entry, index) => (
               <article
                 key={entry.id}
                 data-reveal={index === 0 ? "left" : "right"}
-                className={`overflow-hidden rounded-2xl border border-white bg-white/85 backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1.5 hover:card-shadow-hover ${style.ring}`}
+                className={cn("relative", index === 0 ? "sm:pr-10" : "sm:pl-10")}
               >
-                <span aria-hidden className={`block h-1 w-full bg-gradient-to-r ${style.bar}`} />
+                {index > 0 && <span aria-hidden className="metal-rule-v absolute top-0 bottom-0 left-0 hidden opacity-60 sm:block" />}
 
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <span
-                      aria-hidden
-                      className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${style.tint}`}
-                    >
-                      <GraduationCap className="size-5" />
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-lg bg-secondary px-2.5 py-1 text-sm font-semibold text-subtle num-mono">
-                      <CalendarDays className="size-3.5" aria-hidden />
-                      {entry.period}
-                    </span>
-                  </div>
+                <div className="flex items-center justify-between gap-4">
+                  <span aria-hidden className="flex size-11 items-center justify-center rounded-2xl bg-lavender/15 text-lavender">
+                    <GraduationCap className="size-5" />
+                  </span>
+                  <span className="label-mono num-mono text-lavender/90">{entry.period}</span>
+                </div>
 
-                  <h3 className="mt-4 text-xl font-extrabold text-ink">{entry.degree}</h3>
-                  <p className="mt-1.5 text-[0.9375rem] font-semibold text-brand">{entry.school}</p>
-                  <p className="mt-1 text-[0.9375rem] font-semibold text-subtle">
-                    GPA {entry.gpa}
-                  </p>
+                <h3 className="mt-6 text-[1.5rem] leading-snug font-extrabold tracking-[-0.02em] text-ivory sm:text-[1.7rem]">
+                  {entry.degree}
+                </h3>
+                <p className="mt-2 text-base font-semibold text-lavender">{entry.school}</p>
+                <p className="mt-5 flex items-baseline gap-3">
+                  <span className="label-mono text-platinum/70">GPA</span>{" "}
+                  <span className="section-index text-metal [--index-size:2.75rem]">{entry.gpa}</span>
+                </p>
 
-                  {entry.coursework && entry.coursework.length > 0 && (
-                    <div className="mt-5">
-                      <p className="label-mono text-muted">Relevant coursework</p>
-                      <ul className="mt-3 flex flex-wrap gap-2">
+                {entry.coursework && entry.coursework.length > 0 && (
+                  <div className="mt-7">
+                    <div className="flex items-center gap-3">
+                      <p className="label-mono shrink-0 text-platinum/70">Relevant coursework</p>
+                      <span aria-hidden className="metal-rule flex-1 opacity-40" />
+                    </div>
+                    <div className="skill-list-clip mt-4">
+                      <ul className="skill-list flex flex-wrap items-baseline gap-y-1.5 text-[0.9375rem] text-platinum/85">
                         {entry.coursework.map((course) => (
-                          <li
-                            key={course}
-                            className="rounded-lg border border-hairline bg-white px-2.5 py-1 text-sm font-medium text-subtle transition-colors duration-200 hover:border-brand/40 hover:text-brand"
-                          >
-                            {course}
-                          </li>
+                          <li key={course}>{course}</li>
                         ))}
                       </ul>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </article>
-            )
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </section>

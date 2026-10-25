@@ -73,8 +73,8 @@ export function Navbar() {
   const LogoTag = isHome ? "a" : Link
 
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-white/85 backdrop-blur-md">
-      <div className="mx-auto flex h-18 max-w-[1200px] items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
+    <header className="on-dark sticky top-0 z-50 border-b border-platinum/15 bg-[#24170f]/80 backdrop-blur-md">
+      <div className="mx-auto flex h-15 max-w-[1280px] items-center justify-between gap-4 px-5 sm:px-6 lg:px-8">
         <LogoTag
           href={isHome ? "#top" : "/"}
           aria-label={`${siteConfig.name} - Home`}
@@ -89,12 +89,12 @@ export function Navbar() {
               <circle className="logo-data-point" r="2" />
             </svg>
           </span>
-          <span className="font-heading text-lg font-bold tracking-tight text-ink">
+          <span className="font-heading text-[1.0625rem] font-bold tracking-tight text-ivory">
             {siteConfig.name}
           </span>
         </LogoTag>
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
           {links.map((link) => {
             const LinkTag = link.route ? Link : "a"
             return (
@@ -103,10 +103,11 @@ export function Navbar() {
                 href={link.href}
                 aria-current={link.isActive ? "page" : undefined}
                 className={cn(
-                  "rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold transition-colors duration-200",
+                  // A hairline lavender underline marks the active link instead of a filled pill.
+                  "relative rounded-md px-3 py-2 text-[0.875rem] font-medium tracking-wide transition-colors duration-200 after:absolute after:inset-x-3 after:-bottom-px after:h-px after:origin-left after:bg-lavender after:transition-transform after:duration-300",
                   link.isActive
-                    ? "bg-brand/10 text-brand"
-                    : "text-subtle hover:bg-ink/[0.05] hover:text-ink"
+                    ? "text-lavender after:scale-x-100"
+                    : "text-platinum/80 after:scale-x-0 hover:text-lavender hover:after:scale-x-100"
                 )}
               >
                 {link.label}
@@ -120,7 +121,7 @@ export function Navbar() {
             variant="ghost"
             size="icon-sm"
             nativeButton={false}
-            className="text-subtle hover:text-ink"
+            className="text-platinum/80 hover:bg-lavender/10 hover:text-lavender"
             render={
               <a href={siteConfig.social.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
                 <GithubIcon className="size-5" />
@@ -131,16 +132,19 @@ export function Navbar() {
             variant="ghost"
             size="icon-sm"
             nativeButton={false}
-            className="text-subtle hover:text-ink"
+            className="text-platinum/80 hover:bg-lavender/10 hover:text-lavender"
             render={
               <a href={siteConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
                 <LinkedinIcon className="size-5" />
               </a>
             }
           />
+          <span aria-hidden className="mx-1 h-5 w-px bg-platinum/20" />
           <Button
+            variant="contrast"
             size="sm"
             nativeButton={false}
+            className="h-9"
             render={
               <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
                 <FileDown />

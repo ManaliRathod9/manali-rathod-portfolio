@@ -5,22 +5,23 @@ import Link from "next/link"
 import { ArrowRight, ArrowUpRight, BrainCircuit, ChevronDown, Database, FileDown, FlaskConical, Handshake, Rocket, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { GithubIcon, LinkedinIcon } from "@/components/icons"
-import { PortraitDataFlow } from "@/components/portrait-data-flow"
-import { ProfilePhoto } from "@/components/profile-photo"
+import { HeroArt } from "@/components/hero-art"
+import { HeroBackdrop } from "@/components/hero-backdrop"
 import { ImageLightbox } from "@/components/image-lightbox"
 import { siteConfig } from "@/lib/site"
 
-/**
- * Focus areas, kept together in one moving row under the description. Six badges share
- * the four existing tones, ordered so no two neighbours match (including across the loop).
- */
+/** Badge surfaces alternate chrome and lavender, so no two neighbours match (including across the loop). */
+const chrome = "bg-platinum bg-metal-soft"
+const lavender = "bg-lavender"
+
+/** Focus areas, kept together in one moving row under the description. */
 const focusAreas = [
-  { label: "AI Product", icon: Rocket, tone: "text-indigo bg-indigo/8 border-indigo/20" },
-  { label: "AI Engineering", icon: Sparkles, tone: "text-coral bg-coral/10 border-coral/25" },
-  { label: "Machine Learning", icon: BrainCircuit, tone: "text-teal-ink bg-teal/10 border-teal/25" },
-  { label: "Forward Deployed Engineering", icon: Handshake, tone: "text-brand bg-brand/8 border-brand/20" },
-  { label: "AI Research", icon: FlaskConical, tone: "text-coral bg-coral/10 border-coral/25" },
-  { label: "Data Engineering", icon: Database, tone: "text-teal-ink bg-teal/10 border-teal/25" },
+  { label: "AI Product", icon: Rocket, tone: chrome },
+  { label: "AI Engineering", icon: Sparkles, tone: lavender },
+  { label: "Machine Learning", icon: BrainCircuit, tone: chrome },
+  { label: "Forward Deployed Engineering", icon: Handshake, tone: lavender },
+  { label: "AI Research", icon: FlaskConical, tone: chrome },
+  { label: "Data Engineering", icon: Database, tone: lavender },
 ]
 
 export function Hero() {
@@ -34,139 +35,135 @@ export function Hero() {
   }
 
   return (
-    <section id="top" className="bg-hero relative overflow-hidden">
-      <div className="relative mx-auto max-w-[1200px] px-5 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-          <div className="min-w-0">
-            <p className="anim-enter inline-flex items-center gap-2.5 rounded-full border border-white/70 bg-white/80 px-4 py-2 text-sm font-semibold text-subtle card-shadow backdrop-blur-sm">
-              <span aria-hidden className="size-2 rounded-full bg-teal" />
-              Available for new roles
-            </p>
+    <section id="top" className="bg-hero grain on-dark relative overflow-hidden">
+      <HeroBackdrop className="pointer-events-none absolute inset-0 hidden size-full md:block" />
+      {/* Soft light behind the headline */}
+      <span aria-hidden className="spotlight spotlight-soft absolute -left-[10%] top-[6%] h-[72%] w-[58%]" />
 
-            <h1 className="anim-enter anim-delay-1 relative mt-6 text-[2.25rem] leading-[1.12] font-extrabold text-ink sm:text-[2.75rem] lg:text-[3.25rem]">
-              Hi, I&apos;m Manali - I build{" "}
-              <span className="relative inline-block">
-                <span className="accent-serif text-gradient-signature">useful things</span>
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 -bottom-1 h-3 rounded-full bg-gradient-to-r from-brand/25 via-indigo/25 to-teal/25 blur-[2px]"
-                />
-              </span>{" "}
-              with data and AI.
-            </h1>
+      <div className="relative mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-14 pt-12 sm:px-6 sm:pt-16 lg:min-h-[calc(100svh-3.75rem)] lg:grid-cols-12 lg:gap-6 lg:px-8 lg:py-14">
+        <div className="relative z-10 min-w-0 lg:col-span-6">
+          <p className="anim-enter flex items-center gap-3 text-sm font-semibold tracking-wide text-platinum/85">
+            <span aria-hidden className="relative flex size-3 items-center justify-center">
+              <span className="node-breathe absolute size-full rounded-full bg-lavender/35" />
+              <span className="relative size-1.5 rounded-full bg-lavender" />
+            </span>
+            Available for new roles
+            <span aria-hidden className="metal-rule w-14 opacity-60 sm:w-20" />
+          </p>
 
-            <p className="anim-enter anim-delay-2 mt-5 max-w-xl text-lg leading-relaxed text-subtle">
-              I&apos;ve worked on AI from the model side and the product side. I enjoy figuring out
-              what&apos;s worth building, getting into the data and engineering, and asking the
-              question that matters once it&apos;s in use: does this make someone&apos;s work easier?
-            </p>
+          <h1 className="anim-enter anim-delay-1 mt-7 text-[2.15rem] leading-[1.04] font-extrabold tracking-[-0.035em] text-ivory sm:text-[3.1rem] lg:text-[clamp(2.9rem,4.5vw,4rem)]">
+            <span className="block">Hi, I&apos;m Manali&nbsp;-</span>{" "}
+            <span className="block">
+              I build{" "}
+              <span className="relative isolate inline-block">
+                <span className="accent-serif text-lavender-glow inline-block pr-[0.06em] text-[1.22em] leading-[0.92]">useful things</span>
+                {/* Lavender light behind the phrase, and a faint underline glow. */}
+                <span aria-hidden className="absolute -inset-x-4 -inset-y-2 -z-10 rounded-full bg-lavender/14 blur-2xl" />
+                <span aria-hidden className="absolute inset-x-1 -bottom-0.5 h-2 rounded-full bg-gradient-to-r from-lavender/0 via-lavender/45 to-lavender/0 blur-[3px]" />
+              </span>
+            </span>{" "}
+            <span className="block">with data and AI.</span>
+          </h1>
 
-            <div className="hero-role-ribbon mt-6" aria-label="Focus areas">
-              <div className="hero-role-track">
-                {[0, 1].map((copy) => (
-                  <ul key={copy} className="hero-role-group" aria-hidden={copy === 1 ? true : undefined}>
-                    {focusAreas.map((area) => {
-                      const Icon = area.icon
-                      return (
-                        <li key={area.label} className={`inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl border px-3 py-1.5 text-sm font-semibold ${area.tone}`}>
-                          <Icon className="size-4" aria-hidden />
-                          {area.label}
-                        </li>
-                      )
-                    })}
-                  </ul>
-                ))}
-              </div>
-            </div>
+          <p className="anim-enter anim-delay-2 mt-7 max-w-[34rem] text-lg leading-relaxed text-platinum/80">
+            I&apos;ve worked on AI from the model side and the product side. I enjoy figuring out
+            what&apos;s worth building, getting into the data and engineering, and asking the
+            question that matters once it&apos;s in use: does this make someone&apos;s work easier?
+          </p>
 
-            <div className="anim-enter anim-delay-4 mt-7 flex flex-wrap items-center gap-3">
-              <Button
-                size="lg"
-                nativeButton={false}
-                className="bg-gradient-to-r from-brand to-indigo shadow-[0_10px_28px_-10px_rgb(49_87_246/0.65)] hover:shadow-[0_16px_34px_-10px_rgb(99_102_241/0.6)] hover:-translate-y-0.5"
-                render={
-                  <a href="#projects">
-                    View Work
-                    <ArrowRight className="transition-transform duration-200 group-hover/button:translate-x-1" />
-                  </a>
-                }
-              />
-              <Button
-                variant="secondary"
-                size="lg"
-                nativeButton={false}
-                render={
-                  <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
-                    <FileDown className="transition-transform duration-200 group-hover/button:translate-y-0.5" />
-                    Resume
-                  </a>
-                }
-              />
-            </div>
-
-            <div className="anim-enter anim-delay-5 mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-[0.9375rem] font-semibold">
-              <a
-                href={siteConfig.social.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg py-1 text-subtle transition-colors hover:text-brand"
-              >
-                <GithubIcon className="size-[18px]" />
-                GitHub
-              </a>
-              <a
-                href={siteConfig.social.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg py-1 text-subtle transition-colors hover:text-brand"
-              >
-                <LinkedinIcon className="size-[18px]" />
-                LinkedIn
-              </a>
-              <Link
-                href="/why-hire-me"
-                className="group inline-flex items-center gap-1.5 rounded-lg py-1 text-brand underline-offset-4 hover:underline"
-              >
-                See why I could be a good fit
-                <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+          <div className="hero-role-ribbon mt-6 lg:max-w-[38rem]" aria-label="Focus areas">
+            <div className="hero-role-track">
+              {[0, 1].map((copy) => (
+                <ul key={copy} className="hero-role-group" aria-hidden={copy === 1 ? true : undefined}>
+                  {focusAreas.map((area) => {
+                    const Icon = area.icon
+                    return (
+                      <li
+                        key={area.label}
+                        className={`metal-border inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-xl border border-transparent px-3 py-1.5 text-sm font-semibold text-mocha transition-shadow duration-300 hover:glow-lavender-strong ${area.tone}`}
+                      >
+                        <Icon className="size-4" aria-hidden />
+                        {area.label}
+                      </li>
+                    )
+                  })}
+                </ul>
+              ))}
             </div>
           </div>
 
-          <div
-            className="portrait-group relative mx-auto mb-16 w-full max-w-[19rem] sm:max-w-[21rem] lg:max-w-[24rem]"
-            onPointerMove={followPointer}
-            onPointerLeave={(event) => {
-              event.currentTarget.style.setProperty("--portrait-x", "0px")
-              event.currentTarget.style.setProperty("--portrait-y", "0px")
-            }}
-          >
-            <div aria-hidden className="portrait-data-layer pointer-events-none absolute -bottom-[20%] -left-[24%] h-[65%] w-[124%]">
-              <PortraitDataFlow uid="hero" className="size-full" />
-            </div>
-            <span aria-hidden className="portrait-color-layer portrait-frame absolute -right-3.5 -bottom-3.5 left-3.5 top-3.5 bg-linear-to-br from-coral via-brand to-teal opacity-85" />
-            <div className="portrait-frame-outline gradient-frame portrait-frame relative p-0.75">
-              <div className="portrait-reveal-mask">
-                <button
-                  type="button"
-                  onClick={() => setLightboxOpen(true)}
-                  aria-label="Open larger profile photo"
-                  className="portrait-photo-layer block w-full cursor-pointer"
-                >
-                  <ProfilePhoto size={560} priority className="portrait-frame aspect-4/5" />
-                </button>
-              </div>
-            </div>
+          <div className="anim-enter anim-delay-4 mt-6 flex flex-wrap items-center gap-3">
+            <Button
+              size="lg"
+              nativeButton={false}
+              className="hover:-translate-y-0.5"
+              render={
+                <a href="#projects">
+                  View Work
+                  <ArrowRight className="transition-transform duration-200 group-hover/button:translate-x-1" />
+                </a>
+              }
+            />
+            <Button
+              variant="secondary"
+              size="lg"
+              nativeButton={false}
+              render={
+                <a href={siteConfig.resumeHref} target="_blank" rel="noreferrer">
+                  <FileDown className="transition-transform duration-200 group-hover/button:translate-y-0.5" />
+                  Resume
+                </a>
+              }
+            />
           </div>
+
+          <div className="anim-enter anim-delay-5 mt-7 flex flex-wrap items-center gap-x-6 gap-y-3 text-[0.9375rem] font-semibold">
+            <a
+              href={siteConfig.social.github}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg py-1 text-platinum/85 transition-colors hover:text-lavender"
+            >
+              <GithubIcon className="size-[18px]" />
+              GitHub
+            </a>
+            <a
+              href={siteConfig.social.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg py-1 text-platinum/85 transition-colors hover:text-lavender"
+            >
+              <LinkedinIcon className="size-[18px]" />
+              LinkedIn
+            </a>
+            <Link
+              href="/why-hire-me"
+              className="group inline-flex items-center gap-1.5 rounded-lg py-1 text-lavender underline-offset-4 hover:underline"
+            >
+              See why I could be a good fit
+              <ArrowUpRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </div>
+        </div>
+
+        <div
+          className="relative mx-auto w-full max-w-[25rem] sm:max-w-[32rem] lg:col-span-6 lg:-mr-[10%] lg:ml-[-2%] lg:max-w-none"
+          onPointerMove={followPointer}
+          onPointerLeave={(event) => {
+            event.currentTarget.style.setProperty("--portrait-x", "0px")
+            event.currentTarget.style.setProperty("--portrait-y", "0px")
+          }}
+        >
+          <HeroArt onOpenPhoto={() => setLightboxOpen(true)} />
         </div>
       </div>
 
       <a
         href="#experience"
         aria-label="Scroll to experience"
-        className="anim-enter anim-delay-5 pointer-events-auto relative mx-auto -mt-2 mb-6 hidden w-fit items-center justify-center rounded-full p-2 text-subtle transition-colors hover:text-brand sm:flex"
+        className="anim-enter anim-delay-5 pointer-events-auto absolute bottom-4 left-1/2 hidden -translate-x-1/2 items-center justify-center rounded-full p-2 text-platinum/60 transition-colors hover:text-lavender lg:flex"
       >
-        <ChevronDown className="size-6" />
+        <ChevronDown className="anim-scroll-bob size-6" />
       </a>
 
       <ImageLightbox open={lightboxOpen} onClose={() => setLightboxOpen(false)} />

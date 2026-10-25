@@ -29,6 +29,20 @@
   --color-navy: var(--navy);
   --color-hairline: var(--hairline);
   --color-surface: var(--surface);
+  --color-mocha: var(--mocha);
+  --color-mocha-hover: var(--mocha-hover);
+  --color-mocha-dark: var(--mocha-dark);
+  --color-mocha-muted: var(--mocha-muted);
+  --color-mocha-light: var(--mocha-light);
+  --color-mocha-deep: var(--mocha-deep);
+  --color-espresso: var(--espresso);
+  --color-platinum: var(--platinum);
+  --color-platinum-warm: var(--platinum-warm);
+  --color-platinum-shade: var(--platinum-shade);
+  --color-lavender-deep: var(--lavender-deep);
+  --color-ivory: var(--ivory);
+  --color-surface-light: var(--surface-light);
+  --color-text-light: var(--text-light);
 
   --color-ring: var(--ring);
   --color-input: var(--input);
@@ -56,48 +70,81 @@
 }
 
 :root {
-  --ink: #0f172a;
-  --muted-text: #667085;
-  --subtle-text: #475467;
-  --brand: #3157f6;
-  --brand-dark: #2445d0;
-  --indigo: #6366f1;
-  --coral: #ff6b5e;
-  --pink: #ec4899;
-  --orange: #ff9f43;
-  --teal: #14b8a6;
-  --teal-ink: #0d7f72;
-  --sky: #eaf2ff;
-  --lavender: #f1eeff;
-  --peach: #fff1e8;
-  --mint: #eafbf5;
-  --navy: #0f172a;
-  --hairline: #e2e8f0;
-  --surface: #ffffff;
+  /*
+   * Core palette: Mocha Brown (dominant), Platinum Silver (metallic surfaces),
+   * Pale Lavender (accent light). Everything else is a shade of these three.
+   */
+  --mocha: #6f4e37;
+  --mocha-light: #85634b;
+  --mocha-hover: #5a3e2b;
+  --mocha-deep: #4a2d23;
+  --espresso: #2f1e18;
+  --mocha-dark: #2f241f;
+  --mocha-muted: #625752;
+  --platinum: #e5e4e2;
+  --platinum-warm: #f4f2ef;
+  --platinum-shade: #c5c3c1;
+  --lavender: #e6e0f0;
+  --lavender-deep: #6e5a82;
+  --ivory: #f6f3ee;
+  --surface-light: #f8f5f3;
+  --text-light: #ffffff;
 
-  --background: var(--surface);
+  /* Chrome: the full sweep for decoration, a lighter sweep wherever text sits on it. */
+  --metal: linear-gradient(135deg, #ffffff 0%, #c5c3c1 20%, #f4f3f2 38%, #8f8c8a 58%, #e5e4e2 78%, #ffffff 100%);
+  --metal-soft: linear-gradient(135deg, #ffffff 0%, #e5e4e2 30%, #f7f6f5 52%, #d6d4d2 78%, #f4f3f2 100%);
+  --metal-line: linear-gradient(90deg, transparent, #8f8c8a 18%, #ffffff 42%, #c5c3c1 62%, #8f8c8a 82%, transparent);
+
+  --glow-lavender: 0 0 24px rgb(230 224 240 / 0.25), 0 12px 40px rgb(47 30 24 / 0.18);
+  --glow-lavender-strong: 0 0 30px rgb(230 224 240 / 0.38), 0 16px 44px rgb(47 30 24 / 0.28);
+
+  --ink: var(--mocha-dark);
+  --muted-text: #6e6360;
+  --subtle-text: var(--mocha-muted);
+  --brand: var(--mocha);
+  --brand-dark: var(--mocha-hover);
+
+  /*
+   * Secondary accents. The old names (indigo, coral, ...) stay so every component
+   * keeps its distinct tones, but each now resolves to a shade of the palette:
+   * dusk = deeper lavender, clay/rosewood/caramel = mocha relatives, stone = deeper platinum.
+   */
+  --indigo: #6e5a82;
+  --coral: #8b5e45;
+  --pink: #84636c;
+  --orange: #c9a88c;
+  --teal: #857c74;
+  --teal-ink: #5a5048;
+  --sky: var(--platinum);
+  --peach: #f1e9e4;
+  --mint: #eeedeb;
+  --navy: var(--espresso);
+  --hairline: #d8d2d4;
+  --surface: var(--surface-light);
+
+  --background: var(--lavender);
   --foreground: var(--ink);
-  --card: var(--surface);
+  --card: var(--platinum);
   --card-foreground: var(--ink);
-  --popover: var(--surface);
+  --popover: var(--surface-light);
   --popover-foreground: var(--ink);
-  --primary: var(--brand);
-  --primary-foreground: #ffffff;
-  --secondary: #eef2f8;
-  --secondary-foreground: var(--ink);
+  --primary: var(--mocha);
+  --primary-foreground: var(--text-light);
+  --secondary: var(--platinum);
+  --secondary-foreground: var(--mocha-dark);
   --muted-foreground: var(--muted-text);
-  --accent: #eef2f8;
+  --accent: #ded9e6;
   --accent-foreground: var(--ink);
-  --destructive: #d92d20;
+  --destructive: #a63d2f;
   --border: var(--hairline);
-  --input: var(--hairline);
-  --ring: var(--brand);
+  --input: #cfc8c6;
+  --ring: var(--mocha);
 
   --radius: 0.75rem;
-  --focus: var(--brand);
+  --focus: var(--mocha);
 
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 10px 28px -14px rgb(15 23 42 / 0.16);
-  --shadow-card-hover: 0 2px 6px rgb(15 23 42 / 0.06), 0 26px 50px -18px rgb(15 23 42 / 0.28);
+  --shadow-card: 0 1px 2px rgb(47 36 31 / 0.05), 0 10px 28px -14px rgb(47 36 31 / 0.18);
+  --shadow-card-hover: 0 2px 6px rgb(47 36 31 / 0.07), 0 26px 50px -18px rgb(47 36 31 / 0.3);
 }
 
 @layer base {
@@ -113,7 +160,7 @@
   }
 
   body {
-    background-color: var(--surface);
+    background-color: var(--lavender);
     color: var(--ink);
     font-size: 1rem;
     line-height: 1.65;
@@ -128,9 +175,10 @@
     text-wrap: balance;
   }
 
+  /* Solid, so selected text stays readable on both the mocha and the light sections. */
   ::selection {
-    background-color: color-mix(in srgb, var(--brand) 22%, transparent);
-    color: var(--ink);
+    background-color: var(--lavender);
+    color: var(--espresso);
   }
 }
 
@@ -139,6 +187,12 @@
 }
 @utility card-shadow-hover {
   box-shadow: var(--shadow-card-hover);
+}
+@utility glow-lavender {
+  box-shadow: var(--glow-lavender);
+}
+@utility glow-lavender-strong {
+  box-shadow: var(--glow-lavender-strong);
 }
 
 @layer utilities {
@@ -159,48 +213,140 @@
 
   .num-mono { font-variant-numeric: tabular-nums; }
 
-  .on-dark { --focus: var(--orange); }
-  .on-light { --focus: var(--brand); }
+  .on-dark { --focus: var(--lavender); }
+  .on-light { --focus: var(--mocha); }
 
-  /* ---- Section gradients ---- */
+  /*
+   * ---- Section rooms ----
+   * The page alternates mocha, platinum and lavender rooms:
+   * hero (mocha) / experience (platinum) / projects (mocha) / skills (lavender) /
+   * education (mocha) / workflow (platinum) / about (mocha) / github (lavender) /
+   * contact (mocha).
+   */
   .bg-hero {
-    background: linear-gradient(135deg, #fff0e8 0%, #eeeafe 42%, #e5f8ff 70%, #e8fff6 100%);
+    background:
+      radial-gradient(ellipse 46% 52% at 74% 40%, rgb(230 224 240 / 0.17), transparent 70%),
+      radial-gradient(ellipse 40% 34% at 18% 30%, rgb(246 243 238 / 0.06), transparent 70%),
+      linear-gradient(128deg, #24170f 0%, var(--espresso) 22%, #5a3e2b 58%, var(--mocha-deep) 100%);
   }
   .bg-experience {
-    background: linear-gradient(180deg, #edf3ff 0%, #f1eeff 100%);
+    background:
+      radial-gradient(circle at 88% 6%, rgb(230 224 240 / 0.7), transparent 34%),
+      linear-gradient(180deg, #ebe9e6 0%, #e1dfdc 100%);
   }
   .bg-projects {
-    background: linear-gradient(135deg, #ffffff 0%, #f5f1ff 50%, #fff3ee 100%);
+    background:
+      radial-gradient(circle at 10% 6%, rgb(230 224 240 / 0.12), transparent 30%),
+      radial-gradient(circle at 92% 88%, rgb(229 228 226 / 0.08), transparent 34%),
+      linear-gradient(160deg, #3a261d 0%, #5c3f2d 50%, var(--espresso) 100%);
   }
   .bg-skills {
-    background: linear-gradient(155deg, #0f172a 0%, #12203f 50%, #0c2a2e 100%);
+    background:
+      radial-gradient(circle at 92% 8%, rgb(255 255 255 / 0.55), transparent 32%),
+      radial-gradient(circle at 6% 92%, rgb(110 90 130 / 0.10), transparent 36%),
+      linear-gradient(168deg, #f0ecf6 0%, var(--lavender) 55%, #ddd5ea 100%);
   }
   .bg-education {
-    background: linear-gradient(170deg, #eafbf5 0%, #eaf2ff 100%);
+    background:
+      radial-gradient(circle at 84% 20%, rgb(230 224 240 / 0.12), transparent 34%),
+      linear-gradient(150deg, var(--espresso) 0%, #4a2d23 55%, #5c3f2d 100%);
+  }
+  .bg-lavender-band {
+    background: linear-gradient(100deg, #ece7f4 0%, var(--lavender) 50%, #e2dbee 100%);
   }
   .bg-workflow {
-    background: linear-gradient(170deg, #f1eeff 0%, #fff1e8 100%);
+    background:
+      radial-gradient(circle at 8% 90%, rgb(230 224 240 / 0.6), transparent 32%),
+      linear-gradient(170deg, #ebe9e6 0%, #e1dfdc 100%);
   }
   .bg-about {
-    background: linear-gradient(135deg, #fff0e8 0%, #ffe7f2 100%);
+    background:
+      radial-gradient(circle at 18% 22%, rgb(230 224 240 / 0.12), transparent 30%),
+      linear-gradient(135deg, var(--mocha-deep) 0%, var(--mocha) 55%, #3a261d 100%);
+  }
+  .bg-cream {
+    background: linear-gradient(180deg, #ebe9e6 0%, #e5e4e2 100%);
   }
   .bg-contact {
-    background: linear-gradient(140deg, #3157f6 0%, #4f5ef4 55%, #6366f1 100%);
+    background:
+      radial-gradient(circle at 80% 15%, rgb(230 224 240 / 0.14), transparent 32%),
+      linear-gradient(140deg, var(--espresso) 0%, var(--mocha) 58%, var(--mocha-deep) 100%);
   }
   .bg-life {
-    background: linear-gradient(135deg, #ffe8ee 0%, #efe7ff 45%, #e3f8ff 75%, #e6fff5 100%);
+    background:
+      radial-gradient(circle at 78% 8%, rgb(230 224 240 / 0.14), transparent 28%),
+      linear-gradient(160deg, var(--espresso) 0%, #5c3f2d 45%, #3a261d 100%);
   }
-  .bg-navy { background: #0f172a; }
+  .bg-navy {
+    background: linear-gradient(180deg, var(--espresso) 0%, #22150f 100%);
+  }
+
+  /* ---- Card surfaces, each with a faint glossy highlight ---- */
+  .surface-mocha {
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.07) 0%, transparent 38%),
+      linear-gradient(135deg, #3a261d 0%, var(--mocha) 58%, var(--mocha-deep) 100%);
+  }
+  .surface-platinum {
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.75) 0%, transparent 42%),
+      var(--platinum-warm);
+  }
+  .surface-lavender {
+    background:
+      linear-gradient(160deg, rgb(255 255 255 / 0.55) 0%, transparent 42%),
+      var(--lavender);
+  }
+
+  /* ---- Chrome ---- */
+  .bg-metal { background-image: var(--metal); }
+  .bg-metal-soft { background-image: var(--metal-soft); }
+  .text-metal {
+    background: linear-gradient(135deg, var(--lavender) 8%, #ffffff 45%, var(--platinum-shade) 92%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  /*
+   * Thin chrome outline drawn by a masked pseudo-element, so it works on any
+   * background and follows the element's border-radius.
+   */
+  .metal-border { position: relative; }
+  .metal-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: var(--metal);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Chrome hairline separators. */
+  .metal-border-t { border-top: 1px solid; border-image: var(--metal-line) 1; }
+  .metal-border-b { border-bottom: 1px solid; border-image: var(--metal-line) 1; }
+  .metal-border-y { border-block: 1px solid; border-image: var(--metal-line) 1; }
+
+  /* The one highlighted phrase on a dark hero: lavender with a soft halo. */
+  .text-lavender-glow {
+    color: var(--lavender);
+    text-shadow: 0 0 18px rgb(230 224 240 / 0.45), 0 0 44px rgb(230 224 240 / 0.22);
+  }
 
   /* Ruled notebook page for the working notes on /why-hire-me. */
   .notes-paper {
-    background-color: rgb(255 255 255 / 0.92);
+    background-color: color-mix(in srgb, var(--surface-light) 94%, transparent);
     background-image: repeating-linear-gradient(
       to bottom,
       transparent 0,
       transparent 31px,
-      rgb(49 87 246 / 0.07) 31px,
-      rgb(49 87 246 / 0.07) 32px
+      rgb(111 78 55 / 0.08) 31px,
+      rgb(111 78 55 / 0.08) 32px
     );
   }
 
@@ -216,55 +362,134 @@
   .blob-2 { animation-duration: 34s; animation-delay: -8s; }
   .blob-3 { animation-duration: 40s; animation-delay: -16s; }
 
-  /* Rotating conic border used once, around the hero photo. */
-  .gradient-frame {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-  .gradient-frame::before {
+  /*
+   * Paper grain: a tiny tiled noise texture blended over a room's background,
+   * beneath its content, so the mocha never reads as a flat fill. The section
+   * becomes its own stacking context and the grain sits at z-index -1, i.e.
+   * above the section's background but below everything inside it.
+   */
+  .grain { position: relative; isolation: isolate; }
+  .grain::before {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 190%;
-    aspect-ratio: 1;
-    translate: -50% -50%;
-    background: conic-gradient(
-      from 0deg,
-      #3157f6, #6366f1, #14b8a6, #ff9f43, #ec4899, #3157f6
-    );
-    animation: frame-spin 18s linear infinite;
+    inset: 0;
     z-index: -1;
-    filter: brightness(1);
-    transition: filter 0.5s ease;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='1 1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+    opacity: var(--grain-opacity, 0.32);
+    mix-blend-mode: soft-light;
+  }
+  .grain-faint { --grain-opacity: 0.2; }
+
+  /* Soft stage light. Breathes very slowly; switched off with reduced motion. */
+  .spotlight {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+    background: radial-gradient(closest-side, rgb(246 243 238 / 0.30), rgb(230 224 240 / 0.13) 48%, transparent 100%);
+    animation: spot-breathe 14s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+  .spotlight-soft {
+    background: radial-gradient(closest-side, rgb(230 224 240 / 0.12), rgb(230 224 240 / 0.05) 50%, transparent 100%);
   }
 
   /*
-   * The portrait's asymmetric editorial silhouette: two softly rounded
-   * corners (border-radius) and two diagonally cut corners (clip-path).
-   * clip-path can only draw straight facets, so the cuts are carved with a
-   * polygon while border-radius handles the rounding; at the two corners
-   * where the polygon passes exactly through the box's own corner point,
-   * it removes nothing there, leaving the border-radius curve intact.
-   * Shared by the gradient panel, the outline and the photo so all three
-   * layers trace the same outline.
+   * Hero sculpture. The back and front layers of the chrome orbit drift
+   * together (same animation, same origin: the orbit's centre, which is also
+   * where the phone-size scale-down shrinks toward), so the form stays whole
+   * while the portrait between them stays still.
    */
-  .portrait-frame {
-    --frame-cut: 28px;
-    border-top-left-radius: 2.25rem;
-    border-bottom-right-radius: 2.25rem;
-    clip-path: polygon(
-      0 0,
-      calc(100% - var(--frame-cut)) 0,
-      100% var(--frame-cut),
-      100% 100%,
-      var(--frame-cut) 100%,
-      0 calc(100% - var(--frame-cut))
-    );
+  .chrome-layer {
+    position: absolute;
+    inset: 0;
+    transform-origin: 50% 70%;
+    animation: chrome-drift 22s ease-in-out infinite;
+    will-change: transform;
   }
-  @media (max-width: 480px) {
-    .portrait-frame { --frame-cut: 20px; }
+  .chrome-layer > img { display: block; width: 100%; height: 100%; }
+  /* A slow highlight that travels across the metal only (masked to its shape). */
+  .chrome-sheen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    pointer-events: none;
+  }
+  .chrome-sheen::after {
+    content: "";
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    left: -45%;
+    width: 40%;
+    background: linear-gradient(100deg, transparent 0%, rgb(255 255 255 / 0.3) 45%, rgb(230 224 240 / 0.32) 58%, transparent 100%);
+    transform: translateX(0) skewX(-12deg);
+    animation: chrome-sheen 12s cubic-bezier(0.45, 0, 0.2, 1) infinite;
+    mix-blend-mode: overlay;
+  }
+  .orb-float { animation: orb-float 13s ease-in-out infinite; will-change: transform; }
+
+  /* Flowing data paths and nodes in the backgrounds. */
+  .flow-dash { stroke-dasharray: 2 9; animation: flow-dash 24s linear infinite; }
+  .node-breathe {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: node-breathe 7s ease-in-out infinite;
+  }
+
+  /* ---- Editorial section system ---- */
+  .section-index {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: var(--index-size, clamp(3.4rem, 7vw, 6rem));
+    line-height: 0.78;
+    letter-spacing: -0.03em;
+    font-variant-numeric: lining-nums;
+  }
+  .text-mocha-gradient {
+    background: linear-gradient(160deg, var(--mocha) 10%, var(--lavender-deep) 95%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  /* Thin metallic rules: bright chrome on mocha, a deeper steel on light rooms. */
+  .metal-rule { height: 1px; background: var(--metal-line); }
+  .metal-rule-steel {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8f8c8a 12%, #d6d4d2 38%, #6f6a66 64%, #a9a6a3 86%, transparent);
+  }
+  .metal-rule-v {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, #8f8c8a 8%, #ffffff 36%, #c5c3c1 62%, #8f8c8a 90%, transparent);
+  }
+  /*
+   * Typographic lists with hairline dividers (empty content, so screen readers
+   * skip them). Every item carries a leading divider; the list is pulled left
+   * by one divider-width inside an overflow-hidden wrapper (.skill-list-clip),
+   * so the divider that would start each wrapped line is clipped away.
+   */
+  .skill-list-clip { overflow: hidden; }
+  .skill-list { margin-left: -1.4em; }
+  .skill-list > li { position: relative; padding-left: 1.4em; }
+  .skill-list > li::before {
+    content: "";
+    position: absolute;
+    left: 0.7em;
+    top: 50%;
+    width: 1px;
+    height: 0.8em;
+    translate: 0 -50%;
+    background: currentColor;
+    opacity: 0.28;
+  }
+  .metal-rule-v-steel {
+    width: 1px;
+    background: linear-gradient(180deg, transparent, #8f8c8a 6%, #d6d4d2 34%, #6f6a66 66%, #a9a6a3 92%, transparent);
   }
 
   /* Spaced signature letters share the same display face and baseline. */
@@ -284,31 +509,32 @@
     font-style: italic;
     line-height: 1;
   }
-  .logo-m { color: var(--ink); }
+  /* The logo sits on the dark mocha navbar: ivory M, chrome-and-lavender R. */
+  .logo-m { color: var(--ivory); }
   .logo-r {
-    background: linear-gradient(135deg, #f27468 15%, #8651ce 90%);
+    background: linear-gradient(135deg, var(--lavender) 10%, #ffffff 48%, var(--platinum-shade) 90%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     transition: filter 300ms ease;
   }
   .logo-underline { position: absolute; bottom: 2px; left: 1px; width: 48px; height: 10px; overflow: visible; }
-  .logo-underline path { stroke: var(--teal); stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 100; }
-  .logo-data-point { fill: var(--teal); offset-path: path("M2 3 Q23 12 44 3"); offset-distance: 100%; }
+  .logo-underline path { stroke: var(--lavender); stroke-width: 1.4; stroke-linecap: round; stroke-dasharray: 100; }
+  .logo-data-point { fill: var(--lavender); offset-path: path("M2 3 Q23 12 44 3"); offset-distance: 100%; }
   .logo-link:is(:hover, :focus-visible) .logo-underline path { animation: signature-draw 650ms ease both; }
   .logo-link:is(:hover, :focus-visible) .logo-data-point { animation: signature-point 650ms ease both; }
   .logo-link:is(:hover, :focus-visible) .logo-r { filter: brightness(1.14) saturate(1.1); }
 
-  .portrait-reveal-mask { animation: portrait-wipe 550ms cubic-bezier(0.22, 1, 0.36, 1) 500ms both; }
-  .portrait-color-layer { animation: portrait-layer-settle 1.1s ease both; }
-  .portrait-frame-outline { transition: transform 400ms ease; }
+  /* The portrait reveals with a soft upward wipe once, on load. */
+  .portrait-reveal { animation: portrait-reveal 900ms cubic-bezier(0.22, 1, 0.36, 1) 250ms both; }
+  /* A few pixels of pointer parallax between the layers (fine pointers only). */
+  .parallax-near, .parallax-far { transition: translate 500ms cubic-bezier(0.22, 1, 0.36, 1); }
   @media (hover: hover) and (pointer: fine) {
-    .portrait-frame-outline { transform: translate(var(--portrait-x, 0px), var(--portrait-y, 0px)); }
-    .portrait-group:hover .portrait-frame-outline { transform: translate(var(--portrait-x, 0px), calc(var(--portrait-y, 0px) - 4px)) scale(1.015); }
-    .portrait-group:hover .gradient-frame::before { filter: brightness(1.15); }
+    .parallax-near { translate: calc(var(--portrait-x, 0px) * -1) calc(var(--portrait-y, 0px) * -1); }
+    .parallax-far { translate: var(--portrait-x, 0px) var(--portrait-y, 0px); }
   }
 
-  /* Light sweep across a project thumbnail on hover. */
+  /* Lavender reflection that sweeps across a project image on hover. */
   .shine::after {
     content: "";
     position: absolute;
@@ -316,8 +542,9 @@
     background: linear-gradient(
       115deg,
       transparent 32%,
-      rgb(255 255 255 / 0.42) 48%,
-      transparent 64%
+      rgb(255 255 255 / 0.34) 46%,
+      rgb(230 224 240 / 0.38) 52%,
+      transparent 66%
     );
     transform: translateX(-130%);
     transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
@@ -334,23 +561,30 @@
   /* Opt-in hover lift, pure CSS so it still works without JS. */
   .tilt-lift:hover { --tilt-lift: -8px; }
 
-  /* Signature two-stop word highlight: blue settling into teal. */
+  /*
+   * Reflective frame around project images: a faint glassy bevel inside a
+   * chrome outline (.metal-border), resting on a deep mocha shadow. Hover adds
+   * a soft lavender edge light. Defined after .tilt so its transition list wins.
+   */
+  .project-frame {
+    background: linear-gradient(150deg, rgb(255 255 255 / 0.16), rgb(255 255 255 / 0.03) 38%, rgb(230 224 240 / 0.1));
+    box-shadow: 0 26px 50px -30px rgb(10 6 4 / 0.9), inset 0 1px 0 rgb(255 255 255 / 0.14);
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+  }
+  .project-frame:hover {
+    box-shadow:
+      0 38px 70px -28px rgb(10 6 4 / 0.95),
+      0 0 0 1px rgb(230 224 240 / 0.3),
+      0 0 40px rgb(230 224 240 / 0.14),
+      inset 0 1px 0 rgb(255 255 255 / 0.2);
+  }
+
+  /* Signature word highlight on light sections: mocha settling into deep lavender. */
   .text-gradient-signature {
-    background: linear-gradient(90deg, var(--brand) 0%, var(--indigo) 55%, var(--teal) 100%);
+    background: linear-gradient(90deg, var(--mocha) 0%, var(--coral) 45%, var(--lavender-deep) 100%);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-  }
-
-  /* Richer layered mesh used only in the hero, slowly drifting. */
-  .mesh {
-    background-image:
-      radial-gradient(38% 42% at 15% 20%, rgb(49 87 246 / 0.16), transparent 60%),
-      radial-gradient(34% 38% at 85% 15%, rgb(20 184 166 / 0.16), transparent 60%),
-      radial-gradient(40% 44% at 78% 88%, rgb(236 72 153 / 0.14), transparent 60%),
-      radial-gradient(30% 34% at 18% 85%, rgb(255 159 67 / 0.14), transparent 60%);
-    background-size: 160% 160%;
-    animation: mesh-drift 34s ease-in-out infinite;
   }
 }
 
@@ -364,24 +598,41 @@
   33%      { transform: translate3d(4%, -5%, 0) scale(1.08); }
   66%      { transform: translate3d(-4%, 4%, 0) scale(0.94); }
 }
-@keyframes frame-spin { to { transform: rotate(1turn); } }
 @keyframes marquee-slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @keyframes float-soft {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50%      { transform: translateY(-10px) rotate(3deg); }
 }
 @keyframes timeline-draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes mesh-drift {
-  0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-  50%      { background-position: 10% 8%, -8% 6%, -6% -8%, 8% -6%; }
+@keyframes spot-breathe {
+  0%, 100% { opacity: 0.82; transform: scale(0.97); }
+  50%      { opacity: 1; transform: scale(1.03); }
+}
+@keyframes chrome-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  35%      { transform: translate3d(-4px, -11px, 0) rotate(-1.4deg); }
+  70%      { transform: translate3d(5px, 4px, 0) rotate(0.9deg); }
+}
+@keyframes chrome-sheen {
+  0%       { transform: translateX(0) skewX(-12deg); }
+  38%, 100% { transform: translateX(380%) skewX(-12deg); }
+}
+@keyframes orb-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(-6px, -14px, 0); }
+}
+@keyframes flow-dash { to { stroke-dashoffset: -220; } }
+@keyframes node-breathe {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.35); }
+}
+@keyframes portrait-reveal {
+  from { opacity: 0; clip-path: inset(18% 0 0 0); transform: translateY(14px); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
 }
 @keyframes scroll-bob {
   0%, 100% { transform: translateY(0); opacity: 0.55; }
   50%      { transform: translateY(6px); opacity: 1; }
-}
-@keyframes portrait-wipe {
-  from { clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%); }
-  to   { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
 }
 @keyframes pdf-draw {
   from { stroke-dashoffset: 100; }
@@ -420,14 +671,15 @@
 
 @keyframes signature-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
 @keyframes signature-point { from { offset-distance: 0%; } to { offset-distance: 100%; } }
-@keyframes portrait-layer-settle { from { transform: translate(-5px, -5px); } to { transform: translate(0, 0); } }
 @keyframes role-enter { from { opacity: 0; transform: translateX(-24px); } }
 @keyframes data-travel { from { offset-distance: 0%; } to { offset-distance: 100%; } }
 @keyframes data-start { from { opacity: 0; } to { opacity: 1; } }
 @keyframes chart-breathe { 0%, 100% { transform: scaleY(0.65); } 50% { transform: scaleY(1); } }
+/* The block padding leaves room for the badges' hover glow; the hero trims its margins to match. */
 .hero-role-ribbon {
   overflow: hidden;
   max-width: 100%;
+  padding-block: 8px;
   mask-image: linear-gradient(to right, transparent, black 16px, black calc(100% - 16px), transparent);
   animation: role-enter 450ms ease 240ms both;
 }
@@ -542,7 +794,8 @@ select:focus-visible,
     opacity: 1 !important;
     transform: none !important;
   }
-  .tilt, .portrait-frame-outline { transform: none !important; }
+  .tilt { transform: none !important; }
+  .parallax-near, .parallax-far { translate: none !important; }
   /*
    * The badges stop moving but stay in their single row. The ribbon scrolls sideways
    * instead (swipe or trackpad), so every badge stays reachable without wrapping.

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { ArrowLeft, ArrowRight, NotebookPen } from "lucide-react"
+import { withBasePath } from "@/lib/site"
 
 /*
  * How I think through a problem, written as working notes rather than another résumé
@@ -12,9 +13,9 @@ import { ArrowLeft, ArrowRight, NotebookPen } from "lucide-react"
  */
 
 const marginNotes = [
-  { question: "Who is this helping?", tape: "bg-coral/35", tilt: "lg:-rotate-2" },
-  { question: "How would we catch a wrong answer?", tape: "bg-teal/40", tilt: "lg:rotate-1" },
-  { question: "What happens when someone uses it on a busy day?", tape: "bg-brand/30", tilt: "lg:-rotate-1" },
+  { question: "Who is this helping?", paper: "bg-surface-light", tape: "bg-metal opacity-80", tilt: "lg:-rotate-2" },
+  { question: "How would we catch a wrong answer?", paper: "surface-lavender", tape: "bg-mocha/35", tilt: "lg:rotate-1" },
+  { question: "What happens when someone uses it on a busy day?", paper: "surface-platinum", tape: "bg-lavender-deep/30", tilt: "lg:-rotate-1" },
 ]
 
 const trace = ["Sources", "Retrieval", "Response", "What the interface showed"]
@@ -34,37 +35,54 @@ function Step({ number, children }: { number: string; children: ReactNode }) {
 
 export function WhyHireMeContent() {
   return (
-    <div className="bg-life relative overflow-hidden">
+    <div className="bg-life grain on-dark relative overflow-hidden">
+      <span aria-hidden className="spotlight spotlight-soft absolute -left-[12%] top-0 h-[40rem] w-[60%]" />
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="blob -left-24 top-0 size-96 bg-brand/22" />
-        <span className="blob blob-2 -right-20 top-[45%] size-96 bg-pink/22" />
+        <span className="blob -left-24 top-0 size-96 bg-lavender/10" />
+        <span className="blob blob-2 -right-20 top-[45%] size-96 bg-platinum/8" />
+      </div>
+      {/* A chrome droplet on a hairline orbit, echoing the homepage sculpture. */}
+      <div aria-hidden className="pointer-events-none absolute top-24 right-[7%] hidden h-72 w-96 lg:block">
+        <svg viewBox="0 0 384 288" className="absolute inset-0 size-full">
+          <ellipse cx="192" cy="150" rx="176" ry="70" transform="rotate(-18 192 150)" fill="none" stroke="var(--platinum)" strokeWidth="1" opacity="0.2" />
+          <circle cx="40" cy="196" r="3" fill="var(--lavender)" opacity="0.8" className="node-breathe" />
+          <circle cx="330" cy="86" r="2.5" fill="var(--platinum)" opacity="0.5" />
+        </svg>
+        <span className="spotlight absolute top-6 left-28 size-44" />
+        <span className="orb-float absolute top-16 left-[9.5rem] w-24">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={withBasePath("/images/hero/chrome-orb-240.webp")} alt="" width={240} height={240} decoding="async" className="block h-auto w-full" />
+        </span>
       </div>
 
       <div className="relative mx-auto max-w-[1100px] px-5 py-12 sm:px-6 sm:py-14 lg:px-8">
         <Link
           href="/"
-          className="group inline-flex items-center gap-2 rounded-lg py-1 text-[0.9375rem] font-semibold text-subtle transition-colors hover:text-brand"
+          className="group inline-flex items-center gap-2 rounded-lg py-1 text-[0.9375rem] font-semibold text-platinum/80 transition-colors hover:text-lavender"
         >
           <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
           Back to portfolio
         </Link>
 
         <header className="mt-8 max-w-3xl">
-          <p className="anim-enter label-mono inline-flex rounded-lg bg-white/70 px-2.5 py-1 text-brand backdrop-blur-sm">
+          <p className="anim-enter label-mono inline-flex rounded-lg border border-lavender/30 bg-lavender/10 px-2.5 py-1 text-lavender">
             Why work with me
           </p>
-          <h1 className="anim-enter anim-delay-1 mt-5 text-[2.25rem] leading-[1.1] font-extrabold text-ink sm:text-[2.75rem] lg:text-[3.5rem]">
+          <h1 className="anim-enter anim-delay-1 mt-5 text-[2.25rem] leading-[1.1] font-extrabold text-ivory sm:text-[2.75rem] lg:text-[3.5rem]">
             Show me where the user{" "}
-            <span className="relative inline-block">
-              {/* The full stop sits inside so the italic "s" keeps its right padding under bg-clip-text. */}
-              <span className="accent-serif text-gradient-signature pr-1">hesitates.</span>
+            <span className="relative isolate inline-block">
+              <span className="accent-serif text-lavender-glow pr-1">hesitates.</span>
               <span
                 aria-hidden
-                className="absolute inset-x-0 -bottom-1 h-3 rounded-full bg-gradient-to-r from-brand/25 via-indigo/25 to-teal/25 blur-[2px]"
+                className="absolute -inset-x-3 -inset-y-1 -z-10 rounded-full bg-lavender/15 blur-xl"
+              />
+              <span
+                aria-hidden
+                className="absolute inset-x-0 -bottom-1 h-2.5 rounded-full bg-gradient-to-r from-lavender/0 via-lavender/45 to-lavender/0 blur-[3px]"
               />
             </span>
           </h1>
-          <p className="anim-enter anim-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-subtle">
+          <p className="anim-enter anim-delay-2 mt-6 max-w-2xl text-lg leading-relaxed text-platinum/85">
             The moments I watch for are small: someone stops trusting an answer, repeats a task, or
             works around a tool. That&apos;s usually where the real problem is, and it tells us what
             needs to change.
@@ -75,7 +93,7 @@ export function WhyHireMeContent() {
           {/* The notebook page: one hypothetical situation, worked through step by step. */}
           <article
             aria-labelledby="notes-title"
-            className="notes-paper relative overflow-hidden rounded-2xl border border-white card-shadow"
+            className="notes-paper metal-border overflow-hidden rounded-2xl glow-lavender"
           >
             <span aria-hidden className="absolute inset-y-0 left-9 w-px bg-coral/35 sm:left-12" />
 
@@ -85,7 +103,7 @@ export function WhyHireMeContent() {
                   <NotebookPen className="size-4" aria-hidden />
                   Working notes
                 </p>
-                <p className="label-mono rounded-md border border-dashed border-orange/60 bg-orange/10 px-2 py-0.5 text-[#b45309]">
+                <p className="label-mono rounded-md border border-dashed border-coral/50 bg-orange/15 px-2 py-0.5 text-coral">
                   Hypothetical example
                 </p>
               </div>
@@ -112,7 +130,7 @@ export function WhyHireMeContent() {
                   <ol aria-label="What to trace" className="mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-2">
                     {trace.map((stage, index) => (
                       <li key={stage} className="flex items-center gap-1.5">
-                        <span className="rounded-lg border border-hairline bg-white px-2.5 py-1 font-mono text-[0.8125rem] font-medium text-ink">
+                        <span className="rounded-lg border border-hairline bg-platinum px-2.5 py-1 font-mono text-[0.8125rem] font-medium text-ink">
                           {stage}
                         </span>
                         {index < trace.length - 1 && (
@@ -154,14 +172,14 @@ export function WhyHireMeContent() {
 
           {/* Margin notes: the questions I keep coming back to. */}
           <aside aria-labelledby="margin-title">
-            <h2 id="margin-title" className="label-mono text-muted">
+            <h2 id="margin-title" className="label-mono text-lavender/85">
               In the margin
             </h2>
             <ul className="mt-4 grid gap-4 sm:grid-cols-3 lg:grid-cols-1 lg:gap-6 lg:pt-2">
               {marginNotes.map((note) => (
                 <li
                   key={note.question}
-                  className={`relative rounded-xl bg-[#fffdf5] px-4 pt-5 pb-4 shadow-[0_8px_20px_-12px_rgb(15_23_42/0.35)] ${note.tilt}`}
+                  className={`relative rounded-xl px-4 pt-5 pb-4 shadow-[0_10px_24px_-12px_rgb(20_12_8/0.6)] ${note.paper} ${note.tilt}`}
                 >
                   <span
                     aria-hidden
@@ -175,10 +193,10 @@ export function WhyHireMeContent() {
         </div>
 
         <section aria-labelledby="path-title" className="mt-14 max-w-2xl">
-          <h2 id="path-title" className="label-mono text-muted">
+          <h2 id="path-title" className="label-mono text-lavender/85">
             Where this comes from
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-subtle">
+          <p className="mt-4 text-lg leading-relaxed text-platinum/85">
             Each of those steps comes from a different part of my work. Following a result back
             through the data and the model is the machine learning engineering side. Asking what
             people need from it is the product side, which is my job now. Building a
@@ -190,21 +208,21 @@ export function WhyHireMeContent() {
 
         <section
           aria-labelledby="closing"
-          className="bg-contact on-dark mt-12 flex flex-col items-start gap-6 rounded-3xl p-7 sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+          className="bg-contact on-dark metal-border mt-12 flex flex-col items-start gap-6 rounded-3xl p-7 glow-lavender sm:p-10 lg:flex-row lg:items-center lg:justify-between"
         >
           <h2 id="closing" className="sr-only">
             Get in touch
           </h2>
           <Link
             href="/#contact"
-            className="group inline-flex max-w-xl items-center gap-4 rounded-2xl bg-white px-5 py-4 text-lg leading-snug font-bold text-ink transition-transform duration-200 hover:-translate-y-0.5 sm:px-6 sm:text-xl"
+            className="group inline-flex max-w-xl items-center gap-4 rounded-2xl border border-white/50 bg-platinum bg-metal-soft px-5 py-4 text-lg leading-snug font-bold text-espresso transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:glow-lavender-strong sm:px-6 sm:text-xl"
           >
             Tell me about the part that&apos;s almost working.
-            <ArrowRight className="size-5 shrink-0 text-brand transition-transform duration-200 group-hover:translate-x-1" />
+            <ArrowRight className="size-5 shrink-0 text-mocha transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 rounded-lg py-1 text-[0.9375rem] font-semibold text-white/85 transition-colors hover:text-white"
+            className="group inline-flex items-center gap-2 rounded-lg py-1 text-[0.9375rem] font-semibold text-platinum/85 transition-colors hover:text-lavender"
           >
             <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
             Back to portfolio

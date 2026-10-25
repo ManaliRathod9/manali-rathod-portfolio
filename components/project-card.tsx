@@ -11,59 +11,55 @@ function primaryHref(project: Project) {
   return project.demoUrl ?? project.githubUrl
 }
 
-function ThumbnailLink({
+/**
+ * The project image inside a reflective chrome frame. On hover the frame lifts
+ * (TiltCard), a lavender reflection sweeps the image and the mocha shadow deepens.
+ */
+function FramedThumbnail({
   project,
   className,
+  linkClassName,
   sizes,
   priority,
   variant,
 }: {
   project: Project
   className?: string
+  linkClassName?: string
   sizes?: string
   priority?: boolean
   variant?: "fill" | "showcase"
 }) {
   return (
-    <a
-      href={primaryHref(project)}
-      target="_blank"
-      rel="noreferrer"
-      tabIndex={-1}
-      aria-hidden
-      className={cn("shine relative block overflow-hidden", className)}
-    >
-      <ProjectThumbnail
-        projectId={project.id}
-        sizes={sizes}
-        priority={priority}
-        variant={variant}
-      />
-      {/* Sits over the artwork only, never over the written detail. */}
-      <span className="absolute inset-0 flex items-center justify-center bg-ink/35 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <span className="inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-[0.9375rem] font-semibold text-ink shadow-lg">
-          View Project
-          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    <TiltCard className={cn("project-frame metal-border group rounded-[1.75rem] p-1.5", className)}>
+      <a
+        href={primaryHref(project)}
+        target="_blank"
+        rel="noreferrer"
+        tabIndex={-1}
+        aria-hidden
+        className={cn("shine relative block overflow-hidden rounded-[1.35rem]", linkClassName)}
+      >
+        <ProjectThumbnail projectId={project.id} sizes={sizes} priority={priority} variant={variant} />
+        {/* Sits over the artwork only, never over the written detail. */}
+        <span className="absolute inset-0 flex items-center justify-center bg-espresso/45 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="inline-flex items-center gap-2 rounded-lg border border-white/50 bg-platinum bg-metal-soft px-4 py-2.5 text-[0.9375rem] font-semibold text-espresso glow-lavender-strong">
+            View Project
+            <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </span>
         </span>
-      </span>
-    </a>
+      </a>
+    </TiltCard>
   )
 }
 
-const techTones = [
-  "border-brand/20 bg-brand/8 text-brand",
-  "border-teal/25 bg-teal/10 text-teal-ink",
-  "border-indigo/20 bg-indigo/8 text-indigo",
-  "border-orange/30 bg-orange/12 text-orange",
-]
-
 function TechList({ tech }: { tech: string[] }) {
   return (
-    <ul className="mt-4 flex flex-wrap gap-2" aria-label="Technologies used">
-      {tech.map((item, index) => (
+    <ul className="mt-5 flex flex-wrap gap-2" aria-label="Technologies used">
+      {tech.map((item) => (
         <li
           key={item}
-          className={`rounded-lg border px-2.5 py-1 text-sm font-semibold ${techTones[index % techTones.length]}`}
+          className="rounded-md border border-platinum/20 bg-white/[0.04] px-2.5 py-1 text-[0.8125rem] font-medium tracking-wide text-platinum/85"
         >
           {item}
         </li>
@@ -72,27 +68,23 @@ function TechList({ tech }: { tech: string[] }) {
   )
 }
 
+/** Problem / Built / Why it matters, as hairline-ruled rows rather than a boxed panel. */
 function ProofList({ project, compact = false }: { project: Project; compact?: boolean }) {
   const rows = [
-    { term: "Problem", detail: project.proof.problem, dot: "bg-coral" },
-    { term: "Built", detail: project.proof.built, dot: "bg-brand" },
-    { term: "Why it matters", detail: project.proof.impact, dot: "bg-teal" },
+    { term: "Problem", detail: project.proof.problem },
+    { term: "Built", detail: project.proof.built },
+    { term: "Why it matters", detail: project.proof.impact },
   ]
 
   return (
-    <dl
-      className={cn(
-        "mt-5 space-y-2.5 rounded-xl border border-hairline/70 bg-gradient-to-br from-sky/60 to-lavender/60 p-4",
-        compact && "mt-4 p-3.5"
-      )}
-    >
+    <dl className={cn("border-t border-platinum/15", compact ? "mt-5" : "mt-7")}>
       {rows.map((row) => (
-        <div key={row.term} className="flex gap-3">
-          <span aria-hidden className={cn("mt-2 size-1.5 shrink-0 rounded-full", row.dot)} />
-          <div>
-            <dt className="label-mono text-muted">{row.term}</dt>
-            <dd className="mt-0.5 text-[0.9375rem] leading-relaxed text-ink">{row.detail}</dd>
-          </div>
+        <div
+          key={row.term}
+          className="grid gap-1 border-b border-platinum/15 py-3 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-4"
+        >
+          <dt className="label-mono pt-0.5 text-lavender/85">{row.term}</dt>
+          <dd className="text-[0.9375rem] leading-relaxed text-platinum/85">{row.detail}</dd>
         </div>
       ))}
     </dl>
@@ -128,10 +120,11 @@ function ProjectActions({ project, className }: { project: Project; className?: 
   )
 }
 
-const cardBase =
-  "group relative flex flex-col overflow-hidden rounded-2xl border border-hairline bg-white card-shadow transition-[box-shadow,border-color] duration-300 ease-out hover:border-brand/40 hover:card-shadow-hover"
+function LiveTag() {
+  return <span className="label-mono rounded-md bg-lavender px-2 py-1 text-espresso">Live</span>
+}
 
-/** Large treatment for the two lead projects: animated preview beside the detail. */
+/** Lead projects: a full-width story, large framed preview beside open editorial text. */
 export function FeaturedProjectCard({
   project,
   index,
@@ -144,74 +137,60 @@ export function FeaturedProjectCard({
   const flipped = index % 2 === 1
 
   return (
-    <article data-reveal={flipped ? "right" : "left"}>
-      <TiltCard className={cardBase}>
-        <div className={cn("grid lg:grid-cols-2", flipped && "lg:[&>a]:order-2")}>
-          <ThumbnailLink
-            project={project}
-            variant="showcase"
-            className="aspect-16/10 lg:aspect-auto lg:h-full"
-            sizes="(min-width: 1024px) 600px, 100vw"
-            priority={priority}
-          />
+    <article data-reveal={flipped ? "right" : "left"} className="grid items-center gap-8 lg:grid-cols-12 lg:gap-14">
+      <FramedThumbnail
+        project={project}
+        variant="showcase"
+        className={cn("lg:col-span-7", flipped && "lg:order-2")}
+        linkClassName="aspect-[16/11]"
+        sizes="(min-width: 1024px) 680px, 100vw"
+        priority={priority}
+      />
 
-          <div className="flex flex-col p-6 sm:p-8">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="label-mono rounded-lg bg-gradient-to-r from-brand to-indigo px-2.5 py-1.5 text-white">
-                Featured
-              </span>
-              {project.demoUrl && (
-                <span className="label-mono rounded-lg bg-teal/15 px-2.5 py-1.5 text-teal-ink">
-                  Live
-                </span>
-              )}
-            </div>
-
-            <h3 className="mt-4 text-2xl font-extrabold text-ink sm:text-[1.75rem]">
-              {project.title}
-            </h3>
-            <p className="mt-3 text-base leading-relaxed text-subtle">{project.description}</p>
-
-            <TechList tech={project.tech} />
-            <ProofList project={project} />
-            <ProjectActions project={project} className="mt-6" />
-          </div>
+      <div className={cn("min-w-0 lg:col-span-5", flipped && "lg:order-1")}>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="label-mono text-lavender">Featured</span>
+          <span aria-hidden className="metal-rule w-10 opacity-70" />
+          {project.demoUrl && <LiveTag />}
         </div>
-      </TiltCard>
+        <h3 className="mt-4 text-[1.9rem] leading-[1.08] font-extrabold tracking-[-0.025em] text-ivory sm:text-[2.4rem]">
+          {project.title}
+        </h3>
+        <p className="mt-3 text-lg leading-relaxed text-platinum/80">{project.description}</p>
+
+        <TechList tech={project.tech} />
+        <ProofList project={project} />
+        <ProjectActions project={project} className="mt-7" />
+      </div>
     </article>
   )
 }
 
-/** Grid treatment for the remaining projects. */
+/** The remaining projects: image-led, with the detail set directly on the page below. */
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   return (
-    <article data-reveal data-reveal-delay={String(index % 2)} className="h-full">
-      <TiltCard className={cn(cardBase, "h-full")}>
-        <ThumbnailLink
-          project={project}
-          className="aspect-16/10 w-full"
-          sizes="(min-width: 768px) 560px, 100vw"
-        />
+    <article data-reveal data-reveal-delay={String(index % 2)} className="flex h-full flex-col">
+      <FramedThumbnail
+        project={project}
+        linkClassName="aspect-16/10"
+        sizes="(min-width: 768px) 600px, 100vw"
+      />
 
-        <div className="flex flex-1 flex-col p-6">
-          {project.demoUrl && (
-            <span className="label-mono w-fit rounded-lg bg-teal/15 px-2.5 py-1.5 text-teal-ink">
-              Live
-            </span>
-          )}
+      <div className="flex flex-1 flex-col px-1 pt-7">
+        {project.demoUrl && (
+          <div>
+            <LiveTag />
+          </div>
+        )}
+        <h3 className={cn("text-[1.5rem] leading-tight font-extrabold tracking-[-0.02em] text-ivory", project.demoUrl && "mt-3")}>
+          {project.title}
+        </h3>
+        <p className="mt-2.5 text-base leading-relaxed text-platinum/80">{project.description}</p>
 
-          <h3 className={cn("text-xl font-extrabold text-ink", project.demoUrl ? "mt-3" : "")}>
-            {project.title}
-          </h3>
-          <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-subtle">
-            {project.description}
-          </p>
-
-          <TechList tech={project.tech} />
-          <ProofList project={project} compact />
-          <ProjectActions project={project} className="mt-auto pt-6" />
-        </div>
-      </TiltCard>
+        <TechList tech={project.tech} />
+        <ProofList project={project} compact />
+        <ProjectActions project={project} className="mt-auto pt-7" />
+      </div>
     </article>
   )
 }

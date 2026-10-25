@@ -1,97 +1,85 @@
-import { Building2, CalendarDays } from "lucide-react"
+import { Building2 } from "lucide-react"
 import { SectionHeading } from "@/components/section-heading"
 import { TeachingExperience } from "@/components/teaching-experience"
 import { cn } from "@/lib/utils"
 import { experiences } from "@/lib/content"
 
-/** Alternating accents so the timeline reads as a sequence, not a list. */
+/** Accents for the earlier roles, so the timeline reads as a sequence. */
 const accents = [
-  { dot: "bg-brand", ring: "hover:border-brand/45", chip: "bg-brand/10 text-brand", bar: "from-brand to-indigo" },
-  { dot: "bg-coral", ring: "hover:border-coral/45", chip: "bg-coral/12 text-coral", bar: "from-coral to-orange" },
-  { dot: "bg-teal", ring: "hover:border-teal/45", chip: "bg-teal/12 text-teal-ink", bar: "from-teal to-brand" },
-  { dot: "bg-indigo", ring: "hover:border-indigo/45", chip: "bg-indigo/10 text-indigo", bar: "from-indigo to-pink" },
+  { dot: "bg-coral", chip: "bg-coral/12 text-coral" },
+  { dot: "bg-lavender-deep", chip: "bg-lavender text-lavender-deep" },
+  { dot: "bg-teal", chip: "bg-teal/12 text-teal-ink" },
 ]
 
 export function Experience() {
   return (
-    <section id="experience" className="bg-experience relative overflow-hidden">
+    // overflow-clip (not hidden) so the sticky heading still sticks to the viewport.
+    <section id="experience" className="bg-experience grain grain-faint relative overflow-clip">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <span className="blob -left-24 top-10 size-80 bg-brand/15" />
-        <span className="blob blob-2 -right-20 bottom-0 size-80 bg-indigo/18" />
+        <span className="blob -left-24 top-10 size-80 bg-lavender/70" />
+        <span className="blob blob-2 -right-20 bottom-1/3 size-80 bg-mocha/10" />
       </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-5 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <SectionHeading
-          align="center"
-          eyebrow="Career"
-          title="My Experience"
-          gradientWord="Experience"
-          description="Product management and machine learning engineering, from customer problem to deployed system."
-        />
+      <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <SectionHeading
+                index="01"
+                eyebrow="Career"
+                title="My Experience"
+                gradientWord="Experience"
+                description="Product management and machine learning engineering, from customer problem to deployed system."
+              />
+            </div>
+          </div>
 
-        <ol className="relative mt-10 space-y-4">
-          {/* Animated rail behind the markers */}
-          <span
-            aria-hidden
-            className="timeline-rail absolute left-[9px] top-3 bottom-3 w-0.5 rounded-full bg-gradient-to-b from-brand via-indigo to-teal sm:left-[13px]"
-          />
+          <ol className="relative lg:col-span-8">
+            {/* Chrome rail joining the roles */}
+            <span aria-hidden className="timeline-rail metal-rule-v-steel absolute left-[7px] top-4 bottom-4" />
 
-          {experiences.map((exp, index) => {
-            const isCurrent = index === 0
-            const accent = accents[index % accents.length]
+            {experiences.map((exp, index) => {
+              const isCurrent = index === 0
+              const accent = accents[(index - 1 + accents.length) % accents.length]
 
-            return (
-              <li
-                key={exp.id}
-                data-reveal={index % 2 === 0 ? "left" : "right"}
-                className="relative pl-8 sm:pl-11"
-              >
-                <span
-                  aria-hidden
-                  className={cn(
-                    "absolute left-0 top-6 flex size-5 items-center justify-center rounded-full ring-4 ring-white/70 sm:left-1",
-                    isCurrent ? accent.dot : "bg-white"
-                  )}
+              return (
+                <li
+                  key={exp.id}
+                  data-reveal={index % 2 === 0 ? "left" : "right"}
+                  className={cn("relative pl-10 sm:pl-12", index > 0 && "pt-10", index > 1 && "mt-2")}
                 >
+                  {index > 1 && <span aria-hidden className="metal-rule-steel absolute left-10 right-0 top-0 opacity-70 sm:left-12" />}
                   <span
+                    aria-hidden
                     className={cn(
-                      "size-2 rounded-full",
-                      isCurrent ? "bg-white" : accent.dot
+                      "absolute left-0 flex size-[15px] items-center justify-center rounded-full ring-4 ring-[#e9e7e4]",
+                      isCurrent ? "top-9 bg-mocha" : "top-[3.1rem] bg-platinum-warm"
                     )}
-                  />
-                </span>
+                  >
+                    <span className={cn("size-[5px] rounded-full", isCurrent ? "bg-lavender" : accent.dot)} />
+                  </span>
 
-                <div
-                  className={cn(
-                    "overflow-hidden rounded-2xl border bg-white/85 backdrop-blur-sm transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:card-shadow-hover",
-                    accent.ring,
-                    isCurrent ? "border-brand/40 card-shadow" : "border-white"
-                  )}
-                >
-                  {isCurrent && (
-                    <span
-                      aria-hidden
-                      className={`block h-1 w-full bg-gradient-to-r ${accent.bar}`}
-                    />
-                  )}
-
-                  <div className="p-5 sm:p-6">
+                  {/* The current role is the one dark mocha panel; earlier roles sit open on the page. */}
+                  <article
+                    className={cn(
+                      isCurrent &&
+                        "surface-mocha metal-border overflow-hidden rounded-[1.75rem] p-6 card-shadow-hover sm:p-8"
+                    )}
+                  >
+                    {isCurrent && <span aria-hidden className="absolute inset-x-8 top-0 h-px bg-metal opacity-80" />}
                     <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <span className="inline-flex items-center gap-1.5 rounded-lg bg-secondary px-2.5 py-1 text-sm font-semibold text-subtle num-mono">
-                        <CalendarDays className="size-3.5" aria-hidden />
+                      <span className={cn("label-mono num-mono", isCurrent ? "text-lavender" : "text-subtle")}>
                         {exp.period}
                       </span>
                       {isCurrent && (
-                        <span className="label-mono rounded-lg bg-brand px-2.5 py-1.5 text-white">
-                          Current
-                        </span>
+                        <span className="label-mono rounded-md bg-lavender px-2 py-1 text-espresso">Current</span>
                       )}
                     </div>
 
                     <h3
                       className={cn(
-                        "mt-3 font-extrabold text-ink",
-                        isCurrent ? "text-xl sm:text-2xl" : "text-lg sm:text-xl"
+                        "mt-3 font-extrabold tracking-[-0.02em]",
+                        isCurrent ? "text-[1.6rem] text-ivory sm:text-[2rem]" : "text-[1.35rem] text-espresso sm:text-[1.6rem]"
                       )}
                     >
                       {exp.title}
@@ -99,34 +87,37 @@ export function Experience() {
 
                     <p
                       className={cn(
-                        "mt-2 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[0.9375rem] font-semibold",
-                        accent.chip
+                        "mt-2.5 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[0.9375rem] font-semibold",
+                        isCurrent ? "bg-lavender/15 text-lavender" : accent.chip
                       )}
                     >
                       <Building2 className="size-4 shrink-0" aria-hidden />
                       {exp.org}
                     </p>
 
-                    <ul className="mt-4 space-y-2">
+                    <ul className={cn("mt-5 grid gap-2.5", isCurrent && "sm:gap-3")}>
                       {exp.bullets.map((bullet) => (
                         <li
                           key={bullet}
-                          className="flex gap-3 text-[0.9375rem] leading-relaxed text-subtle"
+                          className={cn(
+                            "flex gap-3 text-[0.9375rem] leading-relaxed sm:text-base",
+                            isCurrent ? "text-platinum/85" : "text-subtle"
+                          )}
                         >
                           <span
                             aria-hidden
-                            className={cn("mt-2 size-1.5 shrink-0 rounded-full", accent.dot)}
+                            className={cn("mt-[0.6rem] h-px w-3 shrink-0", isCurrent ? "bg-lavender" : "bg-mocha/50")}
                           />
                           <span>{bullet}</span>
                         </li>
                       ))}
                     </ul>
-                  </div>
-                </div>
-              </li>
-            )
-          })}
-        </ol>
+                  </article>
+                </li>
+              )
+            })}
+          </ol>
+        </div>
 
         <TeachingExperience />
       </div>
